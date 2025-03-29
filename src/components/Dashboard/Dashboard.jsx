@@ -15,7 +15,7 @@ function DashboardPage() {
 
     useEffect(() => {
         if (userId) {
-            setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
+            setAvatarUrl(`https://task-manager-backend-5hkl.onrender.com/users/${userId}/avatar`);
         }
     }, [userId]);
 
@@ -36,7 +36,7 @@ function DashboardPage() {
         formData.append("avatar", file); // Must match `upload.single("avatar")`
 
         try {
-            const res = await fetch("http://localhost:3000/users/me/avatar", {
+            const res = await fetch("https://task-manager-backend-5hkl.onrender.com/users/me/avatar", {
                 method: "POST",
                 body: formData,
                 headers: {

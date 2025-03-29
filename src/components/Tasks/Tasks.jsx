@@ -12,7 +12,7 @@ function TasksPage() {
     const userToken = localStorage.getItem("token");
 
     useEffect(() => {
-        axios.get("http://localhost:3000/tasks", {
+        axios.get("https://task-manager-backend-5hkl.onrender.com/tasks", {
             headers: {
                 Authorization: `Bearer ${userToken}`, // Send JWT token for authentication
             }
@@ -42,7 +42,7 @@ function TasksPage() {
 
         if (selectedTask) {
             // Update existing task
-            axios.patch(`http://localhost:3000/tasks/${selectedTask._id}`, taskData, {
+            axios.patch(`https://task-manager-backend-5hkl.onrender.com/tasks/${selectedTask._id}`, taskData, {
                 headers: { Authorization: `Bearer ${userToken}` }
             })
                 .then(response => {
@@ -52,7 +52,7 @@ function TasksPage() {
                 .catch(error => console.error("Error updating task:", error));
         } else {
             // Create new task
-            axios.post("http://localhost:3000/tasks", taskData, {
+            axios.post("https://task-manager-backend-5hkl.onrender.com/tasks", taskData, {
                 headers: { Authorization: `Bearer ${userToken}` }
             })
                 .then(response => {
