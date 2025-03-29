@@ -94,7 +94,7 @@ function DashboardPage() {
 
         try {
             const token = localStorage.getItem("token")
-            const response = await fetch(`http://localhost:3000/users/me`, {
+            const response = await fetch(`https://task-manager-backend-5hkl.onrender.com0/users/me`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": `Bearer ${token}`,
