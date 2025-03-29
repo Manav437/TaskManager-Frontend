@@ -1,0 +1,76 @@
+.headerContainer {
+    height: 50px;
+    margin-top: 0;
+    padding-top: 0;
+    background: rgb(57,142,83);
+    background: radial-gradient(circle, rgba(57,142,83,1) 0%, rgba(33,115,119,0.6909357492997199) 63%, rgba(0,0,0,0.528470763305322) 100%);
+    display: flex;          /* Flexbox container for alignment */
+    justify-content: space-between; /* Distributes space between left and right sections */
+    align-items: center;    /* Centers items vertically */
+    padding: 0 20px;        /* Optional: adds some padding to the sides */
+    border-bottom: 1px solid black;
+  }
+  
+  .navList {
+    list-style: none;
+    display: flex;
+    gap: 20px;              /* Adds space between links */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navList li {
+    display: inline;
+  }
+  
+  .navList li a {
+    text-decoration: none;  /* Removes underline */
+    color: inherit;
+  }
+  
+  .navList li a:hover {
+    color: white  /* Optional: Change color on hover */
+  }
+  
+  .underline-hover {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: white;
+  }
+.underline-hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: rgb(141, 229, 141);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+}
+  
+.underline-hover:hover::after {
+  transform: scaleX(1);
+}
+
+.logout-btn {
+  display: flex;
+  line-height: 1.5;
+  text-emphasis: bold;
+  margin: 7px ;
+  border-radius: 5px;
+  border: 1px solid pink;
+  background: tomato;
+}
+.logout-btn:hover {
+  background-color: white;
+  color: tomato;
+}
+
+img {
+  margin-left: 5px;
+  top: 20px;
+  height: 20px;
+}

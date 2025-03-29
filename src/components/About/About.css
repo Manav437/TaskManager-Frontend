@@ -1,0 +1,20 @@
+.about-div {
+    min-height: 87vh;
+    max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-family: sans-serif;
+line-height: 1.6;
+  padding: 2rem;
+ text-align: center;
+ margin: auto;
+}
+
+.about-h1 {
+    margin-top: 30px;
+}
+
+.about-span {
+    line-height: 2;
+}

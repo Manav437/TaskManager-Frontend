@@ -1,0 +1,36 @@
+body {
+    background-color: #394039;
+    background-image: linear-gradient(0deg, #394039 0%, #8cc69a 69%);
+}
+
+.home-container {
+    font-size: 1.5rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 93.8vh;
+    /* background-color: white; */
+}
+
+.home-login-div {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.home-logged-div {
+    color: white;
+}
+
+.home-login-div p {
+    color: white;
+}
+
+button {
+    background: green;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 7px 15px;
+}

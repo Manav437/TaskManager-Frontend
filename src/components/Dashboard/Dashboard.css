@@ -1,0 +1,63 @@
+body {
+    color: white;
+}
+.dashboard-container {
+    display: flex;
+    margin: 20px auto;
+    flex-direction: column;
+    align-items: center;
+    height: 300px;
+    width: 400px;
+    border: 1px solid pink;
+    border-radius: 20px;
+    background: wheat;
+}
+
+h2 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin: 20px auto;
+}
+
+strong {
+    width: 200px;
+}
+
+.user-details {
+   width: 300px;
+   margin: 0 auto;
+}
+
+.img-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-input  {
+    width: 100px;
+}
+
+.dashboard-button {
+    margin: 0 auto;
+    width: 100px;
+}
+
+.preview-image {
+    margin: 10px auto;
+    height: 120px;
+    width: 120px;
+    padding: 2px;
+    border: 2px solid green;
+    border-radius: 5px;
+}
+
+.avatar-img {
+    margin-top: 10px;
+    height: 120px;
+    width: 120px;
+    padding: 2px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
