@@ -44,7 +44,7 @@ function RegisterPage() {
         <>
             <div className="container">
                 <div className="Register-div">
-                    <h1>Sign Up</h1>
+                    <h1 style={{ color: "white" }}>Sign Up</h1>
                     <form onSubmit={handleSubmit}>
                         <label className="label-text">Username</label>
                         <input className="register-input" type="text" name="name" placeholder="Enter your username" onChange={handleChange} required />
@@ -57,7 +57,7 @@ function RegisterPage() {
 
                         <button className="btn-grad" type="submit">Submit</button>
                     </form>
-                    <p>Already have an account? <a href="/login">Login</a></p>
+                    <p>Already have an account? <a style={{ color: "lightgreen" }} href="/login">Login</a></p>
                 </div>
             </div>
         </>

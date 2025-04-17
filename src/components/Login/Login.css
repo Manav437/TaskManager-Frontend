@@ -1,3 +1,10 @@
+.login{
+    height: 100vh;
+    background-color: #0f0f0f;
+    background-image: radial-gradient(#444 1px, transparent 1px);
+    background-size: 20px 20px; 
+}
+
 .login-container {
     display: flex;
     color: black;
@@ -7,14 +14,14 @@
 }
 
 .Login-div {
-    /* background: white; */
-    height: 400px;
+    /* height: 50%; */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: white;
-    padding: 20px;
+    background: #222222;
+    color: white;
+    padding: 10px;
     border-radius: 10px;
     text-align: center;
     width: 20%;
@@ -26,6 +33,7 @@
 }
 
 .login-header {
+    color: white;
     top: 5px;
     margin-bottom: 20px;
 }
@@ -46,23 +54,25 @@
     margin: 10px 0;
 }
 
-.btn-grad {background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%)}
+.btn-grad {background-image: linear-gradient(to right, #90C67C 0%, #78ec76  51%, #90C67C  100%)}
 .btn-grad {
+    height: 40px;
+    width: 90px;
    margin: 10px;
    padding: 10px;
    text-align: center;
    text-transform: uppercase;
    transition: 0.5s;
    background-size: 200% auto;
-   color: white;            
-   box-shadow: 0 0 20px #eee;
+   color: black;            
+   /* box-shadow: 0 0 20px #eee; */
    border-radius: 10px;
    margin-top: 20px;
  }
 
  .btn-grad:hover {
    background-position: right center; /* change the direction of the change here */
-   color: #fff;
+   color: #FFF;
    text-decoration: none;
  }
 

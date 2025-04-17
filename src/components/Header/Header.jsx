@@ -31,6 +31,7 @@ function Header() {
         <>
             <div className="headerContainer">
                 <ul className="navList leftLinks">
+                    <li className="logo-li"><Link to="/"><img style={{ height: "35px" }} src="/taskly-icon.png" alt="" /></Link></li>
                     <li className="underline-hover"><Link to="/">Home</Link></li>
                     <li className="underline-hover"><Link to="/about">About</Link></li>
                     {isLoggedIn ? (

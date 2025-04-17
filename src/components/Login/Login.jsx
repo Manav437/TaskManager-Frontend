@@ -43,10 +43,10 @@ function LoginPage() {
         }
     };
     return (
-        <>
+        <div className="login">
             <div className="login-container">
                 <div className="Login-div">
-                    <h1 className="login-header">Login</h1>
+                    <h1 style={{ paddingTop: "10px" }} className="login-header">Login</h1>
                     <form className="login-form" onSubmit={handleSubmit}>
                         <label className="label-text">Email</label>
                         <input className="login-input" type="email" name="email" onChange={handleChange} placeholder="Enter your email" required />
@@ -56,11 +56,11 @@ function LoginPage() {
 
                         <button className="btn-grad" type="submit">Submit</button>
                     </form>
-                    <p className="login-p">Dont have an account? <a href="/register">Register</a></p>
+                    <p className="login-p">Dont have an account? <a style={{ color: "lightgreen" }} href="/register">Register</a></p>
                 </div>
             </div>
 
-        </>
+        </div>
     )
 }
 

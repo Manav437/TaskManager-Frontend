@@ -8,6 +8,7 @@ import RegisterPage from './components/Register/Register';
 import DashboardPage from './components/Dashboard/Dashboard';
 import TasksPage from './components/Tasks/Tasks';
 import HomePage from './components/Home/Home';
+import NotFoundPage from './components/404Page/NotFoundPage';
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/tasks" element={<TasksPage />}></Route>
         <Route path='/dashboard' element={<DashboardPage />}></Route>
+        <Route path='/*' element={<NotFoundPage />}></Route>
       </Routes>
-    </div>
+    </div >
   )
 }
 
