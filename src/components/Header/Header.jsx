@@ -5,7 +5,16 @@ import "./Header.css"
 function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
     const navigate = useNavigate();
+    const [token, setToken] = useState(localStorage.getItem("token"));
     const userInfo = localStorage.getItem("token")
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setToken(localStorage.getItem("token"));
+        }, 500);
+
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         // Function to update login state
@@ -34,7 +43,7 @@ function Header() {
                     <li className="logo-li"><Link to="/"><img style={{ height: "35px" }} src="/taskly-icon.png" alt="" /></Link></li>
                     <li className="underline-hover"><Link to="/">Home</Link></li>
                     <li className="underline-hover"><Link to="/about">About</Link></li>
-                    {isLoggedIn ? (
+                    {isLoggedIn && token ? (
                         <>
                             <li className="underline-hover"><Link to="/dashboard">Dashboard</Link></li>
                             <li className="underline-hover"><Link to="/tasks">Tasks</Link></li>
@@ -44,7 +53,7 @@ function Header() {
                         : null}
                 </ul>
                 <ul className="navList rightLinks">
-                    {isLoggedIn ? (
+                    {isLoggedIn && token ? (
                         <li className="">
                             <button onClick={handleLogout} className="logout-btn"><img src="/logout-img.png" alt="" />LOGOUT </button>
                         </li>

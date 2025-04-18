@@ -16,6 +16,7 @@ function DashboardPage() {
     useEffect(() => {
         if (userId) {
             setAvatarUrl(`https://task-manager-backend-5hkl.onrender.com/users/${userId}/avatar`);
+            // setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
         }
     }, [userId]);
 
@@ -37,6 +38,7 @@ function DashboardPage() {
 
         try {
             const res = await fetch("https://task-manager-backend-5hkl.onrender.com/users/me/avatar", {
+                // const res = await fetch("http://localhost:3000/users/me/avatar", {
                 method: "POST",
                 body: formData,
                 headers: {
@@ -94,13 +96,17 @@ function DashboardPage() {
 
         try {
             const token = localStorage.getItem("token")
-            const response = await fetch(`https://task-manager-backend-5hkl.onrender.com0/users/me`, {
+            const response = await fetch(`https://task-manager-backend-5hkl.onrender.com/users/me`, {
+                // const response = await fetch(`http://localhost:3000/users/me`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 }
             });
+
+            console.log("Response Status: ", response.status); // Log status code
+            console.log("Response Headers: ", response.headers);
 
             let data;
             if (response.headers.get("content-type")?.includes("application/json")) {
@@ -115,7 +121,7 @@ function DashboardPage() {
                 setUser(null);
 
                 setTimeout(() => {
-                    router.push("/login");
+                    navigate('/register')
                 }, 500);
             } else {
                 const data = await response.json();
