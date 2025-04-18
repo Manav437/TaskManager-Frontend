@@ -128,40 +128,44 @@ function DashboardPage() {
     };
 
     return (
-        <>
+        <div className="dashboard-div">
+            <h2 style={{ paddingBottom: "20px", textAlign: "center", margin: "0 auto", width: "70%", color: "white", fontSize: "3rem" }}>WELCOME USER!</h2>
             <div className="dashboard-container">
-                <h2>WELCOME USER!</h2>
                 {error && <p className="error">{error}</p>}
                 {user ? (
                     <div className="user-details">
-                        <p style={{ color: "brown" }} ><strong style={{ color: "black" }}>Name:</strong> {user.name}</p>
-                        <p style={{ color: "brown" }} ><strong style={{ color: "black" }}>Email:</strong> {user.email}</p>
-                        <p style={{ color: "brown" }} ><strong style={{ color: "black" }}>Account Creation:</strong> {ChangeDate(user.createdAt)}</p>
-                        <p style={{ textAlign: "center" }}><a style={{ color: "red", cursor: "pointer" }} onClick={handleDelete}>Delete account</a></p>
+                        {avatarUrl ? (
+                            <img
+                                src={avatarUrl}
+                                alt="Avatar"
+                                className="avatar-img "
+                                style={{ margin: "10px auto", border: "1px solid white" }}
+                                key={avatarUrl}
+                            />
+                        ) : (
+                            <p>No avatar found</p>
+                        )}
+                        <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Name:</strong> {user.name}</p>
+                        <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Email:</strong> {user.email}</p>
+                        <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Account Creation:</strong> {ChangeDate(user.createdAt)}</p>
+                        <p style={{ marginTop: "50px", textAlign: "center" }}><a style={{ color: "red", cursor: "pointer" }} onClick={handleDelete}>Delete account</a></p>
+
                     </div>
                 ) : (
                     <p>Loading user details...</p>
                 )}
-            </div>
-            <div className="img-container">
-                <input type="file" onChange={handleFileChange} className="dashboard-input" />
-                {preview && <img src={preview} alt="Preview" className="preview-image object-cover mb-2" />}
-                <button onClick={handleUpload} className="dashboard-button">
-                    Upload Avatar
-                </button>
-                {avatarUrl ? (
-                    <img
-                        src={avatarUrl}
-                        alt="Avatar"
-                        className="avatar-img rounded-full border border-gray-300"
-                        key={avatarUrl}
-                    />
-                ) : (
-                    <p>No avatar found</p>
-                )}
 
+                <div className="img-container">
+                    <h3 style={{ border: "1px solid white", borderRadius: "10px", padding: "5px", background: "#2c2c2c", fontWeight: "800" }}>Update your pfp</h3>
+                    <input style={{ textAlign: "center", width: "80px" }} type="file" onChange={handleFileChange} className="dashboard-input" />
+                    {preview && <img src={preview} alt="Preview" className="preview-image object-cover mb-2" />}
+                    <button onClick={handleUpload} className="dashboard-button">
+                        Upload Avatar
+                    </button>
+
+                </div>
             </div>
-        </>
+        </div>
     )
 }
 

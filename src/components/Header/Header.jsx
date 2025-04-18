@@ -46,7 +46,7 @@ function Header() {
                 <ul className="navList rightLinks">
                     {isLoggedIn ? (
                         <li className="">
-                            <button onClick={handleLogout} className="logout-btn">LOGOUT <img src="/logout-img.png" alt="" /></button>
+                            <button onClick={handleLogout} className="logout-btn"><img src="/logout-img.png" alt="" />LOGOUT </button>
                         </li>
                     ) : (
                         <>

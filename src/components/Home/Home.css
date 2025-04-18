@@ -1,139 +1,139 @@
 body {
-    /* background-color: #394039;
-    background-image: linear-gradient(0deg, #394039 0%, #8cc69a 69%); */
-    color: white;
-    /* min-height: 100vh; */
-    /* background-attachment: scroll; */
+  /* background-color: #394039;
+  background-image: linear-gradient(0deg, #394039 0%, #8cc69a 69%); */
+  color: white;
+  /* min-height: 100vh; */
+  /* background-attachment: scroll; */
 }
 
 .home-container {
-    font-size: 1.5rem;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: center; */
-    padding-top: 100px;
-    /* min-height: 100vh; */
-    /* height: 235vh; */
-    background-color: #0f0f0f;
-    background-image: radial-gradient(#444 1px, transparent 1px);
-    background-size: 20px 20px; 
-    /* background-color: white; */
+  font-size: 1.5rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  padding-top: 100px;
+  /* min-height: 100vh; */
+  /* height: 235vh; */
+  background-color: #0f0f0f;
+  background-image: radial-gradient(#444 1px, transparent 1px);
+  background-size: 20px 20px; 
+  /* background-color: white; */
 }
 
 .quote-text {
-    color: white;
-    text-align: center;
-    width: 65%;
-    margin: 0 auto;    
-    font-size: 1.5rem;
-    line-height: 1.5;
+  color: white;
+  text-align: center;
+  width: 65%;
+  margin: 0 auto;    
+  font-size: 1.5rem;
+  line-height: 1.5;
 }
 
 .home-login-div {
-    display: flex;
-    font-size: 1rem;
-    text-align: center;
+  display: flex;
+  font-size: 1rem;
+  text-align: center;
 }
 
 .home-logged-div {
-    color: white;
+  color: white;
 }
 
 .home-login-div p {
-    color: white;
+  color: white;
 }
 
 button {
-    background: green;
-    width: 75px;
-    height: 23px;
-    text-align: center;
-    color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 0;
+  background: green;
+  width: 75px;
+  height: 23px;
+  text-align: center;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0;
 }
 
 .video-container {
-    height: 600px;
-    width: 70%;
-    position: relative;
-    overflow: hidden;
-    color: white;
+  height: 600px;
+  width: 70%;
+  position: relative;
+  overflow: hidden;
+  color: white;
 }
 
 .video-container video {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    border-radius: 12px;
-    z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 12px;
+  z-index: 1;
 }
 
 .text-wrapper {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    overflow: hidden;
-    z-index: 3;
-  }
-
-.moving-text {
-    display: flex;
-    gap: 50px; /* spacing between h2s */
-    white-space: nowrap;
-    color: white;
-    animation: scrollText 10s linear infinite;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  overflow: hidden;
+  z-index: 3;
 }
 
-  .moving-text h2 {
-    font-size: 3rem;
-    font-weight: 700;
-    text-shadow: 0 0 8px #b0a5a5;
+.moving-text {
+  display: flex;
+  gap: 50px; /* spacing between h2s */
+  white-space: nowrap;
+  color: white;
+  animation: scrollText 10s linear infinite;
+}
+
+.moving-text h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 0 0 8px #b0a5a5;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
   }
-  
-  @keyframes scrollText {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  100% {
+    transform: translateX(-50%);
   }
+}
 
 .hello-div {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: black;
-  color: white;
-  z-index: 2;
-  padding: 10px;
-  border-radius: 5px;
+position: absolute;
+top: 20px;
+left: 20px;
+background: black;
+color: white;
+z-index: 2;
+padding: 10px;
+border-radius: 5px;
 }
 
 
 .click-here {
-  background-color: #000000;
-  background-image: linear-gradient(136deg, #000000 0%, #B5FFFC 100%);
-  
+background-color: #000000;
+background-image: linear-gradient(136deg, #000000 0%, #B5FFFC 100%);
+
 }
 
 .footer > h3 {
-  color: #60B5FF;
+color: #60B5FF;
 }
 
 .footer > a {
-  font-size: 1.1rem;
-  text-decoration: none;
-  color: #BDDDE4;
+font-size: 1.1rem;
+text-decoration: none;
+color: #BDDDE4;
 }
 
 .footer > a:hover {
-  color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+color: #fff;
+text-decoration: underline;
+text-underline-offset: 2px;
 }

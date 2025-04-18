@@ -65,16 +65,19 @@
 
 .logout-btn {
   display: flex;
+  justify-content: center;
+  align-items: center;
   line-height: 1.5;
   text-emphasis: bold;
   margin: 7px ;
   border-radius: 5px;
   border: 1px solid pink;
-  background: tomato;
+  background: #F7374F;
+  height: 30px;
+  width: 90px;
 }
 .logout-btn:hover {
-  background-color: white;
-  color: tomato;
+  background: #7D0A0A;
 }
 
 img {

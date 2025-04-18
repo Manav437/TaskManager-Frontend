@@ -4,30 +4,34 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 87vh;
+    height: 100vh;
+    background-color: #0f0f0f;
+    background-image: radial-gradient(#444 1px, transparent 1px);
+    background-size: 20px 20px; 
 }
 
 .not-found-heading {
     font-weight: bold;
-    color: #F7374F;
+    color: #ffffff;
     font-size: 4rem;
 }
 
 .not-found-p {
     font-size: 2rem;
     margin-top: 20px;
-    color: #522546;
+    color: #bbbabb;
 }
 
 .not-found-link {
     margin-top: 40px;
     padding: 20px 40px;
-    background: #522546;
-    color: white;
+    background: #7cb6e9;
+    color: black;
     border-radius: 10px;
 }
 
 .not-found-link:hover {
     background: #2C2C2C;
+    color: white;
     transition: .9s ease;
 }

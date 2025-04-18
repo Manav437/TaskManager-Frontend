@@ -1,34 +1,57 @@
 body {
     color: white;
 }
-.dashboard-container {
-    display: flex;
-    margin: 20px auto;
-    flex-direction: column;
-    align-items: center;
-    height: 300px;
-    width: 400px;
-    border: 1px solid pink;
-    border-radius: 20px;
-    background: wheat;
+
+.dashboard-div {
+    padding-top: 90px;
+    height: 89vh;
+    background-color: #0f0f0f;
+    background-image: radial-gradient(#444 1px, transparent 1px);
+    background-size: 20px 20px; 
 }
 
-h2 {
+.dashboard-container {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    align-items: center;
+    height: 60%;
+    width: 70%;
+    border: 1px solid pink;
+    border-radius: 20px;
+    background: black;
+}
+
+/* h2 {
     color: rgb(0, 0, 0);
     text-align: center;
     margin: 20px auto;
-}
+} */
 
 strong {
     width: 200px;
 }
 
 .user-details {
-   width: 300px;
-   margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+    color: white;
+    width: 50%;
+    margin: 0 auto;
+    
+}
+
+.user-details > p {
+    margin: 5px auto;
+    display: inline-block;
+    width: 50%;
 }
 
 .img-container {
+    border-left: 2px dashed #2c2c2c;
+    width: 50%;
+    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,12 +59,13 @@ strong {
 }
 
 .dashboard-input  {
-    width: 100px;
+    margin: 5px;
 }
 
 .dashboard-button {
     margin: 0 auto;
     width: 100px;
+    height: 40px;
 }
 
 .preview-image {
@@ -50,7 +74,7 @@ strong {
     width: 120px;
     padding: 2px;
     border: 2px solid green;
-    border-radius: 5px;
+    border-radius: 50%;
 }
 
 .avatar-img {

@@ -64,14 +64,14 @@ function TasksPage() {
     };
 
     return (
-        <>
+        <div className="tasks-div">
             <div className="tasks-container">
                 <div className="tasks-header">
-                    <h1>Tasks</h1>
-                    <button style={{ width: "100px", margin: "0px" }} className="create-task-btn" onClick={handleCreateClick}>Create Task</button>
+                    <h1 style={{ fontSize: "2.5rem", marginLeft: "10px" }}>TASKS</h1>
+                    <button style={{ height: "30px", width: "100px", margin: "0px", marginRight: "10px" }} className="create-task-btn" onClick={handleCreateClick}>Create Task</button>
                 </div>
                 <div className="task-section">
-                    <h2 className="tasks-heading">Pending tasks</h2>
+                    <h2 style={{ marginTop: "7px", marginLeft: "7px" }} className="tasks-heading">Pending tasks</h2>
                     <div className="incompleted-tasks">
                         {tasks.filter(task => !task.completed).map(task => (
                             <span key={task._id} className="incompleted-task">{task.description}<img className="edit-img" onClick={() => handleEditClick(task)} src="/edit-img.png" /></span>
@@ -79,13 +79,13 @@ function TasksPage() {
                     </div>
                 </div>
 
-                <button style={{ margin: "0 auto" }} className="toggle-btn" onClick={() => setShowCompleted(!showCompleted)}>
+                <button style={{ margin: "0 auto", marginLeft: "10px", height: "55px", width: "90px" }} className="toggle-btn" onClick={() => setShowCompleted(!showCompleted)}>
                     {showCompleted ? "Hide Completed Tasks" : "Show Completed Tasks"}
                 </button>
 
                 {showCompleted && (
-                    <div className="task-section">
-                        <h2 className="tasks-heading" >Completed Tasks</h2>
+                    <div className="task-section" style={{ marginTop: "20px", }}>
+                        <h2 className="tasks-heading" style={{ marginLeft: "7px", marginTop: "7px", width: "180px", background: "green" }} >Completed Tasks</h2>
                         <div className="completed-tasks">
                             {tasks.filter(task => task.completed).map(task => (
                                 <span key={task._id} className="completed-task">
@@ -134,7 +134,7 @@ function TasksPage() {
                 )}
             </div >
 
-        </>
+        </div >
     )
 }
 
