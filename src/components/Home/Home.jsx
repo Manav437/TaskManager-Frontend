@@ -62,7 +62,7 @@ function HomePage() {
 
                 <div className="video-container" onClick={handleClick}>
                     <video autoPlay muted loop key={videoList[currentVideoIndex]}>
-                        <source src={videoList[currentVideoIndex]} type="video/mp4" />
+                        <source key={videoList[currentVideoIndex]} src={videoList[currentVideoIndex]} type="video/mp4" />
                     </video>
                     <div className="hello-div" style={{ height: "100px", marginTop: "2%", borderRadius: "20px", width: "90%", position: "absolute" }}>
                         {isLoggedIn ? (
