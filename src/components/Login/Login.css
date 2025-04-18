@@ -5,6 +5,27 @@
     background-size: 20px 20px; 
 }
 
+.login::before,
+.login::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 15%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.login::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.login::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
+}
+
 .login-container {
     display: flex;
     color: black;

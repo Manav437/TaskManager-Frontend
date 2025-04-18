@@ -1,6 +1,7 @@
 body {
     margin: 0;
 }
+
 .tasks-div {
     /* height: 100%; */
     margin: 0;
@@ -9,6 +10,27 @@ body {
     background-size: 20px 20px; 
      min-height: 100vh;
     /* max-height: 300vh;  */
+}
+
+.tasks-div:before,
+.tasks-div::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 15%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tasks-div::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.tasks-div::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
 }
 
 .list-disc  {

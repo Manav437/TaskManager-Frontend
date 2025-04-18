@@ -10,6 +10,27 @@ body {
     background-size: 20px 20px; 
 }
 
+.dashboard-div::before,
+.dashboard-div::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 15%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.dashboard-div::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.dashboard-div::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
+}
+
 .dashboard-container {
     display: flex;
     margin: 0 auto;

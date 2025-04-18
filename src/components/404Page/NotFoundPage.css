@@ -10,6 +10,27 @@
     background-size: 20px 20px; 
 }
 
+.not-found-container::before,
+.not-found-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 15%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.not-found-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.not-found-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
+}
+
 .not-found-heading {
     font-weight: bold;
     color: #ffffff;

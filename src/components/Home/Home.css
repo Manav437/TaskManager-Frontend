@@ -12,14 +12,31 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   padding-top: 100px;
-  /* min-height: 100vh; */
-  /* height: 235vh; */
   background-color: #0f0f0f;
   background-image: radial-gradient(#444 1px, transparent 1px);
   background-size: 20px 20px; 
-  /* background-color: white; */
+}
+
+.home-container::before,
+.home-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 15%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.home-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.home-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
 }
 
 .quote-text {
