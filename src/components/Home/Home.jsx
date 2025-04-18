@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css"
 
@@ -23,6 +23,7 @@ function HomePage() {
     const [quote, setQuote] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+    const videoRef = useRef(null);
 
     useEffect(() => {
         console.log("Video index changed to:", currentVideoIndex);
@@ -39,7 +40,14 @@ function HomePage() {
 
     const handleClick = () => {
         // Increment the video index, cycling through the videos
-        setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoList.length);
+        const nextIndex = (currentVideoIndex + 1) % videoList.length;
+        setCurrentVideoIndex(nextIndex);
+
+        if (videoRef.current) {
+            videoRef.current.src = videoList[nextIndex];
+            videoRef.current.load();
+            videoRef.current.play();
+        }
     };
 
     return (
@@ -61,8 +69,8 @@ function HomePage() {
                 </div>
 
                 <div className="video-container" onClick={handleClick}>
-                    <video autoPlay muted loop key={videoList[currentVideoIndex]}>
-                        <source key={videoList[currentVideoIndex]} src={videoList[currentVideoIndex]} type="video/mp4" />
+                    <video autoPlay muted loop preload="auto" key={videoList[currentVideoIndex]}>
+                        <source src={videoList[currentVideoIndex]} type="video/mp4" />
                     </video>
                     <div className="hello-div" style={{ height: "100px", marginTop: "2%", borderRadius: "20px", width: "90%", position: "absolute" }}>
                         {isLoggedIn ? (
