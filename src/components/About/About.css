@@ -23,3 +23,11 @@
 .about-span {
     line-height: 2;
 }
+
+.hover-a-about {
+	color: grey;
+}
+
+.hover-a-about:hover {
+	color: #9FB3DF;
+}

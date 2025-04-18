@@ -81,12 +81,12 @@ function HomePage() {
                             </div>
                         ) : (<div style={{ padding: "10px auto", display: "flex", justifyContent: "space-between", height: "100%" }}>
                             <p style={{ fontSize: "1.8rem", marginTop: "30px", textAlign: "center", paddingTop: "7px", paddingLeft: "10px", display: "inline-block", width: "50%" }}>Already have an account?</p>
-                            <button style={{ borderRadius: "10px", color: "#EFEFEF", background: "#5CB338", fontSize: "2rem", width: "50%", height: "80%" }} onClick={() => navigate("/login")}>LOG IN</button>
+                            <button className="home-login" style={{ borderRadius: "10px", color: "#EFEFEF", background: "#5CB338", fontSize: "2rem", width: "45%", height: "80%" }} onClick={() => navigate("/login")}><span>LOG IN</span></button>
                         </div>)}
 
-                        <div className="click-here" style={{ height: "10px", padding: "3px", border: "1px solid #2C2C2C", borderRadius: "5px", width: "70px", display: "flex", alignItems: "center", fontSize: "8px", marginTop: "30px" }}>
-                            <p style={{ color: "white", display: "inline-block", width: "65px" }}>click here</p>
-                            <img style={{ height: "10px" }} src="/arrow-img.png" alt="" />
+                        <div className="click-here" style={{ height: "12px", padding: "3px", border: "1px solid #2C2C2C", borderRadius: "5px", width: "70px", display: "flex", alignItems: "center", fontSize: "8px", marginTop: "20px" }}>
+                            <p style={{ paddingLeft: "2px", color: "white", display: "inline-block", width: "65px" }}>click here</p>
+                            <img style={{ paddingRight: "4px", height: "10px" }} src="/arrow-img.png" alt="" />
                         </div>
                     </div>
                     <div className="text-wrapper">

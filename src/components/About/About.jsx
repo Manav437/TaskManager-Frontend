@@ -33,7 +33,7 @@ function AboutPage() {
                     </div>
                 </div> */}
 
-                <div style={{ padding: "10px", border: "1px solid #2C2C2C", borderRadius: "20px", margin: "50px auto 0 auto", textAlign: "center", width: "69%" }}>
+                <div style={{ background: "black", padding: "10px", border: "1px solid #2C2C2C", borderRadius: "20px", margin: "50px auto 0 auto", textAlign: "center", width: "69%" }}>
                     <h1 className="about-h1">Vision</h1>
                     <p style={{ margin: "10px auto", textAlign: "center", width: "80%", fontSize: "1.15rem", color: "white" }}>
                         Our mission is to simplify task and user management for individuals and teams.
@@ -42,16 +42,16 @@ function AboutPage() {
                     </p>
                 </div>
 
-                <div style={{ margin: "0 auto", border: "1px solid #2C2C2C", borderRadius: "20px", width: "70%" }}>
+                <div style={{ background: "black", margin: "0 auto", border: "1px solid #2C2C2C", borderRadius: "20px", width: "70%" }}>
                     <FaqItem />
                 </div>
 
 
-                <div style={{ borderRadius: "20px", margin: "0 auto", width: "70%", border: "1px solid #2C2C2C", marginTop: "auto", textAlign: "center", paddingTop: "2rem" }}>
-                    <h2 style={{ fontSize: "3rem", marginTop: "0", color: "white" }}>Contact & Support</h2>
-                    <p style={{ color: "white" }}>
+                <div style={{ background: "black", borderRadius: "20px", margin: "0 auto", width: "70%", border: "1px solid #2C2C2C", marginTop: "auto", textAlign: "center", paddingTop: "2rem" }}>
+                    <h2 style={{ fontSize: "3rem", margin: "0", color: "white" }}>Contact & Support</h2>
+                    <p style={{ fontSize: "1.1rem", color: "white", paddingBottom: "20px" }}>
                         If you have any questions or feedback, feel free to reach out at&nbsp;
-                        <a style={{ color: "grey" }} href="https://x.com/manav437" target="_blank" rel="noopener noreferrer">@manav437 on X</a>.
+                        <a className="hover-a-about" href="https://x.com/manav437" target="_blank" rel="noopener noreferrer">@manav437 on X</a>.
                     </p>
                 </div>
             </div>
