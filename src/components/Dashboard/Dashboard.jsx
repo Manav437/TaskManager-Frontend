@@ -51,6 +51,7 @@ function DashboardPage() {
                 throw new Error(errorData.error || "Upload failed");
             }
             alert("Upload successful!");
+            window.location.reload();
         } catch (error) {
             console.error("Upload failed:", error);
         }
@@ -155,12 +156,10 @@ function DashboardPage() {
                         <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Email:</strong> {user.email}</p>
                         <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Account Creation:</strong> {ChangeDate(user.createdAt)}</p>
                         <p style={{ marginTop: "50px", textAlign: "center" }}><a style={{ color: "red", cursor: "pointer" }} onClick={handleDelete}>Delete account</a></p>
-
                     </div>
                 ) : (
                     <p>Loading user details...</p>
                 )}
-
                 <div className="img-container">
                     <h3 style={{ border: "1px solid white", borderRadius: "10px", padding: "5px", background: "#2c2c2c", fontWeight: "800" }}>Update your pfp</h3>
                     <input style={{ textAlign: "center", width: "80px" }} type="file" onChange={handleFileChange} className="dashboard-input" />
@@ -168,7 +167,6 @@ function DashboardPage() {
                     <button onClick={handleUpload} className="dashboard-button">
                         Upload Avatar
                     </button>
-
                 </div>
             </div>
         </div>
