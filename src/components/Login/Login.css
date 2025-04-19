@@ -107,3 +107,9 @@
     text-decoration: underline;
     color: rgb(42, 42, 42);
 }
+
+@media (max-width :430px) { 
+    .Login-div {
+        width: 60vw;
+    }
+}

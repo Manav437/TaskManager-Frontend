@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import "./Header.css"
 
 function Header() {
+    const [theme, setTheme] = useState("light");
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
     const navigate = useNavigate();
     const [token, setToken] = useState(localStorage.getItem("token"));

@@ -1,16 +1,19 @@
 .about-div {
     min-height: 100vh;
   	display: flex;
-	flex-direction: column;
-	color: white;
-	font-family: sans-serif;
-	line-height: 1.6;
-	padding: 2rem;
-	text-align: center;
-	margin: auto;
-	background-color: #0f0f0f;
+    flex-direction: column;
+    color: white;
+    font-family: sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+    text-align: center;
+    margin: auto;
+    background-color: #0f0f0f;
     background-image: radial-gradient(#444 1px, transparent 1px);
     background-size: 20px 20px; 
+    gap: 20px;
+    color: white;
+    line-height: 1.6;
 }
 
 .about-div::before,
@@ -34,11 +37,52 @@
   background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
 }
 
+.about-first {
+  background: black;
+  padding: 10px;
+  border: 1px solid #2C2C2C;
+  border-radius: 20px;
+  margin: 50px auto 0 auto;
+  text-align: center;
+  width: 69%;
+}
+
+.about-two {
+  background: black;
+  margin: 0 auto;
+  border: 1px solid #2C2C2C;
+  border-radius: 20px;
+  width: 70%;
+}
+
+.about-three {
+  background: black;
+  border-radius: 20px;
+  margin: 0 auto;
+  width: 70%;
+  border: 1px solid #2C2C2C;
+  margin-top: auto;
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.about-three > h2 {
+  font-size: 3rem;
+  margin: 0;
+  color: white;
+}
+
+.about-three > p {
+  font-size: 1.1rem;
+  color: white;
+  padding-bottom: 20px;
+}
+
 .about-h1 {
 	margin: 0;
 	font-size: 3.5rem;
 	color: white;
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .about-span {
@@ -51,4 +95,23 @@
 
 .hover-a-about:hover {
 	color: #9FB3DF;
+}
+
+@media (max-width: 430px) {
+	.about-first,.about-two, .about-three {
+    width: 90%;
+  }
+
+  .about-h1 {
+    font-size: 2rem;
+  }
+
+  .about-three > h2 {
+    font-size: 2rem;
+  }
+
+  .about-three > p {
+    width: 80%;
+    margin: 5px auto;
+  }
 }

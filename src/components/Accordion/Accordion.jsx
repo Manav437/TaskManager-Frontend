@@ -21,49 +21,6 @@ const FaqList = () => {
         }
     ];
 
-    const containerStyle = {
-        width: "100%",
-        margin: "10px auto",
-        padding: "20px",
-        boxSizing: "border-box",
-    };
-
-    const headingStyle = {
-        margin: "0",
-        fontSize: "3rem",
-        fontWeight: "bold",
-        marginBottom: "24px",
-        textAlign: "center",
-        color: "white"
-    };
-
-    const itemStyle = {
-        background: "black",
-        margin: "20px auto",
-        textAlign: "left",
-        width: "90%",
-        border: "1px solid #2C2C2C",
-        borderRadius: "10px",
-        padding: "16px",
-        boxSizing: "border-box",
-    };
-
-    const questionStyle = {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        cursor: "pointer",
-        fontWeight: "600",
-        fontSize: "18px",
-    };
-
-    const answerStyle = {
-        marginTop: "10px",
-        color: "#555",
-        fontSize: "16px",
-        lineHeight: "1.5",
-    };
-
     const FaqItem = ({ question, answer }) => {
         const [isOpen, setIsOpen] = useState(false);
 
@@ -74,19 +31,19 @@ const FaqList = () => {
         };
 
         return (
-            <div style={itemStyle}>
-                <div style={questionStyle} onClick={() => setIsOpen(!isOpen)}>
+            <div className="itemStyle">
+                <div className="questionStyle" onClick={() => setIsOpen(!isOpen)}>
                     {question}
                     <span style={arrowStyle}>▶️</span>
                 </div>
-                {isOpen && <div style={answerStyle}>{answer}</div>}
+                {isOpen && <div className="answerStyle">{answer}</div>}
             </div>
         );
     };
 
     return (
-        <div style={containerStyle}>
-            <h2 style={headingStyle}>FAQs</h2>
+        <div className="containerStyle">
+            <h2 className="headingStyle">FAQs</h2>
             {faqData.map((faq, index) => (
                 <FaqItem key={index} question={faq.question} answer={faq.answer} />
             ))}

@@ -53,36 +53,38 @@ function HomePage() {
     return (
         <>
             <div className="home-container" style={{ gap: "30px" }}>
-                <div style={{ width: "70%", textAlign: "center", border: "1px solid #2c2c2c", borderRadius: "10px" }}>
+                <div className="div-one">
                     <h1 style={{ fontSize: "5rem", color: "white", fontWeight: "800" }}>TASKLY</h1>
                     <h2 style={{ width: "60%", paddingBottom: "9px", borderBottom: "3px solid #2C2C2C", fontStyle: "italic", margin: "5px auto", textAlign: "center", color: "white", fontSize: "2.5rem" }}>Task Management app</h2>
                     <h4>What will you <span style={{ color: "green" }}>achieve</span> today!</h4>
                 </div>
 
-                <div style={{ textAlign: "center", width: "70%", border: "2px solid #2C2C2C", borderRadius: "10px" }}>
-                    <h1 style={{ color: "beige", width: "65%", margin: "0 auto" }}>Do your best work in Taskly</h1>
+                <div className="div-two">
+                    <h1 >Do your best work in Taskly</h1>
                     <p className="quote-text">{quote}</p>
                 </div>
 
-                <div style={{ background: "black", border: "2px solid #2C2C2C", borderRadius: "10px", width: "70%", textAlign: "center", height: "50vh" }}>
-                    <p style={{ margin: "10% auto", width: "50%" }}>For the love of productivity — professionals are facing new challenges, and need fast and reliable tools to stay on track. That's why we built Taskly: a powerful task manager that helps you organize, prioritize, and get things done with ease.</p>
+                <div className="div-three">
+                    <p>For the love of productivity — professionals are facing new challenges, and need fast and reliable tools to stay on track. That's why we built Taskly: a powerful task manager that helps you organize, prioritize, and get things done with ease.</p>
                 </div>
 
                 <div className="video-container" onClick={handleClick}>
                     <video autoPlay muted loop preload="auto" key={videoList[currentVideoIndex]}>
                         <source src={videoList[currentVideoIndex]} type="video/mp4" />
                     </video>
-                    <div className="hello-div" style={{ height: "100px", marginTop: "2%", borderRadius: "20px", width: "90%", position: "absolute" }}>
+                    <div className="hello-div">
                         {isLoggedIn ? (
                             <div style={{ width: "100%", display: "flex", flexDirection: "row" }}>
                                 <a style={{ textDecoration: "none" }} href="/tasks"><p style={{ display: "inline-block", width: "50%", color: "white", background: "black", padding: "5px", borderRadius: "5px", paddingRight: "1px" }}>
                                     Lets get your tasks done!</p>
                                 </a>
                             </div>
-                        ) : (<div style={{ padding: "10px auto", display: "flex", justifyContent: "space-between", height: "100%" }}>
-                            <p style={{ fontSize: "1.8rem", marginTop: "30px", textAlign: "center", paddingTop: "7px", paddingLeft: "10px", display: "inline-block", width: "50%" }}>Already have an account?</p>
-                            <button className="home-login" style={{ borderRadius: "10px", color: "#EFEFEF", background: "#5CB338", fontSize: "2rem", width: "45%", height: "80%" }} onClick={() => navigate("/login")}><span>LOG IN</span></button>
-                        </div>)}
+                        ) : (
+                            <div className="hello-loggedin">
+                                <p >Already have an account?</p>
+                                <button className="home-login" style={{ borderRadius: "10px", color: "#EFEFEF", background: "#5CB338", fontSize: "2rem", width: "45%", height: "80%" }} onClick={() => navigate("/login")}><span>LOG IN</span></button>
+                            </div>
+                        )}
 
                         <div className="click-here" style={{ height: "12px", padding: "3px", border: "1px solid #2C2C2C", borderRadius: "5px", width: "70px", display: "flex", alignItems: "center", fontSize: "8px", marginTop: "20px" }}>
                             <p style={{ paddingLeft: "2px", color: "white", display: "inline-block", width: "65px" }}>click here</p>
@@ -107,19 +109,19 @@ function HomePage() {
                     </div>
                 </div>
 
-                <div style={{ gap: "0", alignItems: "center", display: "flex", flexDirection: "column", width: "70%", margin: "0 auto" }}>
-                    <div style={{ border: "3px solid #2C2C2C", borderBottom: "1px dotted #2C2C2C", padding: "30px", background: "black", height: "70px", display: "flex", justifyContent: "flex-end", gap: "0", marginBottom: "0", width: "80%", borderRadius: "10px 10px 0 0" }}>
-                        <h3 style={{ fontSize: "3rem", paddingTop: "20px", margin: "0 auto", textAlign: "center", marginBottom: "0", color: "white" }}>What <span style={{ padding: "3px 10px", borderRadius: "3px", background: "green", fontWeight: "800", fontStyle: "italic" }}>TASK</span> will you do today?</h3>
+                <div className="footer-div">
+                    <div className="footer-first">
+                        <h3>What <span style={{ padding: "3px 10px", borderRadius: "3px", background: "green", fontWeight: "800", fontStyle: "italic" }}>TASK</span> will you do today?</h3>
                     </div>
 
-                    <div style={{ paddingTop: "30px", height: "250px", background: "black", marginTop: "0", gap: "0", display: "flex", justifyContent: "space-around", flexDirection: "row", width: "100%", border: "3px solid #2C2C2C", borderTop: "0", borderBottom: "0", borderRadius: "10px 10px 0 0" }}>
-                        <div className="footer" style={{ gap: "10px", display: "flex", flexDirection: "column", textAlign: "center" }}>
+                    <div className="footer-links">
+                        <div className="footer" >
                             <h3>PRODUCT</h3>
                             <a href="" >changelogs</a>
                             <a href="">docs</a>
                         </div>
 
-                        <div className="footer" style={{ gap: "10px", display: "flex", flexDirection: "column", textAlign: "center" }}>
+                        <div className="footer">
                             <h3>COMPANY</h3>
                             <a href="/">careers</a>
                             <a href="/">privacy policy</a>
@@ -127,7 +129,7 @@ function HomePage() {
                             <a href="/">partner with us</a>
                         </div>
 
-                        <div className="footer" style={{ gap: "10px", display: "flex", flexDirection: "column", textAlign: "center" }}>
+                        <div className="footer">
                             <h3>DEVELOPERS</h3>
                             <a href="/">blog</a>
                             <a href="/">github</a>
@@ -135,20 +137,8 @@ function HomePage() {
                         </div>
                     </div>
 
-                    <div style={{ border: "3px solid #2C2C2C", borderTop: "1px dotted #2C2C2C", borderBottom: "0", overflow: "hidden", gap: "0", marginBottom: "0", height: "100px", position: "relative", textAlign: "center", width: "100%", background: "black" }} >
-                        <h1 style={{
-                            height: "99px",
-                            position: "absolute",
-                            bottom: "0", // Just below the footer
-                            left: "50%",
-                            transform: "translateX(-50%)",
-                            fontSize: "9rem",
-                            color: "#FFEDFA",
-                            background: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)",
-                            padding: "0 20px",
-                            lineHeight: "1.2",
-                            margin: "0",
-                        }}>TASKLY</h1>
+                    <div className="footer-last">
+                        <h1>TASKLY</h1>
                     </div>
                 </div>
 
