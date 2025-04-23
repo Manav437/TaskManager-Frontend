@@ -44,15 +44,18 @@
 }
 
 .not-found-link {
+  text-decoration: none;
     margin-top: 40px;
     padding: 20px 40px;
-    background: #7cb6e9;
+    background: #EEF1DA;
     color: black;
     border-radius: 10px;
+    transition: background 0.9s ease, color 0.9s ease;
 }
 
 .not-found-link:hover {
-    background: #2C2C2C;
-    color: white;
-    transition: .9s ease;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: #2C2C2C;
+  color: white;
 }

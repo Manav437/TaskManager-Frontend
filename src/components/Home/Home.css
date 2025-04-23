@@ -68,8 +68,10 @@ body {
   height: 50vh;
 }
 .div-three > p {
-  margin: 10% auto;
-  width: 50%;
+  height: 250px;
+  margin: 7% auto;
+  width: 70%;
+  font-size: 30px;
 }
 
 .quote-text {

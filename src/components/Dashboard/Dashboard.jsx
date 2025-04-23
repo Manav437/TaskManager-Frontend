@@ -1,16 +1,18 @@
 import "./Dashboard.css"
 import React, { useState, useEffect } from "react";
 import { getUserDetails } from "../../utils/api"
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function DashboardPage() {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
     const [error, setError] = useState("");
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [avatarUrl, setAvatarUrl] = useState("");
     const [userId, setUserId] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -134,6 +136,33 @@ function DashboardPage() {
         }
     };
 
+    const handleUpdate = async (updatedUser) => {
+        try {
+            console.log("Updated User Data:", updatedUser); // Log to ensure data is correct
+            const updatedUserRequired = {
+                name: updatedUser.name,
+                age: updatedUser.age,
+            }
+            const response = await axios.patch("https://task-manager-backend-5hkl.onrender.com/users/me", updatedUserRequired, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+
+            if (response.status === 200) {
+                setUser(response.data); // Update the user data in the parent component
+                alert("Profile updated successfully!");
+            } else {
+                // Handle specific errors if response is not 200
+                alert("Failed to update profile, please try again.");
+            }
+        } catch (error) {
+            console.error("Error updating user data:", error);
+            alert(`Failed to update profile. Error: ${error.response ? error.response.data : error.message}`);
+        }
+    };
+
+
     return (
         <div className="dashboard-div">
             <h2 style={{ paddingBottom: "20px", textAlign: "center", margin: "0 auto", width: "70%", color: "white", fontSize: "3rem" }}>WELCOME USER!</h2>
@@ -146,7 +175,7 @@ function DashboardPage() {
                                 src={avatarUrl}
                                 alt="Avatar"
                                 className="avatar-img "
-                                style={{ margin: "10px auto", border: "1px solid white" }}
+                                style={{ margin: "30px auto", border: "1px solid white" }}
                                 key={avatarUrl}
                             />
                         ) : (
@@ -155,21 +184,41 @@ function DashboardPage() {
                         <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Name:</strong> {user.name}</p>
                         <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Email:</strong> {user.email}</p>
                         <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Account Creation:</strong> {ChangeDate(user.createdAt)}</p>
-                        <p style={{ marginTop: "50px", textAlign: "center" }}><a style={{ color: "red", cursor: "pointer" }} onClick={handleDelete}>Delete account</a></p>
+                        <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Age:</strong> {user.age}</p>
+                        <p style={{ marginTop: "30px", textAlign: "center" }}><a style={{ color: "red", cursor: "pointer" }} onClick={handleDelete}>Delete account</a></p>
                     </div>
                 ) : (
-                    <p>Loading user details...</p>
+                    <div style={{ margin: "0 auto" }}>
+                        <p>Loading user details...</p>
+                    </div>
                 )}
-                <div className="img-container">
-                    <h3 style={{ border: "1px solid white", borderRadius: "10px", padding: "5px", background: "#2c2c2c", fontWeight: "800" }}>Update your pfp</h3>
-                    <input style={{ textAlign: "center", width: "80px" }} type="file" onChange={handleFileChange} className="dashboard-input" />
-                    {preview && <img src={preview} alt="Preview" className="preview-image object-cover mb-2" />}
-                    <button onClick={handleUpload} className="dashboard-button">
-                        Upload Avatar
-                    </button>
-                </div>
+
+                {user && (
+                    <div className="img-container">
+                        <button style={{ height: "50px" }} onClick={() => setIsModalOpen(true)}>Edit Profile</button>
+                        <hr className="dashed-hr" />
+                        <h3 style={{ border: "1px solid white", borderRadius: "10px", padding: "5px", background: "#2c2c2c", fontWeight: "800" }}>Update your pfp</h3>
+                        <input
+                            style={{ textAlign: "center", width: "80px" }}
+                            type="file"
+                            onChange={handleFileChange}
+                            className="dashboard-input"
+                        />
+                        {preview && <img src={preview} alt="Preview" className="preview-image object-cover mb-2" />}
+                        <button onClick={handleUpload} className="dashboard-button">
+                            Upload Avatar
+                        </button>
+                    </div>
+                )}
+
+                <EditProfileModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    user={user}
+                    onUpdate={handleUpdate}
+                />
             </div>
-        </div>
+        </div >
     )
 }
 

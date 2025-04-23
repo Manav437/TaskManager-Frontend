@@ -3,6 +3,7 @@ import axios from "axios";
 // const API_BASE_URL = "http://localhost:3000"; // Change this to your backend URL
 const API_BASE_URL = "https://task-manager-backend-5hkl.onrender.com"
 
+
 export const registerUser = async (userData) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/users`, userData);
@@ -46,6 +47,20 @@ export const getUserDetails = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching user details:", error.response?.data || error.message);
+        throw error;
+    }
+};
+
+export const updateUserDetails = async (userData) => {
+    try {
+        const response = await axios.patch(`${API_BASE_URL}/users/me`, userData, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // Bearer token for authentication
+            },
+        });
+        return response.data; // Returning updated user data
+    } catch (error) {
+        console.error("Error updating user details:", error.response?.data || error.message);
         throw error;
     }
 };

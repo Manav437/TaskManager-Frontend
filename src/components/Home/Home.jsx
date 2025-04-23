@@ -65,7 +65,10 @@ function HomePage() {
                 </div>
 
                 <div className="div-three">
-                    <p>For the love of productivity — professionals are facing new challenges, and need fast and reliable tools to stay on track. That's why we built Taskly: a powerful task manager that helps you organize, prioritize, and get things done with ease.</p>
+                    <p>For the love of productivity — professionals are facing new challenges, and need
+                        fast and reliable tools to stay on track. That's why we built Taskly: a powerful
+                        task manager that helps you organize, prioritize, and get things done with ease.
+                    </p>
                 </div>
 
                 <div className="video-container" onClick={handleClick}>
