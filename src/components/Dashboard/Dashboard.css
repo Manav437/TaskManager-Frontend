@@ -37,7 +37,7 @@ body {
     flex-direction: row;
     align-items: center;
     height: 60%;
-    width: 70%;
+    width: 60%;
     border: 1px solid pink;
     border-radius: 20px;
     background: black;
@@ -75,8 +75,8 @@ strong {
     height: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
 }
 
 .dashboard-input  {
@@ -112,4 +112,18 @@ strong {
     border: none;
   border-top: 2px dashed #2c2c2c;
   margin: 1rem 0;
+}
+
+.delete-acc {
+    color: red;
+    font-size: 14px;
+}
+
+.delete-acc:hover {
+    text-decoration: none;
+    padding: 3px;
+    border-radius: 2px;
+    width: 200px;
+    background-color: red;
+    color: black;
 }

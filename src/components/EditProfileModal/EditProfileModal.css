@@ -1,5 +1,5 @@
-/* Dashboard.css */
-.modal-overlay {
+
+.modal-profile-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,39 +11,53 @@
     align-items: center;
 }
 
-.modal-content {
-    background: #fff;
+.modal-profile-content {
+    text-align: center;
+    background: #FDFAF6;
+    color: black;
     padding: 20px;
     border-radius: 8px;
     height: 250px;
-    width: 400px;
+    width: 300px;
 }
 
 .modal-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-top: 20px;
 }
 
 .modal-actions button {
     padding: 8px 15px;
     border: none;
-    background-color: #007bff;
     color: white;
     cursor: pointer;
     height: 30px;
 }
 
-button:hover {
-    background-color: #0056b3;
+.modal-actions button:nth-of-type(1){
+    background: #1F7D53;
 }
 
-.modal-content input {
+.modal-actions button:nth-of-type(2){
+    background: #A62C2C;
+}
+
+.modal-actions button:nth-of-type(1):hover {
+    background: #0D4715;
+}
+
+.modal-actions button:nth-of-type(2):hover {
+    background: #690B22;
+}
+
+.modal-profile-content input {
     width: 90%;
     padding: 8px;
     margin: 10px 0;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    color: #2C2C2C;
+    border: 1px solid black;
 }
 
 .error {

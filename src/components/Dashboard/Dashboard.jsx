@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function DashboardPage() {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState();
     const [error, setError] = useState("");
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -144,6 +144,7 @@ function DashboardPage() {
                 age: updatedUser.age,
             }
             const response = await axios.patch("https://task-manager-backend-5hkl.onrender.com/users/me", updatedUserRequired, {
+                // const response = await axios.patch("http://localhost:3000/users/me", updatedUserRequired, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
                 },
@@ -165,27 +166,31 @@ function DashboardPage() {
 
     return (
         <div className="dashboard-div">
-            <h2 style={{ paddingBottom: "20px", textAlign: "center", margin: "0 auto", width: "70%", color: "white", fontSize: "3rem" }}>WELCOME USER!</h2>
+            <h2 style={{ paddingBottom: "20px", textAlign: "center", margin: "10px auto 20px auto", width: "60%", color: "white", fontSize: "3rem" }}>WELCOME USER👋</h2>
             <div className="dashboard-container">
                 {error && <p className="error">{error}</p>}
                 {user ? (
                     <div className="user-details">
-                        {avatarUrl ? (
-                            <img
-                                src={avatarUrl}
-                                alt="Avatar"
-                                className="avatar-img "
-                                style={{ margin: "30px auto", border: "1px solid white" }}
-                                key={avatarUrl}
-                            />
-                        ) : (
-                            <p>No avatar found</p>
-                        )}
-                        <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Name:</strong> {user.name}</p>
-                        <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Email:</strong> {user.email}</p>
-                        <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Account Creation:</strong> {ChangeDate(user.createdAt)}</p>
-                        <p style={{ color: "white" }} ><strong style={{ color: "grey" }}>Age:</strong> {user.age}</p>
-                        <p style={{ marginTop: "30px", textAlign: "center" }}><a style={{ color: "red", cursor: "pointer" }} onClick={handleDelete}>Delete account</a></p>
+                        <div style={{ background: "#2C2C2C", width: "60%", padding: "7px", margin: "25px auto", textAlign: "center", border: "2px solid #DDE6ED", borderRadius: "20px" }}>
+                            {avatarUrl ? (
+                                <img
+                                    src={avatarUrl || '/taskly-icon.png'}
+                                    alt="Avatar"
+                                    className="avatar-img "
+                                    style={{ margin: "20px auto", border: "1px solid white", marginBottom: "10px" }}
+                                    key={avatarUrl}
+                                />
+                            ) : (
+                                <p>No avatar found</p>
+                            )}
+                            <div style={{ width: "85%", margin: "0 auto" }}>
+                                <p style={{ width: "60%", textAlign: "left", color: "white" }} ><strong style={{ color: "#FAF1E6", textDecoration: "underline", textUnderlineOffset: "2px" }}>Name</strong> : {user.name}</p>
+                                <p style={{ width: "70%", textAlign: "left", color: "white" }} ><strong style={{ color: "#FAF1E6", textDecoration: "underline", textUnderlineOffset: "2px" }}>Email</strong> : {user.email}</p>
+                                <p style={{ width: "50%", textAlign: "left", color: "white" }} ><strong style={{ color: "#FAF1E6", textDecoration: "underline", textUnderlineOffset: "2px" }}>Age</strong> : {user.age}</p>
+                                <p style={{ width: "100%", textAlign: "left", color: "white" }} ><strong style={{ color: "#FAF1E6", textDecoration: "underline", textUnderlineOffset: "2px" }}>Account Creation</strong> : {ChangeDate(user.createdAt)}</p>
+                            </div>
+                        </div>
+                        <p style={{ marginTop: "10px", textAlign: "center" }}><a className="delete-acc" style={{ cursor: "pointer" }} onClick={handleDelete}>Delete account</a></p>
                     </div>
                 ) : (
                     <div style={{ margin: "0 auto" }}>
@@ -193,30 +198,44 @@ function DashboardPage() {
                     </div>
                 )}
 
-                {user && (
+                {user ? (
                     <div className="img-container">
-                        <button style={{ height: "50px" }} onClick={() => setIsModalOpen(true)}>Edit Profile</button>
-                        <hr className="dashed-hr" />
-                        <h3 style={{ border: "1px solid white", borderRadius: "10px", padding: "5px", background: "#2c2c2c", fontWeight: "800" }}>Update your pfp</h3>
-                        <input
-                            style={{ textAlign: "center", width: "80px" }}
-                            type="file"
-                            onChange={handleFileChange}
-                            className="dashboard-input"
-                        />
-                        {preview && <img src={preview} alt="Preview" className="preview-image object-cover mb-2" />}
-                        <button onClick={handleUpload} className="dashboard-button">
-                            Upload Avatar
-                        </button>
-                    </div>
-                )}
+                        <div style={{ margin: "0 auto", height: "30%", width: "95%", borderBottom: "2px dashed #2C2C2C" }}>
+                            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100px", margin: "10% auto" }}>
+                                <button style={{ margin: "auto", height: "40px", width: "100px" }} onClick={() => setIsModalOpen(true)}>Edit user details</button>
+                            </div>
+                        </div>
 
-                <EditProfileModal
+                        <div style={{ margin: "0 auto", width: "200px", display: "flex", flexDirection: "column", height: "70%", textAlign: "center" }}>
+                            <h3 style={{ marign: "auto", textAlign: "center", width: "200px", border: "1px solid white", borderRadius: "10px", background: "#2c2c2c", fontWeight: "800" }}>Update your pfp</h3>
+                            <input
+                                style={{ textAlign: "center", width: "85px", margin: "10px auto" }}
+                                type="file"
+                                onChange={handleFileChange}
+                                className="dashboard-input"
+                            />
+                            {preview && <img src={preview} alt="Preview" className="preview-image object-cover mb-2" />}
+                            <button onClick={handleUpload} className="dashboard-button">
+                                Upload Avatar
+                            </button>
+
+                        </div>
+
+                    </div>
+                )
+                    : <>
+
+                    </>
+                }
+
+                {isModalOpen ? <EditProfileModal
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                     user={user}
                     onUpdate={handleUpdate}
                 />
+                    : <></>}
+
             </div>
         </div >
     )

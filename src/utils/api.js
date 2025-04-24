@@ -51,16 +51,16 @@ export const getUserDetails = async () => {
     }
 };
 
-export const updateUserDetails = async (userData) => {
-    try {
-        const response = await axios.patch(`${API_BASE_URL}/users/me`, userData, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`, // Bearer token for authentication
-            },
-        });
-        return response.data; // Returning updated user data
-    } catch (error) {
-        console.error("Error updating user details:", error.response?.data || error.message);
-        throw error;
-    }
-};
+// export const updateUserDetails = async (userData) => {
+//     try {
+//         const response = await axios.patch(`${API_BASE_URL}/users/me`, userData, {
+//             headers: {
+//                 Authorization: `Bearer ${localStorage.getItem("token")}`, // Bearer token for authentication
+//             },
+//         });
+//         return response.data; // Returning updated user data
+//     } catch (error) {
+//         console.error("Error updating user details:", error.response?.data || error.message);
+//         throw error;
+//     }
+// };

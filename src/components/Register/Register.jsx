@@ -16,8 +16,8 @@ function RegisterPage() {
     })
 
     const handleChange = (e) => {
-        setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
+        setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));      //purani value as it is(...spread operator), and only change
+    };                                                                          //the field that is being edited
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -30,11 +30,16 @@ function RegisterPage() {
         }
 
         try {
-            await registerUser(user)
-            alert("Registration successful!")
-            setTimeout(() => {
-                navigate("/login"); // Navigate after alert
-            }, 500);
+            const responseData = await registerUser(user)
+            if (responseData.token) {
+                localStorage.setItem("token", responseData.token);
+                alert("Registration successful!");
+                setTimeout(() => {
+                    navigate("/dashboard");
+                }, 500);
+            } else {
+                setError("No token received from server.");
+            }
         } catch (err) {
             setError(err.message || "Something went wrong!")
         }
