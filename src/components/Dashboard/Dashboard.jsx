@@ -74,7 +74,7 @@ function DashboardPage() {
         formData.append("avatar", file);
 
         try {
-            const res = await fetch(`https://task-manager-backend-5hkl.onrender.com/users/${userId}/avatar`, {
+            const res = await fetch(`https://task-manager-backend-5hkl.onrender.com/users/me/avatar`, {
                 // const res = await fetch("http://localhost:3000/users/me/avatar", {
                 method: "POST",
                 body: formData,
