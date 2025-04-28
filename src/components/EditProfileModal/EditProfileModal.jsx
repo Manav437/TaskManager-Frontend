@@ -40,8 +40,8 @@ function EditProfileModal({ isOpen, onClose, user, onUpdate }) {
                 />
                 {error && <p className="error">{error}</p>}
                 <div className="modal-actions">
-                    <button onClick={handleSave}>Save</button>
                     <button onClick={onClose}>Cancel</button>
+                    <button onClick={handleSave}>Save</button>
                 </div>
             </div>
         </div >

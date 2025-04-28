@@ -11,7 +11,7 @@ function RegisterPage() {
     useEffect(() => {
         const userInfo = localStorage.getItem("token")
         if (userInfo) {
-            navigate("/dashboard")
+            navigate("/dashboard", { state: { fromRegister: true } })
         }
     })
 
@@ -35,7 +35,7 @@ function RegisterPage() {
                 localStorage.setItem("token", responseData.token);
                 alert("Registration successful!");
                 setTimeout(() => {
-                    navigate("/dashboard");
+                    navigate("/dashboard", { state: { fromRegister: true } });
                 }, 500);
             } else {
                 setError("No token received from server.");

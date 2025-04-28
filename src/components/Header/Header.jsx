@@ -33,6 +33,7 @@ function Header() {
 
     const handleLogout = () => {
         localStorage.removeItem("token"); // Remove token from storage
+        localStorage.removeItem("showWelcomeMessage");
         setIsLoggedIn(false); // Update state
         navigate("/login"); // Redirect to login page
     };

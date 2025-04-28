@@ -1,32 +1,64 @@
 import "./Dashboard.css"
 import React, { useState, useEffect } from "react";
-import { getUserDetails } from "../../utils/api"
+import { getUserDetails } from "../../utils/api";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function DashboardPage() {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(null);
     const [error, setError] = useState("");
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [avatarUrl, setAvatarUrl] = useState("");
+    const [avatarUrl, setAvatarUrl] = useState("/taskly-icon.png"); // Default fallback
     const [userId, setUserId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showMessage, setShowMessage] = useState(false);
+    const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (location.state?.fromRegister && !localStorage.getItem('showWelcomeMessage')) {
+            setShowMessage(true);
+            localStorage.setItem('showWelcomeMessage', 'true');
+            const timer = setTimeout(() => {
+                setShowMessage(false);
+            }, 2000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [location.state]);
+
+    useEffect(() => {
         if (userId) {
-            setAvatarUrl(`https://task-manager-backend-5hkl.onrender.com/users/${userId}/avatar`);
-            // setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
+            setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
         }
     }, [userId]);
 
+    useEffect(() => {
+        const checkAvatar = async () => {
+            if (!userId) return;
+            try {
+                const response = await fetch(`http://localhost:3000/users/${userId}/avatar`, { method: "HEAD" });
+                if (response.ok) {
+                    setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
+                } else {
+                    setAvatarUrl("/upload-img.jpg");
+                }
+            } catch (error) {
+                console.error("Error fetching avatar:", error);
+                setAvatarUrl("/taskly-icon.png");
+            }
+        };
+        checkAvatar();
+    }, [userId]);
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         setFile(selectedFile);
-        setPreview(URL.createObjectURL(selectedFile)); // Show preview before upload
+        if (selectedFile) {
+            setPreview(URL.createObjectURL(selectedFile));
+        }
     };
 
     const handleUpload = async () => {
@@ -36,16 +68,14 @@ function DashboardPage() {
         }
 
         const formData = new FormData();
-        formData.append("avatar", file); // Must match `upload.single("avatar")`
+        formData.append("avatar", file);
 
         try {
-            const res = await fetch("https://task-manager-backend-5hkl.onrender.com/users/me/avatar", {
-                // const res = await fetch("http://localhost:3000/users/me/avatar", {
+            const res = await fetch("http://localhost:3000/users/me/avatar", {
                 method: "POST",
                 body: formData,
                 headers: {
-                    Authorization: localStorage.getItem("token"), // Add token if needed
-                    // "Content-Type": "multipart/form-data", // ❌ DO NOT manually set this, browser will handle it
+                    Authorization: localStorage.getItem("token"),
                 },
             });
             if (!res.ok) {
@@ -53,22 +83,23 @@ function DashboardPage() {
                 throw new Error(errorData.error || "Upload failed");
             }
             alert("Upload successful!");
-            window.location.reload();
+            setPreview(null)
+            setAvatarUrl(URL.createObjectURL(file));
         } catch (error) {
             console.error("Upload failed:", error);
+            alert(error.message);
         }
     };
-
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const userData = await getUserDetails();
-                setUser(userData); // Set user details in state
+                setUser(userData);
                 setUserId(userData._id);
             } catch (err) {
                 setError(err.message || "Failed to fetch user details.");
-                navigate("/login"); // Redirect if not authenticated
+                navigate("/login");
             }
         };
 
@@ -78,12 +109,12 @@ function DashboardPage() {
     function ChangeDate(userdate) {
         const date = new Date(userdate);
         if (isNaN(date.getTime())) {
-            return "Invalid Date"; // Handle invalid date inputs
+            return "Invalid Date";
         }
 
         const day = String(date.getDate()).padStart(2, "0");
-        const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based
-        const year = String(date.getFullYear()).slice(-2); // Last 2 digits of year
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = String(date.getFullYear()).slice(-2);
 
         return `${day}-${month}-${year}`;
     }
@@ -98,36 +129,23 @@ function DashboardPage() {
         if (!confirmDelete) return;
 
         try {
-            const token = localStorage.getItem("token")
-            const response = await fetch(`https://task-manager-backend-5hkl.onrender.com/users/me`, {
-                // const response = await fetch(`http://localhost:3000/users/me`, {
+            const token = localStorage.getItem("token");
+            const response = await fetch("http://localhost:3000/users/me", {
                 method: "DELETE",
                 headers: {
                     "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
+                    "Content-Type": "application/json",
+                },
             });
 
-            console.log("Response Status: ", response.status); // Log status code
-            console.log("Response Headers: ", response.headers);
-
-            let data;
-            if (response.headers.get("content-type")?.includes("application/json")) {
-                data = await response.json();
-            } else {
-                data = { message: "Unknown response from server" };
-            }
-
+            const data = await response.json();
             if (response.ok) {
                 alert(data.message || "Account deleted successfully.");
                 localStorage.removeItem("token");
                 setUser(null);
 
-                setTimeout(() => {
-                    navigate('/register')
-                }, 500);
+                setTimeout(() => navigate("/register"), 500);
             } else {
-                const data = await response.json();
                 alert(data.message || "Failed to delete account.");
             }
         } catch (error) {
@@ -138,23 +156,21 @@ function DashboardPage() {
 
     const handleUpdate = async (updatedUser) => {
         try {
-            console.log("Updated User Data:", updatedUser); // Log to ensure data is correct
             const updatedUserRequired = {
                 name: updatedUser.name,
                 age: updatedUser.age,
-            }
-            const response = await axios.patch("https://task-manager-backend-5hkl.onrender.com/users/me", updatedUserRequired, {
-                // const response = await axios.patch("http://localhost:3000/users/me", updatedUserRequired, {
+            };
+
+            const response = await axios.patch("http://localhost:3000/users/me", updatedUserRequired, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
                 },
             });
 
             if (response.status === 200) {
-                setUser(response.data); // Update the user data in the parent component
+                setUser(response.data);
                 alert("Profile updated successfully!");
             } else {
-                // Handle specific errors if response is not 200
                 alert("Failed to update profile, please try again.");
             }
         } catch (error) {
@@ -163,34 +179,48 @@ function DashboardPage() {
         }
     };
 
-
     return (
         <div className="dashboard-div">
-            <h2 style={{ paddingBottom: "20px", textAlign: "center", margin: "10px auto 20px auto", width: "60%", color: "white", fontSize: "3rem" }}>WELCOME USER👋</h2>
+            <h2 style={{ paddingBottom: "20px", textAlign: "center", margin: "10px auto 20px auto", width: "60%", color: "white", fontSize: "3rem" }}>
+                {(user == null ? "" : `Hey, ${user.name}`)} <br />
+                <span style={{ textDecoration: "underline", textUnderlineOffset: "5px", fontSize: "1.5rem" }}> Welcome to your dashboard</span>
+            </h2>
             <div className="dashboard-container">
                 {error && <p className="error">{error}</p>}
                 {user ? (
                     <div className="user-details">
-                        <div style={{ background: "#2C2C2C", width: "60%", padding: "7px", margin: "25px auto", textAlign: "center", border: "2px solid #DDE6ED", borderRadius: "20px" }}>
+                        <div style={{ display: "flex", flexDirection: "column", textAlign: "center", justifyContent: "center", height: "70%", background: "#2C2C2C", width: "60%", padding: "7px", margin: "25px auto", border: "2px solid #DDE6ED", borderRadius: "20px" }}>
                             {avatarUrl ? (
-                                <img
-                                    src={avatarUrl || '/taskly-icon.png'}
-                                    alt="Avatar"
-                                    className="avatar-img "
-                                    style={{ margin: "20px auto", border: "1px solid white", marginBottom: "10px" }}
-                                    key={avatarUrl}
-                                />
+                                <img src={avatarUrl} alt="Taskly Avatar" className="avatar-img" style={{ background: "black", margin: "10px auto", border: "1px solid white" }} key={avatarUrl} />
                             ) : (
                                 <p>No avatar found</p>
                             )}
-                            <div style={{ width: "85%", margin: "0 auto" }}>
-                                <p style={{ width: "60%", textAlign: "left", color: "white" }} ><strong style={{ color: "#FAF1E6", textDecoration: "underline", textUnderlineOffset: "2px" }}>Name</strong> : {user.name}</p>
-                                <p style={{ width: "70%", textAlign: "left", color: "white" }} ><strong style={{ color: "#FAF1E6", textDecoration: "underline", textUnderlineOffset: "2px" }}>Email</strong> : {user.email}</p>
-                                <p style={{ width: "50%", textAlign: "left", color: "white" }} ><strong style={{ color: "#FAF1E6", textDecoration: "underline", textUnderlineOffset: "2px" }}>Age</strong> : {user.age}</p>
-                                <p style={{ width: "100%", textAlign: "left", color: "white" }} ><strong style={{ color: "#FAF1E6", textDecoration: "underline", textUnderlineOffset: "2px" }}>Account Creation</strong> : {ChangeDate(user.createdAt)}</p>
+                            <div style={{ height: "45%", width: "90%", margin: "0 auto" }}>
+                                <p style={{ width: "100%", textAlign: "left", color: "white" }}>
+                                    <strong style={{ color: "lightblue", textDecoration: "underline", textUnderlineOffset: "2px" }}>Name</strong>: {user.name}
+                                </p>
+                                <p style={{ width: "100%", textAlign: "left", color: "white" }}>
+                                    <strong style={{ color: "lightblue", textDecoration: "underline", textUnderlineOffset: "2px" }}>Email</strong>: {user.email}
+                                </p>
+                                <p style={{ width: "100%", textAlign: "left", color: "white" }}>
+                                    <strong style={{ color: "lightblue", textDecoration: "underline", textUnderlineOffset: "2px" }}>Age</strong>: {user.age}
+                                </p>
+                                <p style={{ width: "100%", textAlign: "left", color: "white" }}>
+                                    <strong style={{ color: "lightblue", textDecoration: "underline", textUnderlineOffset: "2px" }}>Account Creation</strong> : {ChangeDate(user.createdAt)}
+                                </p>
                             </div>
                         </div>
-                        <p style={{ marginTop: "10px", textAlign: "center" }}><a className="delete-acc" style={{ cursor: "pointer" }} onClick={handleDelete}>Delete account</a></p>
+
+                        <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
+                            <button
+                                className="delete-acc"
+
+                                onClick={handleDelete}
+                            >
+                                Delete account?
+                            </button>
+                        </div>
+
                     </div>
                 ) : (
                     <div style={{ margin: "0 auto" }}>
@@ -198,47 +228,77 @@ function DashboardPage() {
                     </div>
                 )}
 
-                {user ? (
+                {user && (
                     <div className="img-container">
-                        <div style={{ margin: "0 auto", height: "30%", width: "95%", borderBottom: "2px dashed #2C2C2C" }}>
-                            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100px", margin: "10% auto" }}>
-                                <button style={{ margin: "auto", height: "40px", width: "100px" }} onClick={() => setIsModalOpen(true)}>Edit user details</button>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", margin: "0 auto", height: "30%", width: "100%", borderBottom: "2px solid #2C2C2C" }}>
+                            <h3 style={{ fontSize: "1.4rem", fontWeight: "800" }}>📝  <span style={{ textDecoration: "underline", textUnderlineOffset: "5px" }}>Update your details</span> </h3>
+                            <button className="hover-buttons" style={{ background: "#547792", color: "white", margin: "auto", height: "40px", width: "75px" }} onClick={() => setIsModalOpen(true)}>Edit</button>
+                        </div>
+
+                        <div style={{ margin: "0 auto", width: "60%", display: "flex", flexDirection: "column", height: "70%", textAlign: "center", justifyContent: "flex-start", alignItems: "center" }}>
+                            <h3 style={{
+                                margin: "0",
+                                marginTop: "20px", fontSize: "1.4rem",
+                                height: "10%",
+                                textAlign: "center", width: "100%",
+                                borderRadius: "10px", fontWeight: "800"
+                            }}>
+                                👤  <span style={{ textDecoration: "underline", textUnderlineOffset: "5px", }}>Update your avatar</span>
+                            </h3>
+                            <div style={{ gap: "5px", minHeight: "28%", width: "60%", border: "2px solid #2C2C2C", borderRadius: "10px", padding: "7px", maxHeight: "90%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", marginTop: "20px" }}>
+                                <input
+                                    style={{
+                                        padding: 0,
+                                        opacity: "0", textAlign: "center", margin: "-1px",
+                                        overflow: "hidden",
+                                        clip: "rect(0,0,0,0)",
+                                        border: 0
+                                    }}
+                                    type="file"
+                                    onChange={handleFileChange}
+                                    className="dashboard-input"
+                                    id="fileInput"
+                                />
+
+                                <label
+                                    htmlFor="fileInput"
+                                    style={{
+                                        width: "120px",
+                                        backgroundColor: "#2c2c2c", // Change the background color
+                                        color: "white", // Change the text color
+                                        padding: "5px", // Padding for the label
+                                        borderRadius: "5px", // Rounded corners
+                                        cursor: "pointer", // Change cursor to pointer
+                                        display: "inline-block", // Align the label like a button
+                                        textAlign: "center",
+                                        margin: "5px auto"
+                                    }}
+                                >
+                                    Choose an image
+                                </label>
+
+                                {preview && <img src={preview} alt="Preview" className="preview-image" />}
+                                <button style={{ margin: "0 auto", width: "130px", height: "35px", marginTop: "6px" }} onClick={handleUpload} className="hover-buttons">
+                                    Upload Avatar
+                                </button>
                             </div>
                         </div>
 
-                        <div style={{ margin: "0 auto", width: "200px", display: "flex", flexDirection: "column", height: "70%", textAlign: "center" }}>
-                            <h3 style={{ marign: "auto", textAlign: "center", width: "200px", border: "1px solid white", borderRadius: "10px", background: "#2c2c2c", fontWeight: "800" }}>Update your pfp</h3>
-                            <input
-                                style={{ textAlign: "center", width: "85px", margin: "10px auto" }}
-                                type="file"
-                                onChange={handleFileChange}
-                                className="dashboard-input"
-                            />
-                            {preview && <img src={preview} alt="Preview" className="preview-image object-cover mb-2" />}
-                            <button onClick={handleUpload} className="dashboard-button">
-                                Upload Avatar
-                            </button>
+                    </div>
+                )}
 
-                        </div>
+                {isModalOpen && <EditProfileModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} user={user} onUpdate={handleUpdate} />}
+            </div>
 
+            {
+                showMessage && (
+                    <div style={{ textAlign: "center", background: "white", color: "black", height: "50px", width: "200px", position: "absolute", bottom: "30px", right: "80px" }}>
+                        Welcome email was sent to your email address.
                     </div>
                 )
-                    : <>
-
-                    </>
-                }
-
-                {isModalOpen ? <EditProfileModal
-                    isOpen={isModalOpen}
-                    onClose={() => setIsModalOpen(false)}
-                    user={user}
-                    onUpdate={handleUpdate}
-                />
-                    : <></>}
-
-            </div>
+            }
         </div >
-    )
+    );
 }
 
-export default DashboardPage
+export default DashboardPage;

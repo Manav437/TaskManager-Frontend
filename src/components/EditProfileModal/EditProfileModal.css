@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
 }
 
 .modal-profile-content {
@@ -35,19 +36,19 @@
     height: 30px;
 }
 
-.modal-actions button:nth-of-type(1){
+.modal-actions button:nth-of-type(2){
     background: #1F7D53;
 }
 
-.modal-actions button:nth-of-type(2){
+.modal-actions button:nth-of-type(1){
     background: #A62C2C;
 }
 
-.modal-actions button:nth-of-type(1):hover {
+.modal-actions button:nth-of-type(2):hover {
     background: #0D4715;
 }
 
-.modal-actions button:nth-of-type(2):hover {
+.modal-actions button:nth-of-type(1):hover {
     background: #690B22;
 }
 
