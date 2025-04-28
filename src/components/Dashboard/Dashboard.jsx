@@ -166,7 +166,7 @@ function DashboardPage() {
                 age: updatedUser.age,
             };
 
-            const response = await fetch("https://task-manager-backend-5hkl.onrender.com/users/me", updatedUserRequired, {
+            const response = await axios.patch("https://task-manager-backend-5hkl.onrender.com/users/me", updatedUserRequired, {
                 // const response = await axios.patch("http://localhost:3000/users/me", updatedUserRequired, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
