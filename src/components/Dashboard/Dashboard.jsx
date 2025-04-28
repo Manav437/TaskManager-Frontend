@@ -31,7 +31,8 @@ function DashboardPage() {
 
     useEffect(() => {
         if (userId) {
-            setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
+            setAvatarUrl(`https://taskly-backend.onrender.com/${userId}/avatar`);
+            // setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
         }
     }, [userId]);
 
@@ -39,9 +40,11 @@ function DashboardPage() {
         const checkAvatar = async () => {
             if (!userId) return;
             try {
-                const response = await fetch(`http://localhost:3000/users/${userId}/avatar`, { method: "HEAD" });
+                const response = await fetch(`https://taskly-backend.onrender.com/${userId}/avatar`, { method: "HEAD" });
+                // const response = await fetch(`http://localhost:3000/users/${userId}/avatar`, { method: "HEAD" });
                 if (response.ok) {
-                    setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
+                    setAvatarUrl(`https://taskly-backend.onrender.com/${userId}/avatar`);
+                    // setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
                 } else {
                     setAvatarUrl("/upload-img.jpg");
                 }
@@ -71,7 +74,8 @@ function DashboardPage() {
         formData.append("avatar", file);
 
         try {
-            const res = await fetch("http://localhost:3000/users/me/avatar", {
+            const res = await fetch(`https://taskly-backend.onrender.com/${userId}/avatar`, {
+                // const res = await fetch("http://localhost:3000/users/me/avatar", {
                 method: "POST",
                 body: formData,
                 headers: {
@@ -130,7 +134,8 @@ function DashboardPage() {
 
         try {
             const token = localStorage.getItem("token");
-            const response = await fetch("http://localhost:3000/users/me", {
+            const response = await fetch("https://taskly-backend.onrender.com/users/me", {
+                // const response = await fetch("http://localhost:3000/users/me", {
                 method: "DELETE",
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -161,7 +166,8 @@ function DashboardPage() {
                 age: updatedUser.age,
             };
 
-            const response = await axios.patch("http://localhost:3000/users/me", updatedUserRequired, {
+            const response = await fetch("https://taskly-backend.onrender.com/users/me", {
+                // const response = await axios.patch("http://localhost:3000/users/me", updatedUserRequired, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
                 },
