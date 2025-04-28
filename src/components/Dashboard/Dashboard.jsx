@@ -10,7 +10,7 @@ function DashboardPage() {
     const [error, setError] = useState("");
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [avatarUrl, setAvatarUrl] = useState("/taskly-icon.png"); // Default fallback
+    const [avatarUrl, setAvatarUrl] = useState("/upload-img.jpg"); // Default fallback
     const [userId, setUserId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showMessage, setShowMessage] = useState(false);
@@ -31,7 +31,7 @@ function DashboardPage() {
 
     useEffect(() => {
         if (userId) {
-            setAvatarUrl(`https://taskly-backend-5hkl.onrender.com/${userId}/avatar`);
+            setAvatarUrl(`https://taskly-backend-5hkl.onrender.com/users/${userId}/avatar`);
             // setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
         }       //https://task-manager-backend-5hkl.onrender.com/
     }, [userId]);
@@ -40,10 +40,10 @@ function DashboardPage() {
         const checkAvatar = async () => {
             if (!userId) return;
             try {
-                const response = await fetch(`https://taskly-backend-5hkl.onrender.com/${userId}/avatar`, { method: "HEAD" });
+                const response = await fetch(`https://taskly-backend-5hkl.onrender.com/users/${userId}/avatar`, { method: "HEAD" });
                 // const response = await fetch(`http://localhost:3000/users/${userId}/avatar`, { method: "HEAD" });
                 if (response.ok) {
-                    setAvatarUrl(`https://taskly-backend-5hkl.onrender.com/${userId}/avatar`);
+                    setAvatarUrl(`https://taskly-backend-5hkl.onrender.com/users/${userId}/avatar`);
                     // setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
                 } else {
                     setAvatarUrl("/upload-img.jpg");
@@ -74,7 +74,7 @@ function DashboardPage() {
         formData.append("avatar", file);
 
         try {
-            const res = await fetch(`https://taskly-backend-5hkl.onrender.com/${userId}/avatar`, {
+            const res = await fetch(`https://taskly-backend-5hkl.onrender.com/users/${userId}/avatar`, {
                 // const res = await fetch("http://localhost:3000/users/me/avatar", {
                 method: "POST",
                 body: formData,
