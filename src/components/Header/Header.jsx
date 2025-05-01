@@ -42,23 +42,28 @@ function Header() {
         <>
             <div className="headerContainer">
                 <ul className="navList leftLinks">
-                    <li className="logo-li"><Link to="/"><img style={{ height: "35px" }} src="/taskly-icon.png" alt="" /></Link></li>
                     <li className="underline-hover"><Link to="/">Home</Link></li>
                     <li className="underline-hover"><Link to="/about">About</Link></li>
                     {isLoggedIn && token ? (
                         <>
-                            <li className="underline-hover"><Link to="/dashboard">Dashboard</Link></li>
+
                             <li className="underline-hover"><Link to="/tasks">Tasks</Link></li>
                         </>
 
                     )
                         : null}
                 </ul>
+                <ul>
+                    <li style={{ listStyle: "none" }} className="logo-li"><Link to="/"><img style={{ height: "35px" }} src="/taskly-icon.png" alt="" /></Link></li>
+                </ul>
                 <ul className="navList rightLinks">
                     {isLoggedIn && token ? (
-                        <li className="">
-                            <button onClick={handleLogout} className="logout-btn"><img src="/logout-img.png" alt="" />LOGOUT </button>
-                        </li>
+                        <>
+                            <li className="underline-hover"><Link to="/dashboard">Account</Link></li>
+                            <li className="">
+                                <button onClick={handleLogout} className="logout-btn"><img src="/logout-img.png" alt="" />LOGOUT </button>
+                            </li>
+                        </>
                     ) : (
                         <>
                             <li className="underline-hover"><Link to="/login">Login</Link></li>

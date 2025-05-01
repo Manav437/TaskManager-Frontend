@@ -1,0 +1,120 @@
+/* General container for the entire settings section */
+.hover-dev-cards {
+    padding: 1rem;
+    margin-bottom: 10px;
+    background: black;
+    border-radius: 20px;
+  }
+  
+  .settings-title {
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  /* Grid container for cards */
+  .cards-grid {
+    padding-left: 0;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, 1fr); /* Default: 2 columns */
+  }
+  
+  /* On larger screens, switch to 4 columns */
+  @media (min-width: 1024px) {
+    .cards-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  /* Card styles */
+  .card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-left: 5px;
+    border-radius: 0.5rem;
+    border: 1px solid #cbd5e1; /* Slate-300 color */
+    background-color: #2C2C2C;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  /* Gradient background that moves when hovering */
+  .card-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #7c3aed, #4f46e5); /* Violet to Indigo */
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 1;
+  }
+  
+  /* Hover effect on gradient background */
+  .card:hover .card-bg {
+    transform: translateY(0%);
+  }
+  
+  /* Icon at the top of the card */
+  .card-icon-bg {
+    position: absolute;
+    top: -3rem;
+    right: -3rem;
+    font-size: 9rem;
+    color: #f1f5f9; /* Slate-100 */
+    transition: transform 0.3s, color 0.3s;
+    z-index: 2;
+  }
+  
+  /* Hover effect on the icon */
+  .card:hover .card-icon-bg {
+    transform: rotate(12deg);
+    color: #a78bfa; /* Violet-400 */
+  }
+  
+  /* Icon size and hover color */
+  .card-icon {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    color: #7c3aed; /* Violet-600 */
+    transition: color 0.3s;
+    position: relative;
+    z-index: 3;
+  }
+  
+  /* Hover effect on the icon text */
+  .card:hover .card-icon {
+    color: white;
+  }
+  
+  /* Title text in the card */
+  .card-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #e4e5e9; /* Slate-950 */
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 3;
+  }
+  
+  /* Hover effect on title */
+  .card:hover .card-title {
+    color: white;
+  }
+  
+  /* Subtitle text in the card */
+  .card-subtitle {
+    color: #94a3b8; /* Slate-400 */
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 3;
+  }
+  
+  /* Hover effect on subtitle */
+  .card:hover .card-subtitle {
+    color: #c4b5fd; /* Violet-200 */
+  }
+  

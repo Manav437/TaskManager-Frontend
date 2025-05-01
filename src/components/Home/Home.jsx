@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { DrawCircleText } from "./Home-text";
 import "./Home.css"
 
 const quotes = [
@@ -26,7 +27,7 @@ function HomePage() {
     const videoRef = useRef(null);
 
     useEffect(() => {
-        console.log("Video index changed to:", currentVideoIndex);
+        // console.log("Video index changed to:", currentVideoIndex);
     }, [currentVideoIndex]);
 
     useEffect(() => {
@@ -65,10 +66,7 @@ function HomePage() {
                 </div>
 
                 <div className="div-three">
-                    <p>For the love of productivity — professionals are facing new challenges, and need
-                        fast and reliable tools to stay on track. That's why we built Taskly: a powerful
-                        task manager that helps you organize, prioritize, and get things done with ease.
-                    </p>
+                    <DrawCircleText />
                 </div>
 
                 <div className="video-container" onClick={handleClick}>
@@ -77,9 +75,9 @@ function HomePage() {
                     </video>
                     <div className="hello-div">
                         {isLoggedIn ? (
-                            <div style={{ width: "100%", display: "flex", flexDirection: "row" }}>
-                                <a style={{ textDecoration: "none" }} href="/tasks"><p style={{ display: "inline-block", width: "50%", color: "white", background: "black", padding: "5px", borderRadius: "5px", paddingRight: "1px" }}>
-                                    Lets get your tasks done!</p>
+                            <div style={{ paddingBottom: "60px", height: "100%", width: "100%", display: "flex", flexDirection: "row" }}>
+                                <a style={{ borderRadius: "20px", border: "1px solid #2C2C2C", width: "100%", textAlign: "center", textDecoration: "none" }} href="/tasks"><p style={{ display: "inline-block", width: "50%", color: "white", background: "black", padding: "5px", borderRadius: "5px", paddingRight: "1px" }}>
+                                    (click me) Lets get your tasks done! 📲</p>
                                 </a>
                             </div>
                         ) : (

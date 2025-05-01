@@ -1,6 +1,7 @@
 import "./Dashboard.css"
 import React, { useState, useEffect } from "react";
 import { getUserDetails } from "../../utils/api";
+import HoverDevCards from "../Settings/Settings";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -189,9 +190,14 @@ function DashboardPage() {
         <div className="dashboard-div">
             <h2 style={{ paddingBottom: "20px", textAlign: "center", margin: "10px auto 20px auto", width: "60%", color: "white", fontSize: "3rem" }}>
                 {(user == null ? "" : `Hey, ${user.name}`)} <br />
-                <span style={{ textDecoration: "underline", textUnderlineOffset: "5px", fontSize: "1.5rem" }}> Welcome to your dashboard</span>
+                <span style={{ textDecoration: "underline", textUnderlineOffset: "5px", fontSize: "1.5rem" }}> Welcome to your profile</span>
             </h2>
+
+            <div style={{ background: "black", border: "1px solid #2C2C2C", borderRadius: "20px", margin: "0 auto", width: "70%", marginBottom: "30px" }}>
+                <HoverDevCards />
+            </div>
             <div className="dashboard-container">
+
                 {error && <p className="error">{error}</p>}
                 {user ? (
                     <div className="user-details">
@@ -251,7 +257,7 @@ function DashboardPage() {
                             }}>
                                 👤  <span style={{ textDecoration: "underline", textUnderlineOffset: "5px", }}>Update your avatar</span>
                             </h3>
-                            <div style={{ gap: "5px", minHeight: "28%", width: "60%", border: "2px solid #2C2C2C", borderRadius: "10px", padding: "7px", maxHeight: "90%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", marginTop: "20px" }}>
+                            <div style={{ gap: "5px", minHeight: "28%", width: "60%", border: "2px solid #2C2C2C", borderRadius: "10px", padding: "15px", maxHeight: "90%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", marginTop: "20px" }}>
                                 <input
                                     style={{
                                         padding: 0,
@@ -269,7 +275,7 @@ function DashboardPage() {
                                 <label
                                     htmlFor="fileInput"
                                     style={{
-                                        width: "120px",
+                                        maxWidth: "120px",
                                         backgroundColor: "#2c2c2c", // Change the background color
                                         color: "white", // Change the text color
                                         padding: "5px", // Padding for the label
@@ -284,7 +290,7 @@ function DashboardPage() {
                                 </label>
 
                                 {preview && <img src={preview} alt="Preview" className="preview-image" />}
-                                <button style={{ margin: "0 auto", width: "130px", height: "35px", marginTop: "6px" }} onClick={handleUpload} className="hover-buttons">
+                                <button style={{ height: "40px", width: "100px" }} onClick={handleUpload} className="hover-buttons">
                                     Upload Avatar
                                 </button>
                             </div>
