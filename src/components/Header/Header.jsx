@@ -53,8 +53,8 @@ function Header() {
                     )
                         : null}
                 </ul>
-                <ul>
-                    <li style={{ listStyle: "none" }} className="logo-li"><Link to="/"><img style={{ height: "35px" }} src="/taskly-icon.png" alt="" /></Link></li>
+                <ul className="navList">
+                    <li style={{ listStyle: "none" }} className="logo-li"><Link to="/"><img style={{ verticalAlign: "middle", display: "block", margin: "0 auto", height: "35px", width: "35px" }} src="/taskly-icon.png" alt="" /></Link></li>
                 </ul>
                 <ul className="navList rightLinks">
                     {isLoggedIn && token ? (

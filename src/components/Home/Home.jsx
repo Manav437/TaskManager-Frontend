@@ -44,11 +44,6 @@ function HomePage() {
         const nextIndex = (currentVideoIndex + 1) % videoList.length;
         setCurrentVideoIndex(nextIndex);
 
-        if (videoRef.current) {
-            videoRef.current.src = videoList[nextIndex];
-            videoRef.current.load();
-            videoRef.current.play();
-        }
     };
 
     return (
@@ -70,13 +65,13 @@ function HomePage() {
                 </div>
 
                 <div className="video-container" onClick={handleClick}>
-                    <video autoPlay muted loop preload="auto" key={videoList[currentVideoIndex]}>
+                    <video autoPlay muted loop preload="auto" key={currentVideoIndex}>
                         <source src={videoList[currentVideoIndex]} type="video/mp4" />
                     </video>
                     <div className="hello-div">
                         {isLoggedIn ? (
                             <div style={{ paddingBottom: "60px", height: "100%", width: "100%", display: "flex", flexDirection: "row" }}>
-                                <a style={{ borderRadius: "20px", border: "1px solid #2C2C2C", width: "100%", textAlign: "center", textDecoration: "none" }} href="/tasks"><p style={{ display: "inline-block", width: "50%", color: "white", background: "black", padding: "5px", borderRadius: "5px", paddingRight: "1px" }}>
+                                <a style={{ borderRadius: "20px", border: "1px solid #2C2C2C", width: "100%", textAlign: "center", textDecoration: "none" }} href="/tasks"><p className="log-in-text" style={{ display: "inline-block", width: "50%", color: "white", padding: "5px", borderRadius: "5px", paddingRight: "1px" }}>
                                     (click me) Lets get your tasks done! 📲</p>
                                 </a>
                             </div>
