@@ -2,7 +2,7 @@
 
 Taskly is a full-stack task management web application built with the **MERN** stack. It allows users to register, log in, manage their profile, and create, complete, or delete tasks. Users can also upload profile pictures and view their personalized task lists.
 
-<img src="https://i.ibb.co/s92MQMbw/995-1x-shots-so.png"/>
+<img src="https://i.postimg.cc/rpD7H07p/995-1x-shots-so.png"/>
 
 ## 🚀 Features
 
