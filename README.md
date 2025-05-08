@@ -45,8 +45,21 @@ cd taskly/backend
 npm install
 ```
 
-#### Create a .env file in the backend folder
+##### Create a .env file in the backend folder
 ```bash
 PORT=5000
 MONGODB_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret
+```
+
+#### Frontend
+```bash
+cd ../frontend
+npm install
+```
+
+##### Start frontend
+```bash
+npm start
+```
+
