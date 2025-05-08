@@ -1,4 +1,4 @@
-# 📝 Taskly – Task Manager App
+# Taskly – Task Manager App
 
 Taskly is a full-stack task management web application built with the **MERN** stack. It allows users to register, log in, manage their profile, and create, complete, or delete tasks. Users can also upload profile pictures and view their personalized task lists.
 
