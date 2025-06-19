@@ -1,34 +1,10 @@
 .container {
     display: flex;
-    background-color: #0f0f0f;
-    background-image: radial-gradient(#444 1px, transparent 1px);
-    background-size: 20px 20px; 
-    color: black;
     justify-content: center;  /* Horizontally center */
     align-items: center;  /* Vertically center */
     height: 100vh; /* Full viewport height */
 }
 
-.container:before,
-.container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 15%;
-  height: 100%;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.container::before {
-  left: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
-}
-
-.container::after {
-  right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
-}
 
 .Register-div {
     /* height: 45%; */
@@ -39,20 +15,33 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 20%;
-    box-shadow: 0 0 20px #191818;
+    box-shadow: 1px 1px 7px #b5f8ad;
+}
+
+.Register-div span {
+    color: aquamarine;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.Register-div span:hover {
+    cursor: pointer;
+    color: rgb(187, 225, 213);
 }
 
 .register-input {
     display: block;
-    width: 70%;
+    width: 80%;
     padding: 10px;
     margin: 10px auto;
+    border: 1px solid transparent;
+    border-radius: 5px;
 }
 
-input:focus {
+.register-input:focus {
     outline: none;
-    border: 2px solid grey;
-    border-radius: 5px;
+    border: 1px solid rgb(184, 183, 183);
+    /* border-radius: 5px; */
 }
 
 .label-text {
@@ -75,8 +64,9 @@ p > a {
     color: rgb(42, 42, 42);
 }
 
-@media (max-width :430px) { 
-    .Register-div{
-        width: 60vw;
+@media (max-width :500px) { 
+    .Register-div, .container{
+        width: 70vw;
+        margin: 0 auto;
     }
 }

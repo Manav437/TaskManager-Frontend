@@ -20,7 +20,7 @@ function AboutPage() {
 
 
                 <div className="about-three">
-                    <h2 >Contact & Support</h2>
+                    <h2 style={{ textDecoration: "underline", textUnderlineOffset: "3px" }} >Contact & Support</h2>
                     <p>
                         If you have any questions or feedback, feel free to reach out at&nbsp; <br />
                         <a className="hover-a-about" href="https://x.com/manav437" target="_blank" rel="noopener noreferrer">@manav437 on X</a>.

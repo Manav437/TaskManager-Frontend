@@ -5,7 +5,7 @@
     color: white;
     font-family: sans-serif;
     line-height: 1.6;
-    padding: 2rem;
+    padding: 2rem 0;
     text-align: center;
     margin: auto;
     background-color: #0f0f0f;
@@ -82,7 +82,9 @@
 	margin: 0;
 	font-size: 3.5rem;
 	color: white;
-  margin-top: 10px;
+  	margin-top: 10px;
+	text-decoration: underline;
+	text-underline-offset: 3px;
 }
 
 .about-span {

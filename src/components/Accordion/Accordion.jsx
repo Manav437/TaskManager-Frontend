@@ -27,7 +27,7 @@ const FaqList = () => {
         const arrowStyle = {
             display: "inline-block",
             transform: isOpen ? "rotate(90deg)" : "rotate(0deg)",
-            transition: "transform 0.3s ease",
+            transition: "transform 0.3s ease-in-out",
         };
 
         return (
@@ -36,7 +36,7 @@ const FaqList = () => {
                     {question}
                     <span style={arrowStyle}>▶️</span>
                 </div>
-                {isOpen && <div className="answerStyle">{answer}</div>}
+                <div className={`answerStyle ${isOpen ? "open" : ""}`}>{answer}</div>
             </div>
         );
     };

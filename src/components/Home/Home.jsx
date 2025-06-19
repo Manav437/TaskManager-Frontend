@@ -50,12 +50,12 @@ function HomePage() {
         <>
             <div className="home-container" style={{ gap: "30px" }}>
                 <div className="div-one">
-                    <h1 style={{ fontSize: "5rem", color: "white", fontWeight: "800" }}>TASKLY</h1>
-                    <h2 style={{ width: "60%", paddingBottom: "9px", borderBottom: "3px solid #2C2C2C", fontStyle: "italic", margin: "5px auto", textAlign: "center", color: "white", fontSize: "2.5rem" }}>Task Management app</h2>
-                    <h4>What will you <span style={{ color: "green" }}>achieve</span> today!</h4>
-                </div>
+                    <h1 style={{ marginBottom: ".7rem", fontSize: "6rem", color: "white", fontWeight: "800" }}>TASKLY</h1>
+                    <h2 style={{ color: "#9f9e9e", width: "fit-content", paddingBottom: "9px", borderBottom: "3px solid #fff", fontStyle: "italic", margin: "5px auto", textAlign: "center", fontSize: "2.5rem" }}>Task Management app</h2>
+                    <h4>What will you <span style={{ color: "green", fontStyle: "italic" }}>achieve</span> today!</h4>
+                    {/* </div> */}
 
-                <div className="div-two">
+                    {/* <div className="div-two"> */}
                     <h1 >Do your best work in Taskly</h1>
                     <p className="quote-text">{quote}</p>
                 </div>
@@ -70,37 +70,31 @@ function HomePage() {
                     </video>
                     <div className="hello-div">
                         {isLoggedIn ? (
-                            <div style={{ paddingBottom: "60px", height: "100%", width: "100%", display: "flex", flexDirection: "row" }}>
-                                <a style={{ borderRadius: "20px", border: "1px solid #2C2C2C", width: "100%", textAlign: "center", textDecoration: "none" }} href="/tasks"><p className="log-in-text" style={{ display: "inline-block", width: "50%", color: "white", padding: "5px", borderRadius: "5px", paddingRight: "1px" }}>
-                                    (click me) Lets get your tasks done! 📲</p>
+                            <div style={{ paddingBottom: "60px", width: "100%", display: "flex", flexDirection: "row" }}>
+                                <a style={{ width: "50%", background: "black", borderRadius: "20px", border: "1px solid #2C2C2C", margin: "0 auto", textAlign: "center", textDecoration: "none" }} href="/tasks"><p className="log-in-text" style={{ display: "inline-block", width: "100%", color: "white", padding: "5px", borderRadius: "5px", paddingRight: "1px" }}>
+                                    Lets get your tasks done! 📲</p>
                                 </a>
                             </div>
                         ) : (
                             <div className="hello-loggedin">
                                 <p >Already have an account?</p>
-                                <button className="home-login" style={{ borderRadius: "10px", color: "#EFEFEF", background: "#5CB338", fontSize: "2rem", width: "45%", height: "80%" }} onClick={() => navigate("/login")}><span>LOG IN</span></button>
+                                <button className="home-login" style={{ borderRadius: "20px", color: "#EFEFEF", fontSize: "2rem", width: "45%" }} onClick={() => navigate("/login")}><span>LOG IN</span></button>
                             </div>
                         )}
 
-                        <div className="click-here" style={{ height: "12px", padding: "3px", border: "1px solid #2C2C2C", borderRadius: "5px", width: "70px", display: "flex", alignItems: "center", fontSize: "8px", marginTop: "20px" }}>
+                        <div className="click-here" style={{ height: "12px", padding: "3px", border: "1px solid #2C2C2C", borderRadius: "5px", width: "70px", display: "flex", alignItems: "center", fontSize: "8px" }}>
                             <p style={{ paddingLeft: "2px", color: "white", display: "inline-block", width: "65px" }}>click here</p>
                             <img style={{ paddingRight: "4px", height: "10px" }} src="/arrow-img.png" alt="" />
                         </div>
                     </div>
                     <div className="text-wrapper">
-                        <div className="moving-text" style={{ display: "flex", color: "white" }}>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
-                            <h2 style={{ color: "#F8EEDF" }}>TASKLY</h2>
+                        <div className="moving-text">
+                            <div className="scroll-content">
+                                {Array(12).fill(<h2>TASKLY</h2>)}
+                            </div>
+                            <div className="scroll-content">
+                                {Array(12).fill(<h2>TASKLY</h2>)}
+                            </div>
                         </div>
                     </div>
                 </div>

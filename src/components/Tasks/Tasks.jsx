@@ -69,8 +69,8 @@ function TasksPage() {
     const userToken = localStorage.getItem("token");
 
     useEffect(() => {
-        // axios.get("https://task-manager-backend-5hkl.onrender.com/tasks", {
-        axios.get("http://localhost:3000/tasks", {
+        axios.get("https://task-manager-backend-5hkl.onrender.com/tasks", {
+            // axios.get("http://localhost:3000/tasks", {
             headers: {
                 Authorization: `Bearer ${userToken}`, // Send JWT token for authentication
             }

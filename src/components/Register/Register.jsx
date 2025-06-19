@@ -52,16 +52,17 @@ function RegisterPage() {
                     <h1 style={{ color: "white" }}>Sign Up</h1>
                     <form onSubmit={handleSubmit}>
                         <label className="label-text">Username</label>
-                        <input className="register-input" type="text" name="name" placeholder="Enter your username" onChange={handleChange} required />
+                        <input className="register-input" type="text" name="name" placeholder="xyz1234" onChange={handleChange} required />
 
                         <label className="label-text">Email</label>
-                        <input className="register-input" type="email" name="email" placeholder="Enter your email" onChange={handleChange} required />
+                        <input className="register-input" type="email" name="email" placeholder="johndoe@xyz.com" onChange={handleChange} required />
 
                         <label className="label-text">Password</label>
-                        <input className="register-input" type="password" name="password" placeholder="Enter your password" onChange={handleChange} required />
+                        <input autoComplete="new-password" className="register-input" type="password" name="password" placeholder="********" onChange={handleChange} required />
 
                         <button className="btn-grad" type="submit">Submit</button>
                     </form>
+                    <p style={{ fontSize: ".9rem", marginBottom: "20px" }}>By signing up, you agree to our <span>Terms of service</span>.</p>
                     <p>Already have an account? <a style={{ color: "lightgreen" }} href="/login">Login</a></p>
                 </div>
             </div>

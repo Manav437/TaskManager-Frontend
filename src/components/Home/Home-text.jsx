@@ -22,8 +22,6 @@ export const DrawCircleText = () => {
                         // style={{ strokeDasharray: 600 }}
                         />
                     </svg>
-
-
                 </span>{" "}
                 — professionals are facing new challenges, and need fast and reliable tools to stay on track. That's why we built Taskly: a powerful task manager that helps you organize, prioritize, and get things done with ease.
             </h1>

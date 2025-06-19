@@ -12,6 +12,8 @@
     margin-bottom: 24px;
     text-align: center;
     color: white;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 .itemStyle{
@@ -35,10 +37,20 @@
 }
 
 .answerStyle {
-    margin-top: 10px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
     color: #555;
     font-size: 16px;
     line-height: 1.5;
+    margin-top: 0;
+}
+
+.answerStyle.open {
+    max-height: 500px; /* large enough to accommodate most answers */
+    opacity: 1;
+    margin-top: 10px;
 }
 
 
