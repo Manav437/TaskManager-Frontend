@@ -226,7 +226,7 @@ function DashboardPage() {
                         </div>
 
                         <div className="avatar-upload">
-                            <h3>👤 <span>Update your avatar</span></h3>
+                            <h3 style={{ marginBottom: "0" }}>👤 <span>Update your avatar</span></h3>
                             <div className="avatar-box">
                                 <input type="file" onChange={handleFileChange} className="dashboard-input" id="fileInput" />
                                 <label htmlFor="fileInput" className="file-label">Choose an image</label>

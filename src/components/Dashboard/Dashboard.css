@@ -2,9 +2,10 @@ body {
   color: white;
 }
 
+/* Dashboard main wrapper */
 .dashboard-div {
   padding-top: 90px;
-  min-height: 110vh;
+  min-height: 100vh;
   background-color: #0f0f0f;
   background-image: radial-gradient(#444 1px, transparent 1px);
   background-size: 20px 20px;
@@ -17,7 +18,7 @@ body {
   content: "";
   position: absolute;
   top: 0;
-  width: 15%;
+  width: 5%;
   height: 100%;
   z-index: 1000;
   pointer-events: none;
@@ -33,213 +34,204 @@ body {
   background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
 }
 
+/* Heading style */
 .dashboard-heading {
-  padding-bottom: 20px;
   text-align: center;
-  margin: 10px auto 20px auto;
-  width: 60%;
-  color: white;
-  font-size: 3rem;
+  margin: 0 auto 30px auto;
+  width: 100%;
+  max-width: 700px;
+  color: #fff;
+  font-size: 2.5rem;
 }
 
 .dashboard-heading span {
+  display: block;
   text-decoration: underline;
   text-underline-offset: 5px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  margin-top: 5px;
 }
 
+/* Hover card container */
 .hover-card-container {
-  background: black;
-  border: 1px solid #2C2C2C;
-  border-radius: 20px;
-  margin: 0 auto;
-  width: 70%;
-  margin-bottom: 30px;
+  background: #121212;
+  border: 1px solid #2c2c2c;
+  border-radius: 16px;
+  margin: 0 auto 30px auto;
+  width: 75%;
+  /* max-width: 900px; */
+  padding: 20px;
 }
 
+/* Main container for profile and update sections */
 .dashboard-container {
   display: flex;
+  flex-wrap: wrap;
   margin: 0 auto;
-  flex-direction: row;
-  align-items: center;
-  width: 70%;
-  border: 1px solid pink;
+  gap: 40px;
+  justify-content: center;
+  width: 74%;
+  max-width: 1200px;
   border-radius: 20px;
-  background: black;
-  height: 50vh; 
+  background: #121212;
+  padding: 30px;
+  border: 1px solid #444;
 }
 
+/* User details section */
 .user-details {
+  flex: 1 1 300px;
   display: flex;
   flex-direction: column;
-  color: white;
-  width: 70%;
-  height: 100%;
-  margin: 0 auto;
-  margin-top: 10px;
-  /* height: 60vh; */
+  color: #fff;
+  align-items: center;
+  gap: 20px;
 }
 
+/* User card */
 .user-info-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background: #1e1e1e;
+  width: 100%;
+  max-width: 350px;
+  padding: 20px;
+  border: 1px solid #555;
+  border-radius: 12px;
   text-align: center;
-  justify-content: center;
-  background: #2C2C2C;
-  width: 60%;
-  padding: 7px;
-  margin: 25px auto;
-  border: 2px solid #DDE6ED;
-  border-radius: 20px;
 }
 
 .user-info-text {
-  height: 45%;
-  width: 90%;
-  margin: 0 auto;
+  margin-top: 15px;
+  text-align: left;
+  width: 100%;
 }
 
 .user-info-text p {
-  width: 100%;
-  text-align: left;
-  color: white;
+  margin: 8px 0;
+  color: #ccc;
 }
 
 .user-info-text strong {
-  color: lightblue;
+  color: #76c7f5;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
+/* Avatar image */
+.avatar-img {
+  height: 100px;
+  width: 100px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Centered delete button */
 .button-center {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
 }
 
 .delete-btn {
-  text-transform: none;
-  background: #E14434;
-  padding: 10px 7px;
+  background: #e14434;
+  padding: 10px 20px;
 }
 
+/* Container for update and upload sections */
 .img-container {
-  border-left: 2px solid #2c2c2c;
-  width: 50%;
-  height: 100%;
+  flex: 1 1 300px;
   display: flex;
   flex-direction: column;
+  gap: 30px;
 }
 
+/* Update profile section */
 .update-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border-bottom: 2px solid #2C2C2C;
-  height: 50%;
-  width: 100%;
+  background: #1e1e1e;
+  border: 1px solid #555;
+  border-radius: 12px;
+  padding: 20px;
+  gap: 15px;
 }
 
 .update-section h3 {
-  font-size: 1.4rem;
-  font-weight: 800;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .update-section span {
   text-decoration: underline;
-  text-underline-offset: 5px;
+  text-underline-offset: 4px;
 }
 
 .update-btn {
   background: #547792;
   color: white;
-  margin: auto;
   height: 40px;
-  width: 75px;
+  width: 90px;
 }
 
+/* Avatar upload section */
 .avatar-upload {
-  margin: 0 auto;
-  width: 60%;
   display: flex;
   flex-direction: column;
-  height: 80%;
-  gap: 20px;
-  text-align: center;
-  justify-content: flex-start;
   align-items: center;
+  background: #1e1e1e;
+  border: 1px solid #555;
+  border-radius: 12px;
+  padding: 20px 0;
+  width: 100%;
+  gap: 10px;
 }
 
 .avatar-upload h3 {
-  margin: 0;
-  margin-top: 20px;
-  font-size: 1.4rem;
-  height: 10%;
-  text-align: center;
-  width: 100%;
-  border-radius: 10px;
-  font-weight: 800;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .avatar-upload span {
   text-decoration: underline;
-  text-underline-offset: 5px;
+  text-underline-offset: 4px;
 }
 
 .avatar-box {
-  width: 60%;
-  border: 2px solid #2C2C2C;
-  border-radius: 10px;
-  padding: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  width: 100%;
 }
 
 .dashboard-input {
-  padding: 0;
   opacity: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+  width: 0;
+  height: 0;
 }
 
 .file-label {
-  max-width: 120px;
   background-color: #2c2c2c;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
   cursor: pointer;
   display: inline-block;
   text-align: center;
-  margin: 5px auto;
 }
 
 .preview-image {
-  margin: 10px auto;
   height: 70px;
   width: 70px;
-  padding: 2px;
-  border: 2px solid green;
+  border: 2px solid #4caf50;
   border-radius: 50%;
+  object-fit: cover;
 }
 
-.avatar-img {
-  margin-top: 10px;
-  min-height: 100px;
-  min-width: 100px;
-  max-height: 100px;
-  max-width: 100px;
-  padding: 2px;
-  border: 2px solid black;
-  border-radius: 50%;
-}
-
+/* Common button hover style */
 .hover-buttons {
   cursor: pointer;
   border-radius: 1rem;
@@ -248,28 +240,27 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   color: white;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .hover-buttons:hover {
   transform: translate(-4px, -4px);
-  border-radius: 0.375rem;
-  box-shadow: 4px 4px 0 rgb(255, 255, 255);
+  box-shadow: 4px 4px 0 #fff;
 }
 
 .hover-buttons:active {
-  transform: translate(0px, 0px);
-  border-radius: 1rem;
+  transform: translate(0, 0);
   box-shadow: none;
 }
 
+/* Welcome message popup */
 .welcome-msg {
-  text-align: center;
-  background: white;
-  color: black;
-  height: 50px;
-  width: 200px;
-  position: absolute;
+  position: fixed;
   bottom: 30px;
-  right: 80px;
+  right: 30px;
+  background: #fff;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
 }

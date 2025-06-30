@@ -117,4 +117,9 @@
     width: 80%;
     margin: 5px auto;
   }
+
+  .about-div::before,
+.about-div::after {
+    width: 5%;
+}
 }
