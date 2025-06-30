@@ -1,4 +1,4 @@
-import "./Dashboard.css"
+import "./Dashboard.css";
 import React, { useState, useEffect } from "react";
 import { getUserDetails } from "../../utils/api";
 import HoverDevCards from "../Settings/Settings";
@@ -11,30 +11,30 @@ function DashboardPage() {
     const [error, setError] = useState("");
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [avatarUrl, setAvatarUrl] = useState("/upload-img.jpg"); // Default fallback
+    const [avatarUrl, setAvatarUrl] = useState("/upload-img.jpg");
     const [userId, setUserId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showMessage, setShowMessage] = useState(false);
+
     const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (location.state?.fromRegister && !localStorage.getItem('showWelcomeMessage')) {
+        if (location.state?.fromRegister && !localStorage.getItem("showWelcomeMessage")) {
             setShowMessage(true);
-            localStorage.setItem('showWelcomeMessage', 'true');
+            localStorage.setItem("showWelcomeMessage", "true");
             const timer = setTimeout(() => {
                 setShowMessage(false);
             }, 2000);
-
             return () => clearTimeout(timer);
         }
     }, [location.state]);
 
     useEffect(() => {
         if (userId) {
-            setAvatarUrl(`https://task-manager-backend-5hkl.onrender.com/users/${userId}/avatar`);
+            setAvatarUrl(`https:task-manager-backend-5hkl.onrender.com/users/${userId}/avatar`);
             // setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
-        }       //https://task-manager-backend-5hkl.onrender.com/
+        }
     }, [userId]);
 
     useEffect(() => {
@@ -51,7 +51,7 @@ function DashboardPage() {
                 }
             } catch (error) {
                 console.error("Error fetching avatar:", error);
-                setAvatarUrl("/upload-img.png");
+                setAvatarUrl("/upload-img.jpg");
             }
         };
         checkAvatar();
@@ -88,7 +88,7 @@ function DashboardPage() {
                 throw new Error(errorData.error || "Upload failed");
             }
             alert("Upload successful!");
-            setPreview(null)
+            setPreview(null);
             setAvatarUrl(URL.createObjectURL(file));
         } catch (error) {
             console.error("Upload failed:", error);
@@ -107,7 +107,6 @@ function DashboardPage() {
                 navigate("/login");
             }
         };
-
         fetchUser();
     }, []);
 
@@ -116,11 +115,9 @@ function DashboardPage() {
         if (isNaN(date.getTime())) {
             return "Invalid Date";
         }
-
         const day = String(date.getDate()).padStart(2, "0");
         const month = String(date.getMonth() + 1).padStart(2, "0");
         const year = String(date.getFullYear()).slice(-2);
-
         return `${day}-${month}-${year}`;
     }
 
@@ -129,7 +126,6 @@ function DashboardPage() {
             alert("Unauthorized: No token found.");
             return;
         }
-
         const confirmDelete = window.confirm("Are you sure you want to delete your account?");
         if (!confirmDelete) return;
 
@@ -139,7 +135,7 @@ function DashboardPage() {
                 // const response = await fetch("http://localhost:3000/users/me", {
                 method: "DELETE",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
             });
@@ -149,7 +145,6 @@ function DashboardPage() {
                 alert(data.message || "Account deleted successfully.");
                 localStorage.removeItem("token");
                 setUser(null);
-
                 setTimeout(() => navigate("/register"), 500);
             } else {
                 alert(data.message || "Failed to delete account.");
@@ -170,7 +165,7 @@ function DashboardPage() {
             const response = await axios.patch("https://task-manager-backend-5hkl.onrender.com/users/me", updatedUserRequired, {
                 // const response = await axios.patch("http://localhost:3000/users/me", updatedUserRequired, {
                 headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
 
@@ -188,128 +183,71 @@ function DashboardPage() {
 
     return (
         <div className="dashboard-div">
-            <h2 style={{ paddingBottom: "20px", textAlign: "center", margin: "10px auto 20px auto", width: "60%", color: "white", fontSize: "3rem" }}>
-                {(user == null ? "" : `Hey, ${user.name}`)} <br />
-                <span style={{ textDecoration: "underline", textUnderlineOffset: "5px", fontSize: "1.5rem" }}> Welcome to your profile</span>
+            <h2 className="dashboard-heading">
+                {user == null ? "" : `Hey, ${user.name}`}
+                <br />
+                <span>Welcome to your profile</span>
             </h2>
 
-            <div style={{ background: "black", border: "1px solid #2C2C2C", borderRadius: "20px", margin: "0 auto", width: "70%", marginBottom: "30px" }}>
+            <div className="hover-card-container">
                 <HoverDevCards />
             </div>
-            <div className="dashboard-container">
 
+            <div className="dashboard-container">
                 {error && <p className="error">{error}</p>}
                 {user ? (
                     <div className="user-details">
-                        <div style={{ display: "flex", flexDirection: "column", textAlign: "center", justifyContent: "center", height: "70%", background: "#2C2C2C", width: "60%", padding: "7px", margin: "25px auto", border: "2px solid #DDE6ED", borderRadius: "20px" }}>
+                        <div className="user-info-card">
                             {avatarUrl ? (
-                                <img src={avatarUrl} alt="Taskly Avatar" className="avatar-img" style={{ background: "black", margin: "10px auto", border: "1px solid white" }} key={avatarUrl} />
+                                <img src={avatarUrl} alt="Taskly Avatar" className="avatar-img" key={avatarUrl} />
                             ) : (
                                 <p>No avatar found</p>
                             )}
-                            <div style={{ height: "45%", width: "90%", margin: "0 auto" }}>
-                                <p style={{ width: "100%", textAlign: "left", color: "white" }}>
-                                    <strong style={{ color: "lightblue", textDecoration: "underline", textUnderlineOffset: "2px" }}>Name</strong>: {user.name}
-                                </p>
-                                <p style={{ width: "100%", textAlign: "left", color: "white" }}>
-                                    <strong style={{ color: "lightblue", textDecoration: "underline", textUnderlineOffset: "2px" }}>Email</strong>: {user.email}
-                                </p>
-                                <p style={{ width: "100%", textAlign: "left", color: "white" }}>
-                                    <strong style={{ color: "lightblue", textDecoration: "underline", textUnderlineOffset: "2px" }}>Age</strong>: {user.age}
-                                </p>
-                                <p style={{ width: "100%", textAlign: "left", color: "white" }}>
-                                    <strong style={{ color: "lightblue", textDecoration: "underline", textUnderlineOffset: "2px" }}>Account Creation</strong> : {ChangeDate(user.createdAt)}
-                                </p>
+                            <div className="user-info-text">
+                                <p><strong>Name</strong>: {user.name}</p>
+                                <p><strong>Email</strong>: {user.email}</p>
+                                <p><strong>Age</strong>: {user.age}</p>
+                                <p><strong>Account Creation</strong>: {ChangeDate(user.createdAt)}</p>
                             </div>
                         </div>
-
-                        <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
-                            <button
-                                className="delete-acc"
-
-                                onClick={handleDelete}
-                            >
-                                Delete account?
-                            </button>
+                        <div className="button-center">
+                            <button style={{ background: "#E14434" }} className="hover-buttons delete-btn" onClick={handleDelete}>Delete account?</button>
                         </div>
-
                     </div>
                 ) : (
-                    <div style={{ margin: "0 auto" }}>
-                        <p>Loading user details...</p>
-                    </div>
+                    <p>Loading user details...</p>
                 )}
 
                 {user && (
                     <div className="img-container">
-                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", margin: "0 auto", height: "30%", width: "100%", borderBottom: "2px solid #2C2C2C" }}>
-                            <h3 style={{ fontSize: "1.4rem", fontWeight: "800" }}>📝  <span style={{ textDecoration: "underline", textUnderlineOffset: "5px" }}>Update your details</span> </h3>
-                            <button className="hover-buttons" style={{ background: "#547792", color: "white", margin: "auto", height: "40px", width: "75px" }} onClick={() => setIsModalOpen(true)}>Edit</button>
+                        <div className="update-section">
+                            <h3>📝 <span>Update your details</span></h3>
+                            <button className="hover-buttons update-btn" onClick={() => setIsModalOpen(true)}>Edit</button>
                         </div>
 
-                        <div style={{ margin: "0 auto", width: "60%", display: "flex", flexDirection: "column", height: "70%", textAlign: "center", justifyContent: "flex-start", alignItems: "center" }}>
-                            <h3 style={{
-                                margin: "0",
-                                marginTop: "20px", fontSize: "1.4rem",
-                                height: "10%",
-                                textAlign: "center", width: "100%",
-                                borderRadius: "10px", fontWeight: "800"
-                            }}>
-                                👤  <span style={{ textDecoration: "underline", textUnderlineOffset: "5px", }}>Update your avatar</span>
-                            </h3>
-                            <div style={{ gap: "5px", minHeight: "28%", width: "60%", border: "2px solid #2C2C2C", borderRadius: "10px", padding: "15px", maxHeight: "90%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", marginTop: "20px" }}>
-                                <input
-                                    style={{
-                                        padding: 0,
-                                        opacity: "0", textAlign: "center", margin: "-1px",
-                                        overflow: "hidden",
-                                        clip: "rect(0,0,0,0)",
-                                        border: 0
-                                    }}
-                                    type="file"
-                                    onChange={handleFileChange}
-                                    className="dashboard-input"
-                                    id="fileInput"
-                                />
-
-                                <label
-                                    htmlFor="fileInput"
-                                    style={{
-                                        maxWidth: "120px",
-                                        backgroundColor: "#2c2c2c", // Change the background color
-                                        color: "white", // Change the text color
-                                        padding: "5px", // Padding for the label
-                                        borderRadius: "5px", // Rounded corners
-                                        cursor: "pointer", // Change cursor to pointer
-                                        display: "inline-block", // Align the label like a button
-                                        textAlign: "center",
-                                        margin: "5px auto"
-                                    }}
-                                >
-                                    Choose an image
-                                </label>
-
+                        <div className="avatar-upload">
+                            <h3>👤 <span>Update your avatar</span></h3>
+                            <div className="avatar-box">
+                                <input type="file" onChange={handleFileChange} className="dashboard-input" id="fileInput" />
+                                <label htmlFor="fileInput" className="file-label">Choose an image</label>
                                 {preview && <img src={preview} alt="Preview" className="preview-image" />}
-                                <button style={{ height: "40px", width: "100px" }} onClick={handleUpload} className="hover-buttons">
-                                    Upload Avatar
-                                </button>
+                                <button style={{ width: "90px", height: "40px" }} className="hover-buttons" onClick={handleUpload}>Upload Avatar</button>
                             </div>
                         </div>
-
                     </div>
                 )}
 
-                {isModalOpen && <EditProfileModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} user={user} onUpdate={handleUpdate} />}
+                {isModalOpen && (
+                    <EditProfileModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} user={user} onUpdate={handleUpdate} />
+                )}
             </div>
 
-            {
-                showMessage && (
-                    <div style={{ textAlign: "center", background: "white", color: "black", height: "50px", width: "200px", position: "absolute", bottom: "30px", right: "80px" }}>
-                        Welcome email was sent to your email address.
-                    </div>
-                )
-            }
-        </div >
+            {showMessage && (
+                <div className="welcome-msg">
+                    Welcome email was sent to your email address.
+                </div>
+            )}
+        </div>
     );
 }
 

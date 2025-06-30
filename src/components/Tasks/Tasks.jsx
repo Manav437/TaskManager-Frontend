@@ -151,16 +151,17 @@ function TasksPage() {
                     <div className="tasks-header">
                         <h1 style={{ fontSize: "2.5rem", marginLeft: "10px" }}>TASKS</h1>
                         <button
-                            style={{ height: "30px", width: "100px", marginRight: "10px" }}
+                            style={{ padding: "5px", gap: "5px", display: "flex", alignItems: "center", justifyContent: "center", height: "30px", width: "100px", marginRight: "10px" }}
                             className="create-task-btn"
                             onClick={handleCreateClick}
                         >
-                            Create Task
+                            <img style={{ height: "15px" }} src="/add.svg" alt="" />
+                            New Task
                         </button>
                     </div>
 
                     <div className="task-section">
-                        <h2 className="tasks-heading" style={{ marginLeft: "7px" }}>
+                        <h2 className="tasks-heading" >
                             Pending tasks
                         </h2>
                         <DropZone onDropTask={handleDropTask} acceptCompleted={false}>
@@ -180,10 +181,10 @@ function TasksPage() {
 
                     <button
                         className="toggle-btn"
-                        style={{ marginLeft: "10px", height: "55px", width: "90px" }}
+                        style={{ cursor: "pointer", border: "none", borderRadius: "5px", marginLeft: "0px", height: "40px", width: "120px" }}
                         onClick={() => setShowCompleted(!showCompleted)}
                     >
-                        {showCompleted ? "Hide Completed Tasks" : "Show Completed Tasks"}
+                        {showCompleted ? "Hide Completed Tasks ↑" : "Show Completed Tasks ↓"}
                     </button>
 
                     {showCompleted && (
@@ -191,10 +192,10 @@ function TasksPage() {
                             <h2
                                 className="tasks-heading"
                                 style={{
-                                    marginLeft: "7px",
-                                    marginTop: "7px",
-                                    width: "180px",
-                                    background: "green",
+                                    // marginLeft: "7px",
+                                    // marginTop: "7px",
+                                    // width: "180px",
+                                    color: "green",
                                 }}
                             >
                                 Completed Tasks

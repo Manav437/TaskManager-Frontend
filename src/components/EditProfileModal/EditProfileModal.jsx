@@ -23,8 +23,8 @@ function EditProfileModal({ isOpen, onClose, user, onUpdate }) {
     return (
         <div className="modal-profile-overlay">
             <div className="modal-profile-content" style={{ height: "250px" }}>
-                <h2>Edit Profile</h2>
-                <label>Name</label>
+                <h2 style={{ textAlign: "center" }}>Edit Profile</h2>
+                <label >Name</label>
                 <input
                     type="text"
                     value={name}

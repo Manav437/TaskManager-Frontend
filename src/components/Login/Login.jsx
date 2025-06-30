@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { loginUser } from "../../utils/api.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import './Login.css'
 
 
@@ -46,17 +46,20 @@ function LoginPage() {
         <div className="login">
             <div className="login-container">
                 <div className="Login-div">
-                    <h1 style={{ paddingTop: "10px" }} className="login-header">Login</h1>
+                    <img style={{ height: "40px", width: "40px", borderRadius: "5px" }} src="/taskly-icon.png" />
+                    <h1 style={{ paddingTop: "1px" }} className="login-header">Log in to Taskly</h1>
+                    <p className="login-p">Dont have an account? <Link style={{ color: "lightgreen" }} to="/register">Register</Link></p>
                     <form className="login-form" onSubmit={handleSubmit}>
                         <label className="label-text">Email</label>
-                        <input className="login-input" type="email" name="email" onChange={handleChange} placeholder="Enter your email" required />
+                        <input className="login-input" type="email" name="email" onChange={handleChange} placeholder="mnv.gsn@taskly.dev" required />
 
                         <label className="label-text">Password</label>
-                        <input className="login-input" type="password" name="password" onChange={handleChange} placeholder="Enter your password" required />
+                        <input className="login-input" type="password" name="password" onChange={handleChange} placeholder="********" required />
 
-                        <button className="btn-grad" type="submit">Submit</button>
+                        <button style={{ marginTop: "20px" }} className="btn-grad" type="submit">Log In</button>
                     </form>
-                    <p className="login-p">Dont have an account? <a style={{ color: "lightgreen" }} href="/register">Register</a></p>
+                    <p style={{ fontSize: ".9rem", cursor: "pointer", textAlign: "end", textDecoration: "underline", textUnderlineOffset: "3px" }}>Forgot Password</p>
+
                 </div>
             </div>
 

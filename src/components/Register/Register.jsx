@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "../../utils/api";
 import './Register.css'
@@ -49,21 +50,23 @@ function RegisterPage() {
         <>
             <div className="container">
                 <div className="Register-div">
-                    <h1 style={{ color: "white" }}>Sign Up</h1>
+                    <img style={{ height: "40px", width: "40px", borderRadius: "3px" }} src="./taskly-icon.png" />
+                    <h1 style={{ fontSize: "1.7rem", color: "white" }}>Create your Taskly account</h1>
+                    <p>Already have an account? <Link style={{ color: "lightgreen" }} to="/login">Login</Link></p>
+
                     <form onSubmit={handleSubmit}>
-                        <label className="label-text">Username</label>
-                        <input className="register-input" type="text" name="name" placeholder="xyz1234" onChange={handleChange} required />
+                        <label className="label-text">Name</label>
+                        <input className="register-input" type="text" name="name" placeholder="Manav Gusain" onChange={handleChange} required />
 
                         <label className="label-text">Email</label>
-                        <input className="register-input" type="email" name="email" placeholder="johndoe@xyz.com" onChange={handleChange} required />
+                        <input className="register-input" type="email" name="email" placeholder="manav.gsn@taskly.dev" onChange={handleChange} required />
 
                         <label className="label-text">Password</label>
                         <input autoComplete="new-password" className="register-input" type="password" name="password" placeholder="********" onChange={handleChange} required />
 
-                        <button className="btn-grad" type="submit">Submit</button>
+                        <button className="btn-grad" type="submit">Create Account</button>
                     </form>
-                    <p style={{ fontSize: ".9rem", marginBottom: "20px" }}>By signing up, you agree to our <span>Terms of service</span>.</p>
-                    <p>Already have an account? <a style={{ color: "lightgreen" }} href="/login">Login</a></p>
+                    <p style={{ fontSize: ".9rem", marginTop: "20px" }}>By signing up, you agree to our <span>Terms of service</span>.</p>
                 </div>
             </div>
         </>

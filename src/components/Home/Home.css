@@ -1,11 +1,9 @@
+/* Body styles */
 body {
-  /* background-color: #394039;
-  background-image: linear-gradient(0deg, #394039 0%, #8cc69a 69%); */
   color: white;
-  /* min-height: 100vh; */
-  /* background-attachment: scroll; */
 }
 
+/* Home container */
 .home-container {
   font-size: 1.5rem;
   color: white;
@@ -15,8 +13,7 @@ body {
   padding-top: 100px;
   background-color: #0f0f0f;
   background-image: radial-gradient(#444 1px, transparent 1px);
-  background-size: 20px 20px; 
-
+  background-size: 20px 20px;
 }
 
 .home-container::before,
@@ -40,337 +37,63 @@ body {
   background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
 }
 
+/* Div One */
 .div-one {
-  width: 70%;
+  width: 73%;
   text-align: center;
-  border: 1px solid #2C2C2C;
-  border-radius: 20px;
-  background: #000;
-  padding: 2rem 0;
-  /* color: #9f9e9e; */
-}
-
-/* .div-two {
-  padding: 1.5rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  text-align: center;
-  width: 70%;
   border: 2px solid #2C2C2C;
   border-radius: 10px;
   background: #000;
-} */
+  padding: 2rem 0;
+}
 
 .div-one > h1 {
   color: beige;
-  /* width: 65%;  */
   margin: 0 auto;
-}
-
-.div-three {
-  /* background: #9EBC8A; */
-  /* background: black; */
-  /* border: 2px solid #2C2C2C; */
-  border-radius: 20px;
-  width: 70%;
-  text-align:center;
-  margin-bottom: 20px;
-}
-
-.div-three > p {
-  height: 250px;
-  margin: 7% auto;
-  width: 70%;
-  font-size: 30px;
 }
 
 .quote-text {
-  color: white;
+  color: rgb(176, 167, 167);
   text-align: center;
-  width: 65%;
-  margin: 0 auto;
-  margin-top: 20px;
-  font-size: 1.5rem;
+  width: 50%;
+  margin: 20px auto 0;
+  font-size: 1.7rem;
   line-height: 1.5;
   font-style: italic;
 }
 
-.home-login-div {
-  display: flex;
-  font-size: 1rem;
+/* Div Three */
+.div-three {
+  border: 2px solid #2C2C2C;
+  border-radius: 10px;
+  width: 73%;
   text-align: center;
+  margin-bottom: 20px;
 }
-
-.home-logged-div {
-  color: white;
-}
-
-.home-login-div p {
-  color: white;
-}
-
-/* .log-in-text {
-  
+/* 
+.div-three > p {
+  height: 250px;
+  margin: 7% auto;
+  width: 70%;
+  font-size: 350px;
 } */
 
-button {
-  background: green;
-  width: 75px;
-  height: 23px;
-  text-align: center;
-  color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 0;
-}
-
-.video-container {
-  height: 600px;
-  width: 70%;
-  position: relative;
-  overflow: hidden;
-  color: white;
-  background: black;
-}
-
-.video-container video {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  border-radius: 12px;
-  z-index: 1;
-  transition: opacity 0.3s ease-in-out;
-  /* opacity: 1; */
-}
-.text-wrapper {
-	width: 70%;
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    overflow: hidden;
-    z-index: 3;
-}
-
-.moving-text {
-	display: flex;
-	animation: scrollText 13s linear infinite;
-}
-
-.scroll-content {
-	display: flex;
-	gap: 50px;
-}
-
-.scroll-content h2 {
-	font-size: 3rem;
-	font-weight: 700;
-	text-shadow: 0 0 8px #b0a5a5;
-	white-space: nowrap;
-	color: #F8EEDF;
-}
-
-@keyframes scrollText {
-	0% {
-		transform: translateX(0);
-	}
-	100% {
-		transform: translateX(-50%);
-	}
-}
-
-.hello-div {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	position: absolute;
-	top: 20px;
-	left: 15px;
-	color: white;
-	z-index: 2;
-	padding: 10px;
-	margin-top: 2%;
-	border-radius: 20px;
-	max-width: 95%;
-	width: 95%;
-}
-
-.hello-div a p {
-	transition: transform 0.3s ease-in-out;
-}
-
-.hello-div a:hover p {
-	transform: scale(1.1);
-}
-
-.hello-loggedin {
-  padding: 10px auto;
-  display: flex; 
-  justify-content:space-evenly;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  background: black;
-  border-radius: 20px;
-}
-
-.hello-loggedin > p {
-  font-size: 1.8rem; 
-  text-align: center;
-  display: inline-block;
-  width: 50%;
-}
-
-.click-here {
-  background-color: black;
-  color: white;
-}
-
-.footer {
-  gap: 10px; 
-  display: flex; 
-  flex-direction: column;
-  text-align: center;
-}
-
-.footer > h3 {
-	color: #60B5FF;
-}
-
-.footer > a {
-	font-size: 1.1rem;
-	text-decoration: none;
-	color: #BDDDE4;
-}
-
-.footer > a:hover {
-	color: #fff;
-	text-decoration: underline;
-	text-underline-offset: 2px;
-}
-
-.home-login {
-	text-align: center;
-	transition: all 0.5s;
-	display: inline-block;
-	height: 50px;
-	margin: 0;
-	background: #5CB338;
-}
-
-.home-login:hover {
-	background: #3c7425;
-}
-
-.home-login:after {
-	content: '»';
-	position: absolute;
-	opacity: 0;  
-	top: 31px;
-	right: 90px;
-	transition: 0.5s;
-}
-
-.home-login:hover:after {
-  opacity: 1;
-  right: 165px;
-}
-
-.footer-div {
-  gap: 0;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  margin: 0 auto;
-}
-
-.footer-first {
-  border: 3px solid #2C2C2C;
-  border-bottom: 1px dotted #2C2C2C;
-  padding: 30px;
-  background: black;
-  height: 70px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 0;
-  margin-bottom: 0;
-  width: 80%;
-  border-radius: 10px 10px 0 0;
-}
-
-.footer-first > h3 {
-  font-size: 3rem;
-  padding-top: 20px;
-  margin: 0 auto;
-  text-align: center;
-  margin-bottom: 0;
-  color: white;
-}
-
-.footer-links {
-  padding-top: 30px;
-  height: 250px;
-  background: black;
-  margin-top: 0;
-  gap: 0;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  width: 100%;
-  border: 3px solid #2C2C2C;
-  border-top: 0;
-  border-bottom: 0;
-  border-radius: 10px 10px 0 0;
-}
-
-.footer-last {
-	border: 3px solid #2C2C2C;
-	border-top: 1px dashed #2C2C2C;
-	border-bottom: 0;
-	overflow: hidden;
-	gap: 0;
-	margin-bottom: 0;
-	height: 100px;
-	position:relative;
-	text-align: "center";
-	width: 100%;
-	background: black;
-}
-
-.footer-last > h1 {
-	font-style: italic;
-	height: 99px;
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	font-size: 9rem;
-	color: #FFEDFA;
-	background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
-	padding: 0 20px;
-	line-height: 1.2;
-	margin: 0;
-}
-
-.draw-circle-container {
-  border-radius: 20px;
+/* === DrawCircleText Styles === */
+/* .draw-circle-container {
   display: grid;
   place-items: center;
-  background-color: #064e3b; /* Equivalent to bg-emerald-950 */
-  padding: 5rem; /* Equivalent to px-4 py-24 */
-  color: white; /* Equivalent to text-yellow-50 */
-  min-height: 30vh; /* Ensure the container takes the full height of the screen */
-}
+  background-color: #064e3b; 
+  padding: 5rem;
+  color: white;
+  min-height: 30vh;
+} */
 
 .draw-circle-text {
   width: 80%;
-  /* max-width: 40rem; Equivalent to max-w-2xl */
   text-align: center;
-  font-size: 1.8rem; /* Equivalent to text-5xl (adjusted for larger text) */
-  line-height: 1.4; /* Equivalent to leading-snug */
-  position: relative; /* Needed to position the circle behind the text */
+  font-size: 1.8rem;
+  line-height: 1.4;
+  position: relative;
 }
 
 .draw-circle-span {
@@ -389,26 +112,298 @@ button {
   width: 210px;
 }
 
-@media (max-width: 430px) {
 
-  .div-one, .div-two, .div-three, .video-container, .footer-div {
+/* Video container */
+.video-container {
+  height: 600px;
+  width: 73%;
+  border: 2px solid #2C2C2C;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  background: black;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  z-index: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Hello Div */
+.hello-div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  color: white;
+  z-index: 2;
+  padding: 10px;
+  margin-top: 2%;
+  border-radius: 20px;
+  max-width: 95%;
+  width: 95%;
+}
+
+.hello-div a p {
+  transition: transform 0.3s ease-in-out;
+}
+
+.hello-div a:hover p {
+  transform: scale(1.1);
+}
+
+.hello-loggedin {
+  padding: 10px auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: black;
+  border-radius: 10px;
+}
+
+.hello-loggedin > p {
+  font-size: 1.8rem;
+  text-align: center;
+  display: inline-block;
+  width: 50%;
+}
+
+/* Login button */
+.home-login {
+  text-align: center;
+  transition: all 0.5s;
+  display: inline-block;
+  border: 2px solid transparent;
+  height: 50px;
+  margin: 0;
+  background: #5CB338;
+  border-radius: 10px;
+  color: #EFEFEF;
+  width: 45%;
+}
+
+.home-login:hover {
+  background: #3c7425;
+  border: 1px solid white;
+}
+
+.home-login:after {
+  content: '➤';
+  position: absolute;
+  opacity: 0;
+  top: 35px;
+  right: 155px;
+  transition: 0.5s;
+}
+
+.home-login:hover:after {
+  opacity: 1;
+  right: 170px;
+}
+
+/* Click here */
+.click-here {
+  background-color: black;
+  color: white;
+  height: 12px;
+  padding: 3px;
+  border: 1px solid #2C2C2C;
+  border-radius: 5px;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  font-size: 8px;
+}
+
+/* Moving text */
+.text-wrapper {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.moving-text {
+  display: flex;
+}
+
+.scroll-content {
+  display: flex;
+  animation: scrollText 25s linear infinite;
+  width: max-content;
+  gap: 50px;
+}
+
+.scroll-content h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 0 0 8px #b0a5a5;
+  white-space: nowrap;
+  color: #F8EEDF;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Footer */
+.footer-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 73%;
+  margin: 0 auto;
+}
+
+.footer-first {
+  border: 3px solid #2C2C2C;
+  border-bottom: 1px dotted #2C2C2C;
+  padding: 30px;
+  background: black;
+  height: 70px;
+  display: flex;
+  justify-content: flex-end;
+  width: 80%;
+  border-radius: 10px 10px 0 0;
+}
+
+.footer-first > h3 {
+  font-size: 3rem;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+}
+
+.footer-links {
+  padding-top: 30px;
+  min-height: 220px;
+  background: black;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  border: 3px solid #2C2C2C;
+  border-top: 0;
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.footer {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.footer > h3 {
+  color: #60B5FF;
+}
+
+.footer > a {
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #BDDDE4;
+}
+
+.footer > a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-last {
+  border: 3px solid #2C2C2C;
+  border-top: 1px dashed #2C2C2C;
+  height: 170px;
+  position: relative;
+  background: black;
+  width: 100%;
+  overflow: hidden;
+}
+
+.footer-last > h1 {
+  font-style: italic;
+  height: 150px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15rem;
+  color: #FFEDFA;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+  padding: 0 20px;
+  line-height: 1;
+  margin: 0;
+}
+
+/* Circle Text */
+.draw-circle-container {
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background-color: #064e3b;
+  padding: 5rem;
+  color: white;
+  min-height: 30vh;
+}
+
+.draw-circle-text {
+  width: 80%;
+  text-align: center;
+  font-size: 1.8rem;
+  line-height: 1.4;
+  position: relative;
+}
+
+.draw-circle-span {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.draw-circle-svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-45%, -50%);
+  z-index: 0;
+  height: 90px;
+  width: 210px;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .div-one, .div-three, .video-container {
     width: 80%;
   }
 
-  .div-two > h1 {
+  .footer-div {
     width: 100%;
-    margin: 0;
   }
 
   .div-three {
     height: 45vh;
+    width: 80%;
   }
 
-
-  .hello-div{
+  .hello-div {
     height: 70px;
-    top : 10px;
-    left : 0;
+    top: 10px;
+    left: 0;
   }
 
   .hello-loggedin {
@@ -419,14 +414,14 @@ button {
   .hello-loggedin > p {
     width: 50%;
     height: 60%;
-    margin: 0 auto;
-    margin-top: 7px;
     font-size: 1.5rem;
+    margin-top: 7px;
   }
 
   .footer > h3 {
     font-size: 1.3rem;
   }
+
   .footer > a {
     font-size: 1.1rem;
   }
@@ -451,7 +446,7 @@ button {
   }
 
   .draw-circle-container {
-    width: 220px;
+    /* width: 55vw; */
     height: 30vh;
   }
 
@@ -467,10 +462,9 @@ button {
   .draw-circle-svg {
     width: 150px;
   }
-  
+
   .log-in-text {
     font-size: 1.2rem;
-    margin-top: 2px;
     background: transparent;
   }
 }

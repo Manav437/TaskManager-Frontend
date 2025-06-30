@@ -59,25 +59,38 @@ body {
 
 .tasks-heading {
     text-align: center;
-    background: red;
-    color: white;
-    width: 160px;
-    padding: 2px;
-    border-radius: 5px;
+    /* background: red; */
+    color: red;
+    /* color: white; */
+    width: fit-content;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin: 7px 0 15px 7px;
 }
 
 .task-section {
-    border: 1px solid #2C2C2C;
+    border: 2px solid #2C2C2C;
     border-radius: 10px;
     padding: 5px;
     margin-bottom: 20px;
     background: black;
+    padding-left: 10px;
+}
+
+.toggle-btn {
+    font-size: .9rem;
+    background: #fff;
+    transition: .3s ease-in-out;
+}
+
+.toggle-btn:hover {
+    background: #cacaca;
 }
 
 .incompleted-tasks {
-    text-align: center;
+    /* text-align: center; */
     display: flex;
-    justify-content: center; 
+    /* justify-content: center;  */
     flex-wrap: wrap;
     gap: 8px;
     height: 30vh;
@@ -86,19 +99,28 @@ body {
 .incompleted-task {
     display: flex;
     justify-content: space-between;
-    text-align: center;
-    width: 150px;
-    height: 60px;
+    /* text-align: center; */
+    width: 120px;
+    height: 50px;
     background-color: #e2a89a;
     color: black;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 14px;
+    transition: .3s ease-in-out;
+}
+
+.incompleted-task:hover .edit-img {
+    opacity: 1;
+}
+
+.completed-task:hover .edit-img {
+    opacity: 1;
 }
 
 .completed-tasks {
     display: flex;
-    justify-content: center; 
+    /* justify-content: center;  */
     flex-wrap: wrap;
     gap: 8px;
 }
@@ -106,9 +128,9 @@ body {
 .completed-task {
     display: flex;
     justify-content: space-between;
-    text-align: center;
-    width: 150px;
-    height: 60px;
+    /* text-align: center; */
+    width: 120px;
+    height: 50px;
     background-color: #c3e6cb;
     color: black;
     padding: 5px 10px;
@@ -118,15 +140,17 @@ body {
 
 .edit-img {
     /* right: 0px; */
+    opacity: 0;
     text-align: center;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     cursor: pointer;
     background: white;
     padding: 3px;
     border-radius: 5px;
     padding-top:2px;
     padding-right: 2px;
+    transition: .2s ease-in-out;
 }
 
 .create-task-btn {
@@ -135,8 +159,14 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 10px;
-    transition: background 0.3s;
+    margin-bottom: 5px;
+    transition: background 0.3s ease-in-out;
+    border: 1px solid #fff;
+}
+
+.create-task-btn:hover {
+    background-color: #2246d5;
+    /* border: 1px solid #2c2c2c; */
 }
 
 .desc-label {

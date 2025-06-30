@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3000"; // Change this to your backend URL
-// const API_BASE_URL = "https://task-manager-backend-5hkl.onrender.com"
+// const API_BASE_URL = "http://localhost:3000"; // Change this to your backend URL
+const API_BASE_URL = "https://task-manager-backend-5hkl.onrender.com"
 
 
 export const registerUser = async (userData) => {

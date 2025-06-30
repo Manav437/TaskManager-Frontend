@@ -2,49 +2,61 @@
     height: 100vh;
 }
 
-
 .login-container {
     display: flex;
-    /* color: black; */
-    justify-content: center;  /* Horizontally center */
-    align-items: center;  /* Vertically center */
-    height: 100vh; /* Full viewport height */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    background: radial-gradient(
+        circle at center,
+        #2e2e2e 0%,
+        #1f1f1f 40%,
+        #121212 100%
+    );
+    /* Optional: Smooth text or component look */
+    color: white;
 }
 
 .Login-div {
     /* height: 50%; */
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
-    background: #222222;
+    /* background: #222222; */
     color: white;
     padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    width: 20%;
-    box-shadow: 1px 1px 7px #b5f8ad;
+    /* border-radius: 10px; */
+    /* text-align: center; */
+    width: 25%;
+    /* box-shadow: 1px 1px 7px #b5f8ad; */
 }
 
 .login-form {
-    height: 60%;
+    /* height: 700%; */
     width: 100%;
 }
 
 .login-header {
+    margin-left: 0;
     color: white;
     top: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+}
+
+input {
+    font-family: consolas;
 }
 
 .login-input {
     border: 1px solid transparent;
-    width: 80%;
+    width: 96.5%;
     height: 35px;
     margin-top: 10px;
     padding-left: 10px;
     display: block;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     border-radius: 5px;
 }
 
@@ -55,7 +67,7 @@
 }
 
 .label-text {
-    width: 85%;
+    /* width: 85%; */
     text-align: start;
     display: block;
     margin: 15px auto;
@@ -64,27 +76,29 @@
 .btn-grad {background-image: linear-gradient(to right, #90C67C 0%, #78ec76  51%, #90C67C  100%)}
 .btn-grad {
     height: 40px;
-    width: 90px;
-   margin: 10px;
+    width: 100%;
+   /* margin: 10px; */
    padding: 10px;
    text-align: center;
-   text-transform: uppercase;
-   transition: 0.5s;
+   /* text-transform: uppercase; */
+   transition: 0.45s;
    background-size: 200% auto;
+   font-size: 1.3rem;
    color: black;            
    /* box-shadow: 0 0 20px #eee; */
-   border-radius: 10px;
+   border-radius: 5px;
    margin-top: 20px;
  }
 
  .btn-grad:hover {
    background-position: right center; /* change the direction of the change here */
-   color: #FFF;
+   color: #242424;
    text-decoration: none;
  }
 
 
 .login-p {
+    /* font-family: consolas; */
     color: grey;
 } 
 

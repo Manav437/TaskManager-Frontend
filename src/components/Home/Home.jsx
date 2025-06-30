@@ -56,7 +56,7 @@ function HomePage() {
                     {/* </div> */}
 
                     {/* <div className="div-two"> */}
-                    <h1 >Do your best work in Taskly</h1>
+                    {/* <h1 >Do your best work in Taskly</h1> */}
                     <p className="quote-text">{quote}</p>
                 </div>
 
@@ -78,7 +78,7 @@ function HomePage() {
                         ) : (
                             <div className="hello-loggedin">
                                 <p >Already have an account?</p>
-                                <button className="home-login" style={{ borderRadius: "20px", color: "#EFEFEF", fontSize: "2rem", width: "45%" }} onClick={() => navigate("/login")}><span>LOG IN</span></button>
+                                <button className="home-login" style={{ borderRadius: "10px", color: "#EFEFEF", fontSize: "1.7rem", width: "35%" }} onClick={() => navigate("/login")}><span>Log In</span></button>
                             </div>
                         )}
 
@@ -91,9 +91,7 @@ function HomePage() {
                         <div className="moving-text">
                             <div className="scroll-content">
                                 {Array(12).fill(<h2>TASKLY</h2>)}
-                            </div>
-                            <div className="scroll-content">
-                                {Array(12).fill(<h2>TASKLY</h2>)}
+                                {Array(12).fill(<h2>TASKLY</h2>)} {/* duplicated */}
                             </div>
                         </div>
                     </div>

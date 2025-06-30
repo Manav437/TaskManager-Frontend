@@ -4,10 +4,10 @@ import "./About.css"
 function AboutPage() {
     return (
         <>
-            <div className="about-div">
+            <div className="about-div" style={{ gap: "30px" }}>
                 <div className="about-first">
                     <h1 className="about-h1">Vision</h1>
-                    <p style={{ margin: "10px auto", textAlign: "center", width: "80%", fontSize: "1.15rem", color: "white" }}>
+                    <p style={{ margin: "10px auto", textAlign: "center", width: "70%", fontSize: "1.2rem", color: "#4f4e4e" }}>
                         Our mission is to simplify task and user management for individuals and teams.
                         Whether you're a developer, student, or project manager,
                         Task Manager helps you stay organized and focused.

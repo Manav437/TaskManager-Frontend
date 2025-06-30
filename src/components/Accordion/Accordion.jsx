@@ -26,7 +26,7 @@ const FaqList = () => {
 
         const arrowStyle = {
             display: "inline-block",
-            transform: isOpen ? "rotate(90deg)" : "rotate(0deg)",
+            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
             transition: "transform 0.3s ease-in-out",
         };
 
@@ -34,7 +34,7 @@ const FaqList = () => {
             <div className="itemStyle">
                 <div className="questionStyle" onClick={() => setIsOpen(!isOpen)}>
                     {question}
-                    <span style={arrowStyle}>▶️</span>
+                    <span style={arrowStyle}>↯</span>
                 </div>
                 <div className={`answerStyle ${isOpen ? "open" : ""}`}>{answer}</div>
             </div>

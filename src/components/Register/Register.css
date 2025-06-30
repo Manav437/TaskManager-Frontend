@@ -1,21 +1,30 @@
 .container {
     display: flex;
-    justify-content: center;  /* Horizontally center */
-    align-items: center;  /* Vertically center */
-    height: 100vh; /* Full viewport height */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    background: radial-gradient(
+        circle at center,
+        #2e2e2e 0%,
+        #1f1f1f 40%,
+        #121212 100%
+    );
+    /* Optional: Smooth text or component look */
+    color: white;
 }
 
 
 .Register-div {
     /* height: 45%; */
-    background: #222222;
+    /* background: #222222; */
     color: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 20%;
-    box-shadow: 1px 1px 7px #b5f8ad;
+    /* border-radius: 10px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* text-align: center; */
+    width: 25%;
+    /* box-shadow: 1px 1px 7px #b5f8ad; */
 }
 
 .Register-div span {
@@ -31,16 +40,17 @@
 
 .register-input {
     display: block;
-    width: 80%;
+    width: 93%;
     padding: 10px;
     margin: 10px auto;
     border: 1px solid transparent;
-    border-radius: 5px;
+    border-radius: 3px;
+    font-family: consolas;
 }
 
 .register-input:focus {
     outline: none;
-    border: 1px solid rgb(184, 183, 183);
+    border: 1px solid rgb(255, 255, 255);
     /* border-radius: 5px; */
 }
 
@@ -48,10 +58,13 @@
     display: block;
 }
 
-button {
-    padding: 5px 10px;
+.btn-grad {
+    /* padding: 5px 10px; */
     cursor: pointer;
     margin-top: 10px;
+    border: none;
+    font-weight: 600;
+    /* letter-spacing: 1px; */
 }
 
 p {

@@ -1,20 +1,23 @@
 /* === Base Styles === */
 .header {
-  width: 70%;
-  margin: 10px auto;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
   background: #000;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 0;
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 1000;
-  border: 2px solid #2C2C2C;
-  border-radius: 10px;
+  border-bottom: 1px solid #2C2C2C;
+}
+
+.header-container {
+  width: 75%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo img {
@@ -25,60 +28,58 @@
 /* === Nav (Desktop) === */
 .nav {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
 }
 
 .nav a {
   color: white;
   text-decoration: none;
-  position: relative;
-  margin: 0 10px;
-  transition: color 0.3s ease;
+  margin: 0 5px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
 }
 
-.nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 2px;
-  background-color: #04b663; /* Neon green or adjust to your liking */
-  transition: width 0.3s ease;
+.nav a:hover {
+  background: #333;
 }
 
-nav a:hover::after {
-  width: 100%;
+.register-btn {
+  background: #04b663;
+  color: black;
+  border-radius: 8px;
+  padding: 7px 12px;
+  transition: background 0.3s ease;
 }
 
-.logout-btn {
+.register-btn:hover {
+  background: #037f48;
   color: white;
-  text-decoration: none;
-  font-weight: 500;
-  background: none;
-  border: none;
-  cursor: pointer;
 }
 
 .logout-btn {
   display: flex;
   align-items: center;
   gap: 6px;
+  background: #f7374f;
+  border: none;
   padding: 6px 12px;
-  border-radius: 4px;
-  background-color: #f7374f;
-}
-
-.logout-btn:hover {
-  background-color: #a62c2c;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  transition: background 0.3s ease;
 }
 
 .logout-btn img {
   height: 18px;
 }
 
-/* === Hamburger (Mobile Only) === */
+.logout-btn:hover {
+  background: #a62c2c;
+}
+
+/* === Hamburger === */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -105,35 +106,29 @@ nav a:hover::after {
     background: #181818;
     flex-direction: column;
     align-items: flex-start;
-    padding: 12px 20px;
-    gap: 12px;
+    padding: 15px 20px;
     display: none;
     width: 90%;
+    border-radius: 10px;
   }
 
   .nav.open {
     display: flex;
-	width: 90%;
-	border-radius: 10px;
-	/* margin: 0 auto; */
   }
 
-  .nav.open a:hover {
-	background: #4a4a4a;
-	border : 1px solid white;
+  .nav a {
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
+    border-radius: 6px;
+    padding: 10px 12px;
   }
 
-  .nav.open a {
-	border: 1px solid transparent;
-	border-radius: 10px;
-	width: 100%;
-	padding: 10px 0;
-	padding-left: 10px;
-	transition: .25s ease-in-out;
+  .nav a:hover {
+    background: #333;
   }
 
   .hamburger {
     display: flex;
-	align-items: flex-end;
   }
 }

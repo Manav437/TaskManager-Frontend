@@ -10,7 +10,8 @@
 
 body {
     margin: 0;
-    /* max-height: 180vh; */
+    padding: 0;
+    /* max-height: fit-content; */
     font-family:Arial, Helvetica, sans-serif;
     color: white;  
 }

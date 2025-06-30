@@ -3,7 +3,7 @@
   	display: flex;
     flex-direction: column;
     color: white;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     line-height: 1.6;
     padding: 2rem 0;
     text-align: center;
@@ -11,7 +11,7 @@
     background-color: #0f0f0f;
     background-image: radial-gradient(#444 1px, transparent 1px);
     background-size: 20px 20px; 
-    gap: 20px;
+    /* gap: 30px; */
     color: white;
     line-height: 1.6;
 }
@@ -39,29 +39,30 @@
 
 .about-first {
   background: black;
-  padding: 10px;
-  border: 1px solid #2C2C2C;
-  border-radius: 20px;
-  margin: 50px auto 0 auto;
+  padding: 10px 0;
+  border: 2px solid #2C2C2C;
+  border-radius: 10px;
+  margin: 0 auto;
   text-align: center;
-  width: 69%;
+  margin-top: 75px;
+  width: 72.5%;
 }
 
 .about-two {
   background: black;
   margin: 0 auto;
-  border: 1px solid #2C2C2C;
-  border-radius: 20px;
-  width: 70%;
+  border: 2px solid #2C2C2C;
+  border-radius: 10px;
+  width: 72.5%;
 }
 
 .about-three {
   background: black;
   border-radius: 20px;
   margin: 0 auto;
-  width: 70%;
-  border: 1px solid #2C2C2C;
-  margin-top: auto;
+  width: 72.5%;
+  border: 2px solid #2C2C2C;
+  /* margin-top: auto; */
   text-align: center;
   padding-top: 2rem;
 }
@@ -99,7 +100,7 @@
 	color: #9FB3DF;
 }
 
-@media (max-width: 430px) {
+@media (max-width: 500px) {
 	.about-first,.about-two, .about-three {
     width: 90%;
   }
@@ -109,7 +110,7 @@
   }
 
   .about-three > h2 {
-    font-size: 2rem;
+    font-size: 1.3rem;
   }
 
   .about-three > p {
