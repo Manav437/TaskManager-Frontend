@@ -1,5 +1,26 @@
 import React, { useState } from "react";
-import "./Accordion.css"
+import "./Accordion.css";
+
+const FaqItem = ({ faq, index, activeIndex, setActiveIndex }) => {
+    const isOpen = index === activeIndex;
+
+    const toggleAccordion = () => {
+        const newIndex = isOpen ? null : index;
+        setActiveIndex(newIndex);
+    };
+
+    return (
+        <div className={`faq-item ${isOpen ? "open" : ""}`}>
+            <button className="faq-question" onClick={toggleAccordion}>
+                {faq.question}
+                <span className="faq-icon"></span>
+            </button>
+            <div className="faq-answer-wrapper">
+                <p className="faq-answer">{faq.answer}</p>
+            </div>
+        </div>
+    );
+};
 
 const FaqList = () => {
     const faqData = [
@@ -8,44 +29,32 @@ const FaqList = () => {
             answer: "To add a new task, click on the 'Add Task' button, fill in the task details like title, description, deadline, and priority, then click 'Save'.",
         },
         {
-            question: "Is there a way to mark a task as completed?",
-            answer: "Absolutely! Click the checkbox or 'Mark as Done' button next to the task. Completed tasks will move to your 'Completed' list.",
+            question: "Can I mark a task as completed?",
+            answer: "Absolutely! Click the checkbox next to the task. Completed tasks will move to your 'Completed' list.",
         },
         {
-            question: "How do I change my account details or profile photo?",
+            question: "How do I change my account details?",
             answer: "Go to your 'Profile' section from the sidebar menu and click 'Edit Profile' to update your details or upload a new photo.",
         },
         {
             question: "Is this task manager free to use?",
-            answer: "Yes — our core task management features are free forever. Premium plans may be available in future for advanced options."
-        }
+            answer: "Yes — our core task management features are free forever. Premium plans may be available in the future for advanced options.",
+        },
     ];
 
-    const FaqItem = ({ question, answer }) => {
-        const [isOpen, setIsOpen] = useState(false);
-
-        const arrowStyle = {
-            display: "inline-block",
-            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.3s ease-in-out",
-        };
-
-        return (
-            <div className="itemStyle">
-                <div className="questionStyle" onClick={() => setIsOpen(!isOpen)}>
-                    {question}
-                    <span style={arrowStyle}>↯</span>
-                </div>
-                <div className={`answerStyle ${isOpen ? "open" : ""}`}>{answer}</div>
-            </div>
-        );
-    };
+    // State is lifted to the parent to ensure only one item is open at a time
+    const [activeIndex, setActiveIndex] = useState(null);
 
     return (
-        <div className="containerStyle">
-            <h2 className="headingStyle">FAQs</h2>
+        <div className="faq-container">
             {faqData.map((faq, index) => (
-                <FaqItem key={index} question={faq.question} answer={faq.answer} />
+                <FaqItem
+                    key={index}
+                    faq={faq}
+                    index={index}
+                    activeIndex={activeIndex}
+                    setActiveIndex={setActiveIndex}
+                />
             ))}
         </div>
     );

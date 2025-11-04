@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
 .not-found-container {
     display: flex;
     flex-direction: column;
@@ -5,57 +7,74 @@
     justify-content: center;
     text-align: center;
     height: 100vh;
-    background-color: #0f0f0f;
-    background-image: radial-gradient(#444 1px, transparent 1px);
-    background-size: 20px 20px; 
+    padding: 20px;
+    font-family: "Poppins", sans-serif;
+    color: #e0e0e0;
+    background-color: #121212;
+    overflow: hidden;
 }
 
-.not-found-container::before,
-.not-found-container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 15%;
-  height: 100%;
-  z-index: 10;
-  pointer-events: none;
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
-.not-found-container::before {
-  left: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+.not-found-image {
+    height: 150px;
+    border-radius: 5px;
+    border: 2px solid #fff;
+    margin-bottom: 40px;
+    animation: float 4s ease-in-out infinite;
 }
 
-.not-found-container::after {
-  right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
+.not-found-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
 .not-found-heading {
-    font-weight: bold;
+    font-size: 6rem;
+    font-weight: 700;
     color: #ffffff;
-    font-size: 4rem;
+    margin: 0;
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.2),
+        0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 .not-found-p {
-    font-size: 2rem;
-    margin-top: 20px;
-    color: #bbbabb;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin: 0;
+    color: #a0a0a0;
+    max-width: 400px;
 }
 
 .not-found-link {
-  text-decoration: none;
-    margin-top: 40px;
-    padding: 20px 40px;
-    background: #EEF1DA;
-    color: black;
-    border-radius: 10px;
-    transition: background 0.9s ease, color 0.9s ease;
+    text-decoration: none;
+    margin-top: 50px;
+    padding: 15px 35px;
+    background: #007bff;
+    color: white;
+    font-weight: 600;
+    border-radius: 50px;
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 }
 
 .not-found-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  background: #2C2C2C;
-  color: white;
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
 }

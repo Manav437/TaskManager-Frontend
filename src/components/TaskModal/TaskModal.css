@@ -1,10 +1,10 @@
-.modal-overlay {
+.task-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
@@ -12,27 +12,27 @@
     z-index: 1000;
 }
 
-.modal-overlay .modal-content {
+.task-modal-content {
     background: #1a1a1a;
     color: white;
     border: 1px solid #333;
-    /*padding: 25px;*/
-    /*border-radius: 12px;*/
+    padding: 25px;
+    border-radius: 12px;
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.modal-header {
+.task-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.modal-header h2 {
+.task-modal-header h2 {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
@@ -52,7 +52,7 @@
     color: #fff;
 }
 
-.modal-body {
+.task-modal-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -69,8 +69,8 @@
     color: #ccc;
 }
 
-.modal-content input {
-    width: 90%;
+.task-modal-content input {
+    width: 93%;
     height: 45px;
     padding: 0 15px;
     background: #222;
@@ -84,21 +84,20 @@
         box-shadow 0.2s ease;
 }
 
-.modal-content input:focus {
+.task-modal-content input:focus {
     outline: none;
     border-color: #34d399;
     box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.3);
 }
 
-/* === Modal Actions (Buttons) === */
-.modal-actions {
+.task-modal-actions {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
     margin-top: 10px;
 }
 
-.modal-actions button {
+.task-modal-actions button {
     height: 40px;
     padding: 0 20px;
     border: none;
@@ -110,7 +109,7 @@
         background-color 0.2s ease,
         transform 0.2s ease;
 }
-.modal-actions button:hover {
+.task-modal-actions button:hover {
     transform: translateY(-2px);
 }
 

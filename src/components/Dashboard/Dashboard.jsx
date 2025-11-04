@@ -1,251 +1,259 @@
-import "./Dashboard.css";
-import React, { useState, useEffect } from "react";
-import { getUserDetails } from "../../utils/api";
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import {
+    getUserDetails,
+    updateUser,
+    deleteUser,
+    uploadAvatar,
+} from "../../utils/api";
 import HoverDevCards from "../Settings/Settings";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
-import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import "./Dashboard.css";
 
 function DashboardPage() {
     const [user, setUser] = useState(null);
     const [error, setError] = useState("");
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [avatarUrl, setAvatarUrl] = useState("/upload-img.jpg");
-    const [userId, setUserId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showMessage, setShowMessage] = useState(false);
+    const [toast, setToast] = useState({ show: false, message: "", type: "" });
 
     const location = useLocation();
     const navigate = useNavigate();
 
+    const showToast = (message, type = "success") => {
+        setToast({ show: true, message, type });
+        setTimeout(
+            () => setToast({ show: false, message: "", type: "" }),
+            3000,
+        );
+    };
+
+    const fetchUser = useCallback(async () => {
+        try {
+            const response = await getUserDetails();
+            setUser(response.data);
+        } catch (err) {
+            setError(err.message || "Failed to fetch user details.");
+            navigate("/login");
+        }
+    }, [navigate]);
+
     useEffect(() => {
-        if (location.state?.fromRegister && !localStorage.getItem("showWelcomeMessage")) {
-            setShowMessage(true);
-            localStorage.setItem("showWelcomeMessage", "true");
-            const timer = setTimeout(() => {
-                setShowMessage(false);
-            }, 2000);
-            return () => clearTimeout(timer);
+        fetchUser();
+    }, [fetchUser]);
+
+    useEffect(() => {
+        if (
+            location.state?.fromRegister &&
+            !localStorage.getItem("welcomeShown")
+        ) {
+            showToast("Welcome! Your account has been created successfully.");
+            localStorage.setItem("welcomeShown", "true");
         }
     }, [location.state]);
 
-    useEffect(() => {
-        if (userId) {
-            setAvatarUrl(`https:task-manager-backend-5hkl.onrender.com/users/${userId}/avatar`);
-            // setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
-        }
-    }, [userId]);
-
-    useEffect(() => {
-        const checkAvatar = async () => {
-            if (!userId) return;
-            try {
-                const response = await fetch(`https://task-manager-backend-5hkl.onrender.com/users/${userId}/avatar`, { method: "HEAD" });
-                // const response = await fetch(`http://localhost:3000/users/${userId}/avatar`, { method: "HEAD" });
-                if (response.ok) {
-                    setAvatarUrl(`https://task-manager-backend-5hkl.onrender.com/users/${userId}/avatar`);
-                    // setAvatarUrl(`http://localhost:3000/users/${userId}/avatar`);
-                } else {
-                    setAvatarUrl("/upload-img.jpg");
-                }
-            } catch (error) {
-                console.error("Error fetching avatar:", error);
-                setAvatarUrl("/upload-img.jpg");
-            }
-        };
-        checkAvatar();
-    }, [userId]);
-
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
-        setFile(selectedFile);
         if (selectedFile) {
+            setFile(selectedFile);
             setPreview(URL.createObjectURL(selectedFile));
         }
     };
 
     const handleUpload = async () => {
-        if (!file) {
-            alert("Please select a file first.");
-            return;
-        }
+        if (!file) return showToast("Please select a file first.", "error");
 
         const formData = new FormData();
         formData.append("avatar", file);
 
         try {
-            const res = await fetch(`https://task-manager-backend-5hkl.onrender.com/users/me/avatar`, {
-                // const res = await fetch("http://localhost:3000/users/me/avatar", {
-                method: "POST",
-                body: formData,
-                headers: {
-                    Authorization: localStorage.getItem("token"),
-                },
-            });
-            if (!res.ok) {
-                const errorData = await res.json();
-                throw new Error(errorData.error || "Upload failed");
-            }
-            alert("Upload successful!");
+            await uploadAvatar(formData);
+            showToast("Avatar updated successfully!");
             setPreview(null);
-            setAvatarUrl(URL.createObjectURL(file));
+            setFile(null);
+            // Force browser to refetch the image by adding a cache-busting query param
+            setUser((prevUser) => ({
+                ...prevUser,
+                avatarUrl: `${import.meta.env.VITE_API_URL}/users/${prevUser._id}/avatar?t=${new Date().getTime()}`,
+            }));
         } catch (error) {
-            console.error("Upload failed:", error);
-            alert(error.message);
+            showToast(error.response?.data?.error || "Upload failed.", "error");
         }
     };
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const userData = await getUserDetails();
-                setUser(userData);
-                setUserId(userData._id);
-            } catch (err) {
-                setError(err.message || "Failed to fetch user details.");
-                navigate("/login");
-            }
-        };
-        fetchUser();
-    }, []);
-
-    function ChangeDate(userdate) {
-        const date = new Date(userdate);
-        if (isNaN(date.getTime())) {
-            return "Invalid Date";
+    const handleUpdate = async (updatedUserData) => {
+        try {
+            const response = await updateUser({
+                name: updatedUserData.name,
+                age: updatedUserData.age,
+            });
+            setUser(response.data);
+            showToast("Profile updated successfully!");
+        } catch (error) {
+            showToast(error.response?.data?.error || "Update failed.", "error");
         }
-        const day = String(date.getDate()).padStart(2, "0");
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const year = String(date.getFullYear()).slice(-2);
-        return `${day}-${month}-${year}`;
-    }
+    };
 
     const handleDelete = async () => {
-        if (!user) {
-            alert("Unauthorized: No token found.");
-            return;
-        }
-        const confirmDelete = window.confirm("Are you sure you want to delete your account?");
-        if (!confirmDelete) return;
-
-        try {
-            const token = localStorage.getItem("token");
-            const response = await fetch("https://task-manager-backend-5hkl.onrender.com/users/me", {
-                // const response = await fetch("http://localhost:3000/users/me", {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-                alert(data.message || "Account deleted successfully.");
+        if (
+            window.confirm(
+                "Are you sure you want to delete your account? This action cannot be undone.",
+            )
+        ) {
+            try {
+                await deleteUser();
+                showToast("Account deleted successfully.");
                 localStorage.removeItem("token");
-                setUser(null);
-                setTimeout(() => navigate("/register"), 500);
-            } else {
-                alert(data.message || "Failed to delete account.");
+                window.dispatchEvent(new Event("storage"));
+                navigate("/register");
+            } catch (error) {
+                showToast(
+                    error.response?.data?.error || "Deletion failed.",
+                    "error",
+                );
             }
-        } catch (error) {
-            console.error("Error deleting account:", error);
-            alert("An error occurred. Please try again.");
         }
     };
+    if (!user) {
+        return (
+            <div className="dashboard-page">
+                <header className="dashboard-header">
+                    {/* Shimmer for the main heading */}
+                    <div className="skeleton-header-text shimmer"></div>
+                    <div className="skeleton-header-welcome">
+                        Welcome to your personal dashboard
+                    </div>
+                </header>
+                <div className="dashboard-grid">
+                    {/* The User Card Skeleton */}
+                    <div className="skeleton-card">
+                        <div className="skeleton-avatar shimmer"></div>
+                        <div style={{ width: "80%", marginTop: "10px" }}>
+                            <div
+                                className="skeleton-text shimmer"
+                                style={{ height: "28px", marginBottom: "15px" }}
+                            ></div>
+                            <div className="skeleton-text shimmer"></div>
+                            <div
+                                className="skeleton-text shimmer"
+                                style={{ width: "60%" }}
+                            ></div>
+                        </div>
+                        <div className="skeleton-button shimmer"></div>
+                    </div>
 
-    const handleUpdate = async (updatedUser) => {
-        try {
-            const updatedUserRequired = {
-                name: updatedUser.name,
-                age: updatedUser.age,
-            };
+                    <div className="avatar-card"></div>
+                    <div className="settings-card"></div>
+                    <div className="danger-zone-card"></div>
+                </div>
+            </div>
+        );
+    }
 
-            const response = await axios.patch("https://task-manager-backend-5hkl.onrender.com/users/me", updatedUserRequired, {
-                // const response = await axios.patch("http://localhost:3000/users/me", updatedUserRequired, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            });
-
-            if (response.status === 200) {
-                setUser(response.data);
-                alert("Profile updated successfully!");
-            } else {
-                alert("Failed to update profile, please try again.");
-            }
-        } catch (error) {
-            console.error("Error updating user data:", error);
-            alert(`Failed to update profile. Error: ${error.response ? error.response.data : error.message}`);
-        }
-    };
+    // Construct avatar URL once user data is available
+    const avatarUrl = `${import.meta.env.VITE_API_URL}/users/${user._id}/avatar`;
 
     return (
-        <div className="dashboard-div">
-            <h2 className="dashboard-heading">
-                {user == null ? "" : `Hey, ${user.name}`}
-                <br />
-                <span>Welcome to your profile</span>
-            </h2>
+        <div className="dashboard-page">
+            {toast.show && (
+                <div className={`toast ${toast.type}`}>{toast.message}</div>
+            )}
 
-            <div className="hover-card-container">
-                <HoverDevCards />
-            </div>
+            <header className="dashboard-header">
+                <h1>Hey, {user.name}</h1>
+                <p>Welcome to your personal dashboard.</p>
+            </header>
 
-            <div className="dashboard-container">
-                {error && <p className="error">{error}</p>}
-                {user ? (
-                    <div className="user-details">
-                        <div className="user-info-card">
-                            {avatarUrl ? (
-                                <img src={avatarUrl} alt="Taskly Avatar" className="avatar-img" key={avatarUrl} />
-                            ) : (
-                                <p>No avatar found</p>
-                            )}
-                            <div className="user-info-text">
-                                <p><strong>Name</strong>: {user.name}</p>
-                                <p><strong>Email</strong>: {user.email}</p>
-                                <p><strong>Age</strong>: {user.age}</p>
-                                <p><strong>Account Creation</strong>: {ChangeDate(user.createdAt)}</p>
-                            </div>
-                        </div>
-                        <div className="button-center">
-                            <button style={{ background: "#E14434" }} className="hover-buttons delete-btn" onClick={handleDelete}>Delete account?</button>
-                        </div>
+            <div className="dashboard-grid">
+                <div className="user-card">
+                    <img
+                        src={user.avatarUrl || avatarUrl}
+                        onError={(e) => (e.target.src = "/upload-img.jpg")}
+                        alt="User Avatar"
+                        className="user-avatar"
+                    />
+                    <div className="user-info">
+                        <h2>{user.name}</h2>
+                        <p>{user.email}</p>
+                        <p>Age: {user.age || "Not set"}</p>
+                        <p>
+                            Joined:{" "}
+                            {new Date(user.createdAt).toLocaleDateString()}
+                        </p>
                     </div>
-                ) : (
-                    <p>Loading user details...</p>
-                )}
-
-                {user && (
-                    <div className="img-container">
-                        <div className="update-section">
-                            <h3>📝 <span>Update your details</span></h3>
-                            <button className="hover-buttons update-btn" onClick={() => setIsModalOpen(true)}>Edit</button>
-                        </div>
-
-                        <div className="avatar-upload">
-                            <h3 style={{ marginBottom: "0" }}>👤 <span>Update your avatar</span></h3>
-                            <div className="avatar-box">
-                                <input type="file" onChange={handleFileChange} className="dashboard-input" id="fileInput" />
-                                <label htmlFor="fileInput" className="file-label">Choose an image</label>
-                                {preview && <img src={preview} alt="Preview" className="preview-image" />}
-                                <button style={{ width: "90px", height: "40px" }} className="hover-buttons" onClick={handleUpload}>Upload Avatar</button>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                {isModalOpen && (
-                    <EditProfileModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} user={user} onUpdate={handleUpdate} />
-                )}
-            </div>
-
-            {showMessage && (
-                <div className="welcome-msg">
-                    Welcome email was sent to your email address.
+                    <button
+                        className="edit-profile-btn"
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        Edit Profile
+                    </button>
                 </div>
+
+                <div className="avatar-card">
+                    <h3 style={{ textAlign: "center" }}>Update Avatar</h3>
+                    <p style={{ textAlign: "center" }}>
+                        Upload a new profile picture.
+                    </p>
+                    <div className="avatar-upload-area">
+                        <input
+                            type="file"
+                            onChange={handleFileChange}
+                            className="file-input"
+                            id="fileInput"
+                        />
+                        <label htmlFor="fileInput" className="file-label">
+                            {preview ? (
+                                <img
+                                    src={preview}
+                                    alt="Preview"
+                                    className="preview-image"
+                                />
+                            ) : (
+                                <span
+                                    style={{
+                                        textAlign: "center",
+                                        fontSize: "10px",
+                                    }}
+                                >
+                                    Choose Image
+                                </span>
+                            )}
+                        </label>
+                        {file && (
+                            <button
+                                onClick={handleUpload}
+                                className="upload-btn"
+                            >
+                                Upload
+                            </button>
+                        )}
+                    </div>
+                </div>
+
+                <div className="settings-card">
+                    <h3 style={{ textAlign: "center" }}>Settings</h3>
+                    <HoverDevCards />
+                </div>
+
+                <div className="danger-zone-card">
+                    <h3 style={{ textAlign: "center" }}>Delete Account?</h3>
+                    <p style={{ textAlign: "center" }}>
+                        Permanently delete your account and all associated data.
+                    </p>
+                    <button onClick={handleDelete} className="delete-btn">
+                        Delete Account
+                    </button>
+                </div>
+            </div>
+
+            {isModalOpen && (
+                <EditProfileModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    user={user}
+                    onUpdate={handleUpdate}
+                />
             )}
         </div>
     );

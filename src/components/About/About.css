@@ -1,125 +1,119 @@
-.about-div {
+/* === Page Layout & Typography === */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap");
+
+.about-page {
+    font-family: "Inter", sans-serif;
+    color: #e0e0e0;
+    background-color: #0a0a0a;
+    background-image: radial-gradient(#222 1px, transparent 1px);
+    background-size: 20px 20px;
     min-height: 100vh;
-  	display: flex;
+    padding: 120px 20px 50px; /* Added top padding to account for fixed header */
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
     flex-direction: column;
-    color: white;
-    /* font-family: sans-serif; */
-    line-height: 1.6;
-    padding: 2rem 0;
+    gap: 40px;
+}
+
+/* === Section Styling === */
+.about-section {
+    background: #111;
+    border: 1px solid #2c2c2c;
+    border-radius: 12px;
+    padding: 40px;
     text-align: center;
-    margin: auto;
-    background-color: #0f0f0f;
-    background-image: radial-gradient(#444 1px, transparent 1px);
-    background-size: 20px 20px; 
-    /* gap: 30px; */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.about-heading {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 800;
     color: white;
-    line-height: 1.6;
+    margin: 0 0 15px 0;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
 }
 
-.about-div::before,
-.about-div::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 15%;
-  height: 100%;
-  z-index: 10;
-  pointer-events: none;
+.about-heading::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #04b663; /* Accent color */
 }
 
-.about-div::before {
-  left: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+.about-subheading {
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.about-div::after {
-  right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
+.section-title {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    margin: 0 0 30px 0;
+    color: white;
+    font-weight: 700;
 }
 
-.about-first {
-  background: black;
-  padding: 10px 0;
-  border: 2px solid #2C2C2C;
-  border-radius: 10px;
-  margin: 0 auto;
-  text-align: center;
-  margin-top: 75px;
-  width: 72.5%;
+/* === FAQ Section Specifics === */
+.faq-section {
+    padding: 40px 20px; /* Adjust padding for accordion */
 }
 
-.about-two {
-  background: black;
-  margin: 0 auto;
-  border: 2px solid #2C2C2C;
-  border-radius: 10px;
-  width: 72.5%;
+/* === Contact Section Specifics === */
+.contact-section p {
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    line-height: 1.7;
 }
 
-.about-three {
-  background: black;
-  border-radius: 20px;
-  margin: 0 auto;
-  width: 72.5%;
-  border: 2px solid #2C2C2C;
-  /* margin-top: auto; */
-  text-align: center;
-  padding-top: 2rem;
+.contact-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #60b5ff;
+    text-decoration: none;
+    font-weight: 700;
+    position: relative;
+    transition: color 0.3s ease;
 }
 
-.about-three > h2 {
-  font-size: 3rem;
-  margin: 0;
-  color: white;
+.contact-link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #60b5ff;
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
 }
 
-.about-three > p {
-  font-size: 1.1rem;
-  color: white;
-  padding-bottom: 20px;
+.contact-link:hover {
+    color: #82c5ff;
 }
 
-.about-h1 {
-	margin: 0;
-	font-size: 3.5rem;
-	color: white;
-  	margin-top: 10px;
-	text-decoration: underline;
-	text-underline-offset: 3px;
+.contact-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
-.about-span {
-    line-height: 2;
-}
-
-.hover-a-about {
-	color: grey;
-}
-
-.hover-a-about:hover {
-	color: #9FB3DF;
-}
-
-@media (max-width: 500px) {
-	.about-first,.about-two, .about-three {
-    width: 90%;
-  }
-
-  .about-h1 {
-    font-size: 2rem;
-  }
-
-  .about-three > h2 {
-    font-size: 1.3rem;
-  }
-
-  .about-three > p {
-    width: 80%;
-    margin: 5px auto;
-  }
-
-  .about-div::before,
-.about-div::after {
-    width: 5%;
-}
+/* === Responsive === */
+@media (max-width: 768px) {
+    .about-page {
+        padding-top: 100px;
+    }
+    .about-section {
+        padding: 30px 20px;
+    }
 }

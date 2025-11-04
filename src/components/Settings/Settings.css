@@ -1,120 +1,119 @@
-/* General container for the entire settings section */
 .hover-dev-cards {
     padding: 1rem;
-    margin-bottom: 10px;
-    background: black;
+    background: transparent; /* Changed to transparent to blend with parent */
     border-radius: 20px;
-  }
-  
-  .settings-title {
-    text-align: center;
-    color: white;
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 0;
-    margin-bottom: 10px;
-  }
-  
-  /* Grid container for cards */
-  .cards-grid {
-    padding-left: 0;
+    height: 100%;
+    /* Added flex properties to control vertical alignment */
+    display: flex;
+    flex-direction: column;
+}
+
+/* You can remove the .settings-title class as it's no longer in the JSX */
+
+.cards-grid {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(2, 1fr); /* Default: 2 columns */
-  }
-  
-  /* On larger screens, switch to 4 columns */
-  @media (min-width: 1024px) {
+    grid-template-columns: 1fr;
+
+    /* --- EDITED --- */
+    flex-grow: 1; /* Allows the grid to fill the vertical space */
+    align-content: center; /* Vertically centers the rows of cards */
+    justify-content: center; /* Horizontally centers the grid content */
+}
+
+@media (min-width: 768px) {
     .cards-grid {
-      grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
-  }
-  
-  /* Card styles */
-  .card {
+}
+
+.card {
     position: relative;
     overflow: hidden;
-    width: 100%;
-    padding-left: 5px;
-    border-radius: 0.5rem;
-    border: 1px solid #cbd5e1; /* Slate-300 color */
-    background-color: #2C2C2C;
+    max-width: 220px;
+    padding: 1.5rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #444;
+    background-color: #1a1a1a;
     text-decoration: none;
     transition: all 0.3s ease;
-  }
-  
-  /* Gradient background that moves when hovering */
-  .card-bg {
+}
+
+/* Gradient background that moves when hovering */
+.card-bg {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, #7c3aed, #4f46e5); /* Violet to Indigo */
+    background: linear-gradient(
+        to right,
+        #7c3aed,
+        #4f46e5
+    ); /* Violet to Indigo */
     transform: translateY(100%);
     transition: transform 0.3s ease;
     z-index: 1;
-  }
-  
-  /* Hover effect on gradient background */
-  .card:hover .card-bg {
+}
+
+.card:hover .card-bg {
     transform: translateY(0%);
-  }
-  
-  /* Icon at the top of the card */
-  .card-icon-bg {
+}
+
+/* Icon at the top of the card */
+.card-icon-bg {
     position: absolute;
-    top: -3rem;
-    right: -3rem;
-    font-size: 9rem;
-    color: #f1f5f9; /* Slate-100 */
-    transition: transform 0.3s, color 0.3s;
+    top: -1.2rem;
+    right: -2.3rem;
+    font-size: 6rem;
+    color: #333; /* Darker initial color */
+    transition:
+        transform 0.3s,
+        color 0.3s;
     z-index: 2;
-  }
-  
-  /* Hover effect on the icon */
-  .card:hover .card-icon-bg {
+}
+
+.card:hover .card-icon-bg {
     transform: rotate(12deg);
     color: #a78bfa; /* Violet-400 */
-  }
-  
-  /* Icon size and hover color */
-  .card-icon {
+}
+
+/* Icon size and hover color */
+.card-icon {
     margin-bottom: 0.5rem;
-    font-size: 2rem;
+    font-size: 1.75rem; /* Slightly smaller */
     color: #7c3aed; /* Violet-600 */
     transition: color 0.3s;
     position: relative;
     z-index: 3;
-  }
-  
-  /* Hover effect on the icon text */
-  .card:hover .card-icon {
+}
+
+.card:hover .card-icon {
     color: white;
-  }
-  
-  /* Title text in the card */
-  .card-title {
+}
+
+/* Title text in the card */
+.card-title {
     font-size: 1.125rem;
-    font-weight: 500;
-    color: #e4e5e9; /* Slate-950 */
+    font-weight: 600; /* Bolder */
+    color: #f1f5f9;
     transition: color 0.3s ease;
     position: relative;
     z-index: 3;
-  }
-  
-  /* Hover effect on title */
-  .card:hover .card-title {
+    margin: 0 0 0.25rem; /* Adjusted margin */
+}
+
+.card:hover .card-title {
     color: white;
-  }
-  
-  /* Subtitle text in the card */
-  .card-subtitle {
+}
+
+/* Subtitle text in the card */
+.card-subtitle {
     color: #94a3b8; /* Slate-400 */
     transition: color 0.3s ease;
     position: relative;
     z-index: 3;
-  }
-  
-  /* Hover effect on subtitle */
-  .card:hover .card-subtitle {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.card:hover .card-subtitle {
     color: #c4b5fd; /* Violet-200 */
-  }
-  
+}

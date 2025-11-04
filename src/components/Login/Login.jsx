@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { loginUser } from "../../utils/api.js";
 import { useNavigate, Link } from "react-router-dom";
-import './Login.css'
-
+import { loginUser } from "../../utils/api.js";
+import "./Login.css";
 
 function LoginPage() {
     const [user, setUser] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
+    // This effect redirects the user if they are already logged in.
+    // The empty dependency array [] ensures it only runs once on mount.
     useEffect(() => {
-        const userInfo = localStorage.getItem("token")
-        if (userInfo) {
-            navigate("/dashboard")
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate("/dashboard", { replace: true });
         }
-    })
-
+    }, [navigate]);
 
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -25,46 +25,91 @@ function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
-        console.log("Submitting Data:", user);
+        setIsLoading(true);
 
         if (!user.email || !user.password) {
-            console.error("Email and password are required!");
+            setError("Email and password are required.");
+            setIsLoading(false);
             return;
         }
+
         try {
             const data = await loginUser(user);
-            localStorage.setItem("token", data.token); // Store JWT in localStorage
-            alert("Login successful!");
-            window.dispatchEvent(new Event("authChange"));
-            navigate("/dashboard"); // Redirect after login
+            localStorage.setItem("token", data.token);
+            window.dispatchEvent(new Event("storage"));
+            navigate("/dashboard");
         } catch (err) {
-            setError(err.message || "Invalid credentials");
-            alert("Invalid credentials");
+            setError(err.message || "Invalid credentials. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
     };
+
     return (
-        <div className="login">
-            <div className="login-container">
-                <div className="Login-div">
-                    <img style={{ height: "40px", width: "40px", borderRadius: "5px" }} src="/taskly-icon.png" />
-                    <h1 style={{ paddingTop: "1px" }} className="login-header">Log in to Taskly</h1>
-                    <p className="login-p">Dont have an account? <Link style={{ color: "lightgreen" }} to="/register">Register</Link></p>
-                    <form className="login-form" onSubmit={handleSubmit}>
-                        <label className="label-text">Email</label>
-                        <input className="login-input" type="email" name="email" onChange={handleChange} placeholder="mnv.gsn@taskly.dev" required />
+        <div className="login-page">
+            <div className="login-card">
+                <div className="login-header">
+                    <img
+                        src="/taskly-icon.png"
+                        alt="Taskly Logo"
+                        className="login-logo"
+                    />
+                    <h1>Log in to Taskly</h1>
+                    <p>
+                        Don't have an account?{" "}
+                        <Link to="/register" className="login-link">
+                            Register
+                        </Link>
+                    </p>
+                </div>
 
-                        <label className="label-text">Password</label>
-                        <input className="login-input" type="password" name="password" onChange={handleChange} placeholder="********" required />
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            id="email"
+                            className="login-input"
+                            type="email"
+                            name="email"
+                            value={user.email}
+                            onChange={handleChange}
+                            placeholder="e.g., your@email.com"
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            id="password"
+                            className="login-input"
+                            type="password"
+                            name="password"
+                            value={user.password}
+                            onChange={handleChange}
+                            placeholder="********"
+                            required
+                        />
+                    </div>
 
-                        <button style={{ marginTop: "20px" }} className="btn-grad" type="submit">Log In</button>
-                    </form>
-                    <p style={{ fontSize: ".9rem", cursor: "pointer", textAlign: "end", textDecoration: "underline", textUnderlineOffset: "3px" }}>Forgot Password</p>
+                    {error && <p className="error-message">{error}</p>}
 
+                    <button
+                        className="login-button"
+                        type="submit"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? "Logging In..." : "Log In"}
+                    </button>
+                </form>
+
+                <div className="login-footer">
+                    <Link to="/forgot-password" className="login-link small">
+                        Forgot Password?
+                    </Link>
                 </div>
             </div>
-
         </div>
-    )
+    );
 }
 
-export default LoginPage
+export default LoginPage;

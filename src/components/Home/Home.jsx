@@ -1,138 +1,202 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { DrawCircleText } from "./Home-text";
-import "./Home.css"
+import "./Home.css";
 
-const quotes = [
-    "The future depends on what you do today.",
-    "Success usually comes to those who are too busy to be looking for it.",
-    "Don't watch the clock; do what it does. Keep going.",
-    "The way to get started is to quit talking and begin doing.",
-    "The secret of getting ahead is getting started.",
-    "The best way to predict the future is to create it.",
-    "You are never too old to set another goal or to dream a new dream.",
-    "Your limitation — it's only your imagination.",
-    "You dont have to be extreme, just consistent.",
-    "Work hard in silence, let success be your noise.",
-    "Done is better than perfect."
-]
-
-const videoList = ["/video-1.mp4", "/video-2.mp4", "/video-3.mp4", "/video-4.mp4", "/video-5.mp4"];
+const fadeInUp = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.8, ease: "easeOut" },
+    },
+};
 
 function HomePage() {
     const navigate = useNavigate();
     const [quote, setQuote] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+    const [isLoggedIn, setIsLoggedIn] = useState(
+        !!localStorage.getItem("token"),
+    );
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-    const videoRef = useRef(null);
+
+    const quotes = [
+        "The future depends on what you do today.",
+        "Success usually comes to those who are too busy to be looking for it.",
+        "Don't watch the clock; do what it does. Keep going.",
+        "The way to get started is to quit talking and begin doing.",
+        "Done is better than perfect.",
+        "Work hard in silence, let success be your noise.",
+    ];
+
+    const videoList = [
+        "/video-1.mp4",
+        "/video-2.mp4",
+        "/video-3.mp4",
+        "/video-4.mp4",
+        "/video-5.mp4",
+    ];
 
     useEffect(() => {
-        // console.log("Video index changed to:", currentVideoIndex);
-    }, [currentVideoIndex]);
-
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        setIsLoggedIn(!!token);
-    }, [])
-
-    useEffect(() => {
+        setIsLoggedIn(!!localStorage.getItem("token"));
         setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-    }, [])
+    }, []);
 
-    const handleClick = () => {
-        // Increment the video index, cycling through the videos
-        const nextIndex = (currentVideoIndex + 1) % videoList.length;
-        setCurrentVideoIndex(nextIndex);
-
+    const handleVideoClick = () => {
+        setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoList.length);
     };
 
     return (
-        <>
-            <div className="home-container" style={{ gap: "30px" }}>
-                <div className="div-one">
-                    <h1 style={{ marginBottom: ".7rem", fontSize: "6rem", color: "white", fontWeight: "800" }}>TASKLY</h1>
-                    <h2 style={{ color: "#9f9e9e", width: "fit-content", paddingBottom: "9px", borderBottom: "3px solid #fff", fontStyle: "italic", margin: "5px auto", textAlign: "center", fontSize: "2.5rem" }}>Task Management app</h2>
-                    <h4>What will you <span style={{ color: "green", fontStyle: "italic" }}>achieve</span> today!</h4>
-                    {/* </div> */}
+        <motion.div
+            className="home-page"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+        >
+            <div className="home-container">
+                {/* Header */}
+                <motion.header
+                    className="home-header"
+                    variants={fadeInUp}
+                    initial="hidden"
+                    animate="visible"
+                >
+                    <h1 className="home-title">TASKLY</h1>
+                    <h2 className="home-subtitle">
+                        Task Management Reimagined
+                    </h2>
+                    <h4 className="home-tagline">
+                        What will you{" "}
+                        <span className="tagline-highlight">achieve</span>{" "}
+                        today?
+                    </h4>
+                    <p className="quote-text">"{quote}"</p>
+                </motion.header>
 
-                    {/* <div className="div-two"> */}
-                    {/* <h1 >Do your best work in Taskly</h1> */}
-                    <p className="quote-text">{quote}</p>
-                </div>
-
-                <div className="div-three">
+                {/* Promo Section */}
+                <motion.section
+                    className="home-promo-card"
+                    variants={fadeInUp}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 0.3 }}
+                >
                     <DrawCircleText />
-                </div>
+                </motion.section>
 
-                <div className="video-container" onClick={handleClick}>
-                    <video autoPlay muted loop preload="auto" key={currentVideoIndex}>
-                        <source src={videoList[currentVideoIndex]} type="video/mp4" />
-                    </video>
-                    <div className="hello-div">
+                {/* Video Section */}
+                <motion.div
+                    className="video-container"
+                    onClick={handleVideoClick}
+                    variants={fadeInUp}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 0.5 }}
+                >
+                    <AnimatePresence>
+                        <motion.video
+                            key={currentVideoIndex}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5 }}
+                            autoPlay
+                            muted
+                            loop
+                            preload="auto"
+                        >
+                            <source
+                                src={videoList[currentVideoIndex]}
+                                type="video/mp4"
+                            />
+                        </motion.video>
+                    </AnimatePresence>
+
+                    <div className="video-overlay">
                         {isLoggedIn ? (
-                            <div style={{ paddingBottom: "60px", width: "100%", display: "flex", flexDirection: "row" }}>
-                                <a style={{ width: "50%", background: "black", borderRadius: "20px", border: "1px solid #2C2C2C", margin: "0 auto", textAlign: "center", textDecoration: "none" }} href="/tasks"><p className="log-in-text" style={{ display: "inline-block", width: "100%", color: "white", padding: "5px", borderRadius: "5px", paddingRight: "1px" }}>
-                                    Lets get your tasks done! 📲</p>
-                                </a>
+                            <div className="video-cta-loggedin">
+                                <Link to="/tasks" className="cta-link">
+                                    Let's get your tasks done! 📲
+                                </Link>
                             </div>
                         ) : (
-                            <div className="hello-loggedin">
-                                <p >Already have an account?</p>
-                                <button className="home-login" style={{ borderRadius: "10px", color: "#EFEFEF", fontSize: "1.7rem", width: "35%" }} onClick={() => navigate("/login")}><span>Log In</span></button>
+                            <div className="video-cta-loggedout">
+                                <p
+                                    style={{
+                                        color: "white",
+                                        margin: "0",
+                                        width: "fit-content",
+                                    }}
+                                >
+                                    Already have an account?
+                                </p>
+                                <button
+                                    className="home-login-button"
+                                    onClick={() => navigate("/login")}
+                                >
+                                    Log In
+                                </button>
                             </div>
                         )}
-
-                        <div className="click-here" style={{ height: "12px", padding: "3px", border: "1px solid #2C2C2C", borderRadius: "5px", width: "70px", display: "flex", alignItems: "center", fontSize: "8px" }}>
-                            <p style={{ paddingLeft: "2px", color: "white", display: "inline-block", width: "65px" }}>click here</p>
-                            <img style={{ paddingRight: "4px", height: "10px" }} src="/arrow-img.png" alt="" />
+                        <div className="video-click-prompt">
+                            <p style={{ color: "white" }}>Click</p>
+                            <img
+                                src="/arrow-img.png"
+                                alt="arrow"
+                                className="prompt-arrow"
+                            />
                         </div>
                     </div>
-                    <div className="text-wrapper">
-                        <div className="moving-text">
-                            <div className="scroll-content">
-                                {Array(12).fill(<h2>TASKLY</h2>)}
-                                {Array(12).fill(<h2>TASKLY</h2>)} {/* duplicated */}
-                            </div>
+                    <div className="video-marquee">
+                        <div className="marquee-content">
+                            {Array(24).fill(<h2>TASKLY</h2>)}
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
-                <div className="footer-div">
-                    <div className="footer-first">
-                        <h3>What <span style={{ padding: "3px 10px", borderRadius: "3px", background: "green", fontWeight: "800", fontStyle: "italic" }}>TASK</span> will you do today?</h3>
+                {/* Footer */}
+                <motion.footer
+                    className="home-footer"
+                    variants={fadeInUp}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 0.7 }}
+                >
+                    <div className="footer-promo">
+                        <h3>
+                            What <span className="promo-highlight">TASK</span>{" "}
+                            will you do today?
+                        </h3>
                     </div>
 
-                    <div className="footer-links">
-                        <div className="footer" >
+                    <div className="footer-links-container">
+                        <div className="footer-column">
                             <h3>PRODUCT</h3>
-                            <a href="" >changelogs</a>
-                            <a href="">docs</a>
+                            <a href="#">Changelogs</a>
+                            <a href="#">Docs</a>
                         </div>
-
-                        <div className="footer">
+                        <div className="footer-column">
                             <h3>COMPANY</h3>
-                            <a href="/">careers</a>
-                            <a href="/">privacy policy</a>
-                            <a href="/">terms of service</a>
-                            <a href="/">partner with us</a>
+                            <a href="#">Careers</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
                         </div>
-
-                        <div className="footer">
+                        <div className="footer-column">
                             <h3>DEVELOPERS</h3>
-                            <a href="/">blog</a>
-                            <a href="/">github</a>
-                            <a href="/">status</a>
+                            <a href="#">Blog</a>
+                            <a href="#">GitHub</a>
+                            <a href="#">Status</a>
                         </div>
                     </div>
 
-                    <div className="footer-last">
+                    <div className="footer-brand">
                         <h1>TASKLY</h1>
                     </div>
-                </div>
-
-            </div >
-        </>
-    )
+                </motion.footer>
+            </div>
+        </motion.div>
+    );
 }
 
-export default HomePage
+export default HomePage;

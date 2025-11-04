@@ -1,50 +1,80 @@
 import React, { useState, useEffect } from "react";
-import "./EditProfileModal.css"
+import { motion, AnimatePresence } from "framer-motion";
+import "./EditProfileModal.css";
 
 function EditProfileModal({ isOpen, onClose, user, onUpdate }) {
-    const [name, setName] = useState(user.name);
-    const [age, setAge] = useState(user.age);
-    const [error, setError] = useState("");
-
+    const [name, setName] = useState(user?.name || "");
+    const [age, setAge] = useState(user?.age || "");
 
     useEffect(() => {
-        setName(user?.name || "");
-        setAge(user?.age || "");
+        if (user) {
+            setName(user.name || "");
+            setAge(user.age || "");
+        }
     }, [user]);
 
     const handleSave = () => {
+        if (!name.trim()) {
+            return;
+        }
         const updatedUser = { ...user, name, age };
-        onUpdate(updatedUser); // Pass the updated user data to the parent component
-        onClose(); // Close the modal after saving
+        onUpdate(updatedUser);
+        onClose();
     };
 
-    if (!isOpen) return null;
-
     return (
-        <div className="modal-profile-overlay">
-            <div className="modal-profile-content" style={{ height: "250px" }}>
-                <h2 style={{ textAlign: "center" }}>Edit Profile</h2>
-                <label >Name</label>
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter your name"
-                />
-                <label>Age</label>
-                <input
-                    type="number"
-                    value={age}
-                    onChange={(e) => setAge(e.target.value)}
-                    placeholder="Enter your age"
-                />
-                {error && <p className="error">{error}</p>}
-                <div className="modal-actions">
-                    <button onClick={onClose}>Cancel</button>
-                    <button onClick={handleSave}>Save</button>
+        <AnimatePresence>
+            {isOpen && (
+                <div className="modal-overlay" onClick={onClose}>
+                    <motion.div
+                        style={{ width: "100%" }}
+                        className="modal-content"
+                        onClick={(e) => e.stopPropagation()}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -30 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                        <div className="modal-header">
+                            <h2>Edit Profile</h2>
+                            <button className="close-button" onClick={onClose}>
+                                &times;
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="form-group">
+                                <label htmlFor="name">Name</label>
+                                <input
+                                    id="name"
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder="Enter your name"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="age">Age</label>
+                                <input
+                                    id="age"
+                                    type="number"
+                                    value={age}
+                                    onChange={(e) => setAge(e.target.value)}
+                                    placeholder="Enter your age"
+                                />
+                            </div>
+                        </div>
+                        <div className="modal-actions">
+                            <button className="cancel-btn" onClick={onClose}>
+                                Cancel
+                            </button>
+                            <button className="save-btn" onClick={handleSave}>
+                                Save Changes
+                            </button>
+                        </div>
+                    </motion.div>
                 </div>
-            </div>
-        </div >
+            )}
+        </AnimatePresence>
     );
 }
 

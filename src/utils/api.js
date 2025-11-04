@@ -1,66 +1,52 @@
 import axios from "axios";
 
 // const API_BASE_URL = "http://localhost:3000"; // Change this to your backend URL
-const API_BASE_URL = "https://task-manager-backend-5hkl.onrender.com"
+// // const API_BASE_URL = "https://task-manager-backend-5hkl.onrender.com"
 
+const apiClient = axios.create({
+    baseURL:
+        import.meta.env.VITE_API_URL ||
+        "https://task-manager-backend-5hkl.onrender.com",
+    headers: {
+        "Content-Type": "application/json",
+    },
+});
 
-export const registerUser = async (userData) => {
-    try {
-        const response = await axios.post(`${API_BASE_URL}/users`, userData);
-        return response.data;
-    } catch (error) {
-        console.error("Registration Error:", error.response?.data || error.message);
-        throw error;
-    }
+apiClient.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    },
+);
+
+// auth
+export const registerUser = (userData) => apiClient.post("/users", userData);
+export const loginUser = async (credentials) => {
+    const response = await apiClient.post("/users/login", credentials);
+    return response.data;
 };
+export const logoutUser = () => apiClient.post("/users/logout");
 
-export const loginUser = async (userData) => {
-    try {
-        const response = await axios.post(`${API_BASE_URL}/users/login`, userData);
-        return response.data;
-    } catch (error) {
-        console.error("Login Error:", error.response?.data || error.message);
-        throw error;
-    }
-};
+// user mngmnt
+export const getUserDetails = () => apiClient.get("/users/me");
+export const updateUser = (userData) => apiClient.patch("/users/me", userData);
+export const deleteUser = () => apiClient.delete("/users/me");
+export const uploadAvatar = (formData) =>
+    apiClient.post("/users/me/avatar", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+    });
 
-export const logoutUser = async () => {
-    try {
-        const response = await axios.post(`${API_BASE_URL}/users/logout`);
-        return response.data;
-    } catch (error) {
-        console.error("Logout Error:", error.response?.data || error.message);
-        throw error;
-    }
-};
+// tasks
+export const getTasks = () => apiClient.get("/tasks");
+export const createTask = (taskData) => apiClient.post("/tasks", taskData);
+export const updateTask = (id, taskData) =>
+    apiClient.patch(`/tasks/${id}`, taskData);
+export const deleteTask = (id) => apiClient.delete(`/tasks/${id}`);
 
-export const getUserDetails = async () => {
-    try {
-        const token = localStorage.getItem("token"); // Get token from localStorage
-        if (!token) throw new Error("No token found. Please log in.");
-
-        const response = await axios.get(`${API_BASE_URL}/users/me`, {
-            headers: {
-                Authorization: `Bearer ${token}`, // Send token in headers
-            },
-        });
-        return response.data;
-    } catch (error) {
-        console.error("Error fetching user details:", error.response?.data || error.message);
-        throw error;
-    }
-};
-
-// export const updateUserDetails = async (userData) => {
-//     try {
-//         const response = await axios.patch(`${API_BASE_URL}/users/me`, userData, {
-//             headers: {
-//                 Authorization: `Bearer ${localStorage.getItem("token")}`, // Bearer token for authentication
-//             },
-//         });
-//         return response.data; // Returning updated user data
-//     } catch (error) {
-//         console.error("Error updating user details:", error.response?.data || error.message);
-//         throw error;
-//     }
-// };
+export default apiClient;

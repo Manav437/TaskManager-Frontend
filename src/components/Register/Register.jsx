@@ -1,76 +1,137 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../utils/api";
-import './Register.css'
+import "./Register.css";
 
 function RegisterPage() {
-    const [user, setUser] = useState({ name: "", email: "", password: "" })
-    const [error, setError] = useState("")
-    const navigate = useNavigate()
+    const [user, setUser] = useState({ name: "", email: "", password: "" });
+    const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const userInfo = localStorage.getItem("token")
-        if (userInfo) {
-            navigate("/dashboard", { state: { fromRegister: true } })
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate("/dashboard", { replace: true });
         }
-    })
+    }, [navigate]);
 
     const handleChange = (e) => {
-        setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));      //purani value as it is(...spread operator), and only change
-    };                                                                          //the field that is being edited
+        setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log("Submitting Data:", user);
-        setError("")
+        e.preventDefault();
+        setError("");
+        setIsLoading(true);
 
         if (!user.name || !user.email || !user.password) {
             setError("All fields are required!");
+            setIsLoading(false);
             return;
         }
 
         try {
-            const responseData = await registerUser(user)
+            const responseData = await registerUser(user);
             if (responseData.token) {
                 localStorage.setItem("token", responseData.token);
-                alert("Registration successful!");
-                setTimeout(() => {
-                    navigate("/dashboard", { state: { fromRegister: true } });
-                }, 500);
+                window.dispatchEvent(new Event("storage"));
+                navigate("/dashboard", { state: { fromRegister: true } });
             } else {
-                setError("No token received from server.");
+                setError(
+                    "Registration failed: No token received from the server.",
+                );
             }
         } catch (err) {
-            setError(err.message || "Something went wrong!")
+            setError(err.message || "Registration failed. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
-    }
+    };
 
     return (
-        <>
-            <div className="container">
-                <div className="Register-div">
-                    <img style={{ height: "40px", width: "40px", borderRadius: "3px" }} src="./taskly-icon.png" />
-                    <h1 style={{ fontSize: "1.7rem", color: "white" }}>Create your Taskly account</h1>
-                    <p>Already have an account? <Link style={{ color: "lightgreen" }} to="/login">Login</Link></p>
+        <div className="register-page">
+            <div className="register-card">
+                <div className="register-header">
+                    <img
+                        src="/taskly-icon.png"
+                        alt="Taskly Logo"
+                        className="register-logo"
+                    />
+                    <h1>Create your Taskly account</h1>
+                    <p>
+                        Already have an account?{" "}
+                        <Link to="/login" className="register-link">
+                            Login
+                        </Link>
+                    </p>
+                </div>
 
-                    <form onSubmit={handleSubmit}>
-                        <label className="label-text">Name</label>
-                        <input className="register-input" type="text" name="name" placeholder="Manav Gusain" onChange={handleChange} required />
+                <form className="register-form" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="name">Name</label>
+                        <input
+                            id="name"
+                            className="register-input"
+                            type="text"
+                            name="name"
+                            value={user.name}
+                            onChange={handleChange}
+                            placeholder="e.g., Manav Gusain"
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            id="email"
+                            className="register-input"
+                            type="email"
+                            name="email"
+                            value={user.email}
+                            onChange={handleChange}
+                            placeholder="e.g., your@email.com"
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            id="password"
+                            className="register-input"
+                            type="password"
+                            name="password"
+                            value={user.password}
+                            onChange={handleChange}
+                            placeholder="Choose a strong password"
+                            required
+                            autoComplete="new-password"
+                        />
+                    </div>
 
-                        <label className="label-text">Email</label>
-                        <input className="register-input" type="email" name="email" placeholder="manav.gsn@taskly.dev" onChange={handleChange} required />
+                    {error && <p className="error-message">{error}</p>}
 
-                        <label className="label-text">Password</label>
-                        <input autoComplete="new-password" className="register-input" type="password" name="password" placeholder="********" onChange={handleChange} required />
+                    <button
+                        className="register-button"
+                        type="submit"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? "Creating Account..." : "Create Account"}
+                    </button>
+                </form>
 
-                        <button className="btn-grad" type="submit">Create Account</button>
-                    </form>
-                    <p style={{ fontSize: ".9rem", marginTop: "20px" }}>By signing up, you agree to our <span>Terms of service</span>.</p>
+                <div className="register-footer">
+                    <p>
+                        By signing up, you agree to our{" "}
+                        <Link to="/terms" className="register-link small">
+                            Terms of Service
+                        </Link>
+                        .
+                    </p>
                 </div>
             </div>
-        </>
-    )
+        </div>
+    );
 }
 
-export default RegisterPage
+export default RegisterPage;

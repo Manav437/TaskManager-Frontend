@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Header.css";
 
 function Header() {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+
+    const [isLoggedIn, setIsLoggedIn] = useState(
+        !!localStorage.getItem("token"),
+    );
 
     useEffect(() => {
-        const interval = setInterval(() => {
+        const handleStorageChange = () => {
             setIsLoggedIn(!!localStorage.getItem("token"));
-        }, 500);
-        return () => clearInterval(interval);
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+        };
     }, []);
 
     const handleLogout = () => {
@@ -22,34 +30,70 @@ function Header() {
         navigate("/login");
     };
 
+    const closeMenu = () => setMenuOpen(false);
+
     return (
         <header className="header">
             <div className="header-container">
-                <Link to="/" className="logo">
+                <NavLink to="/" className="logo" onClick={closeMenu}>
                     <img src="/taskly-icon.png" alt="Taskly Logo" />
-                </Link>
+                    <span>TASKLY</span>
+                </NavLink>
 
                 <nav className={`nav ${menuOpen ? "open" : ""}`}>
-                    <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-                    <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
-                    {isLoggedIn && <Link to="/tasks" onClick={() => setMenuOpen(false)}>Tasks</Link>}
+                    <NavLink to="/" onClick={closeMenu}>
+                        Home
+                    </NavLink>
+                    <NavLink to="/about" onClick={closeMenu}>
+                        About
+                    </NavLink>
+                    {isLoggedIn && (
+                        <NavLink to="/tasks" onClick={closeMenu}>
+                            Tasks
+                        </NavLink>
+                    )}
+
+                    <div className="nav-separator"></div>
 
                     {isLoggedIn ? (
                         <>
-                            <Link to="/dashboard" onClick={() => setMenuOpen(false)}>Account</Link>
-                            <button className="logout-btn" onClick={handleLogout}>
-                                <img src="/logout-img.png" alt="Logout icon" /> Logout
+                            <NavLink
+                                to="/dashboard"
+                                className="account-link"
+                                onClick={closeMenu}
+                            >
+                                Account
+                            </NavLink>
+                            <button
+                                className="logout-btn"
+                                onClick={handleLogout}
+                            >
+                                <img src="/logout-img.png" alt="Logout icon" />
+                                <span>Logout</span>
                             </button>
                         </>
                     ) : (
                         <>
-                            <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
-                            <Link className="register-btn" to="/register" onClick={() => setMenuOpen(false)}>Get Started</Link>
+                            <NavLink to="/login" onClick={closeMenu}>
+                                Login
+                            </NavLink>
+                            <NavLink
+                                to="/register"
+                                className="register-btn"
+                                onClick={closeMenu}
+                            >
+                                Get Started
+                            </NavLink>
                         </>
                     )}
                 </nav>
 
-                <button className="hamburger" aria-label="Toggle menu" onClick={() => setMenuOpen(!menuOpen)}>
+                <button
+                    className={`hamburger ${menuOpen ? "open" : ""}`}
+                    aria-label="Toggle menu"
+                    aria-expanded={menuOpen}
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >
                     <span></span>
                     <span></span>
                     <span></span>
