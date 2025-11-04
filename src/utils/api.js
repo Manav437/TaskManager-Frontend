@@ -5,7 +5,7 @@ import axios from "axios";
 
 const apiClient = axios.create({
     baseURL:
-        import.meta.env.VITE_API_URL ||
+        // import.meta.env.VITE_API_URL ||
         "https://task-manager-backend-5hkl.onrender.com",
     headers: {
         "Content-Type": "application/json",

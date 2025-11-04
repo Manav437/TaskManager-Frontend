@@ -9,8 +9,6 @@ function LoginPage() {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
-    // This effect redirects the user if they are already logged in.
-    // The empty dependency array [] ensures it only runs once on mount.
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
